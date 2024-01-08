@@ -1,0 +1,37 @@
+<form [formGroup]="loginForm" novalidate>
+  <fieldset>
+    <div class="modal-content bg-dark">
+      <div class="modal-body">
+        <h4 class="modal-title fs-4 text-center py-3" id="newReservationModalLabel">Log in to {{ title }}</h4>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.close()"></button>
+        <div class="mb-3">
+          <label for="loginEmail" class="form-label">Email</label>
+          <input type="email" id="loginEmail" class="form-control" formControlName="email" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" id="loginPassword" class="form-control" formArrayName="password" required>
+          <a type="button" id="passwordHeld" class="form-text text-green-300">Forgot your password?</a>
+        </div>
+
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary w-100" (click)="logIn()">Log In</button>
+        </div>
+
+        <div class="content">
+          <p class="or">or</p>
+        </div>
+
+        <div class="mb-3">
+          <button class="btn btn-danger w-100">Log in with Google</button>
+        </div>
+
+        <div class="mb-3 text-center">
+          <a type="button" class="text-green-300">Don't have an account? Sign up</a>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

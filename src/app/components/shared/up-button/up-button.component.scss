@@ -1,0 +1,50 @@
+.scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: -15px;
+  z-index: 99999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  transition: all .4s;
+  cursor: pointer;
+}
+
+.active {
+  visibility: visible;
+  opacity: 1;
+  bottom: 15px;
+}
+
+// X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .scroll-top {
+    bottom: -1rem;
+    right: 1rem;
+  }
+
+  .active {
+    bottom: 1rem;
+  }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .scroll-top {
+    right: 1.2rem;
+  }
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {
+  .scroll-top {
+    right: 1.5rem;
+  }
+}
+
+

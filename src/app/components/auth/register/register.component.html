@@ -1,0 +1,24 @@
+<form novalidate>
+  <fieldset>
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-body">
+        <h4 class="modal-title fs-4 text-center py-3" id="newReservationModalLabel">Join {{ title }} today</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.close()"></button>
+        <div class="mb-3">
+          <label for="registerEmail" class="form-label">Email</label>
+          <input type="email" id="registerEmail" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="registerPassword" class="form-label">Password</label>
+          <input type="password" id="registerPassword" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </div>
+        <div class="mb-3 text-end">
+          <span type="button" class="text-primary">Already a {{ title }} user? Log in</span>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

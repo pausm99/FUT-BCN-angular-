@@ -1,0 +1,29 @@
+.main-button {
+  font-weight: 500;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 14px 65px;
+  border-radius: 50px;
+  transition: .3s;
+  color: #fff;
+  box-shadow: 0 0 15px #00000014;
+  border: 2px solid var(--green-300);
+}
+
+.feature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1.5rem;
+}
+
+.bg-featured-blog {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 15rem;
+}

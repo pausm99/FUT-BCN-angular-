@@ -1,0 +1,49 @@
+<nav [style]="filter" class="navbar navbar-expand-lg fixed-top" #navBar>
+  <div class="container-xxl">
+    <a class="navbar-brand" href="#">{{ title }}</a>
+    <button class="navbar-toggler" (click)="quitFilter()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">{{ title }}</h5>
+        <button (click)="addFilter()" type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-between h-100 flex-grow-1 pe-3 ps-3 ps-lg-0">
+          @for (route of routes; track $index) {
+            <li class="nav-item">
+              @if (route.path !== 'login' && route.path !== 'register') {
+                <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
+              }
+            </li>
+          }
+          @if (!user) {
+            <li class="nav-item">
+              <div class="d-flex gap-2 ms-lg-4 flex-column flex-lg-row">
+                <button class="btn btn-primary text-white" (click)="openLogin()">Log In</button>
+                <button class="btn btn-secondary" (click)="openRegister()">Register</button>
+              </div>
+            </li>
+          }
+          @else {
+            <li>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="#">Language</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
