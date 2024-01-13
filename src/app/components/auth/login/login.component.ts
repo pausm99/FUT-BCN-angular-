@@ -4,10 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { CommonModule } from '@angular/common';
-import { CustomValidators } from '../../../validators/custom.validator';
 import { UserService } from '../../../services/user/user.service';
-import { tap } from 'rxjs';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
