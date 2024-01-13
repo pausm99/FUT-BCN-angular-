@@ -101,5 +101,13 @@ input {
   margin-bottom: 0.25rem !important;
 }
 
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 0.25rem $primary !important;
+}
+
+.offcanvas-backdrop.show {
+  opacity: 0.75 !important;
+}
+
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

@@ -1,23 +1,50 @@
-<form [formGroup]="loginForm" novalidate>
+<form [formGroup]="loginForm" (submit)="logIn()" novalidate>
   <fieldset>
-    <div class="modal-content bg-dark">
+    <div class="modal-content bg-dark text-light">
       <div class="modal-body">
         <h4 class="modal-title fs-4 text-center py-3" id="newReservationModalLabel">Log in to {{ title }}</h4>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.close()"></button>
         <div class="mb-3">
           <label for="loginEmail" class="form-label">Email</label>
-          <input type="email" id="loginEmail" class="form-control" formControlName="email" required>
+          <input type="email" minlength="5" maxlength="256" id="loginEmail" class="form-control" formControlName="email" required
+          [ngClass]="{'
+            is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched,
+          }">
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched && !loginForm.get('email')?.hasError('email')) {
+            <span class="invalid-feedback">Required</span>
+          }
+          @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
+            <span class="invalid-feedback">Invalid email address</span>
+          }
         </div>
 
         <div class="mb-3">
           <label for="loginPassword" class="form-label">Password</label>
-          <input type="password" id="loginPassword" class="form-control" formArrayName="password" required>
-          <a type="button" id="passwordHeld" class="form-text text-green-300">Forgot your password?</a>
+          <input type="password" id="loginPassword" class="form-control" formControlName="password" required
+          [ngClass]="{'is-invalid':
+            loginForm.get('password')?.invalid && loginForm.get('password')?.touched
+          }">
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <span class="invalid-feedback">Required</span>
+          }
+          <a type="button" id="passwordHeld" class="form-text text-green-400">Forgot your password?</a>
         </div>
 
+        @if (invalidCredentials || serverError) {
+          <div class="alert alert-danger" role="alert">
+            <div>
+              @if (invalidCredentials) {
+                Invalid credentials
+              } @else if (serverError) {
+                Server not respond
+              }
+            </div>
+          </div>
+        }
+
         <div class="mb-3">
-          <button type="submit" class="btn btn-primary w-100" (click)="logIn()">Log In</button>
+          <button type="submit" class="btn btn-primary w-100">Log In</button>
         </div>
 
         <div class="content">
@@ -29,7 +56,7 @@
         </div>
 
         <div class="mb-3 text-center">
-          <a type="button" class="text-green-300">Don't have an account? Sign up</a>
+          <a (click)="openRegister()" type="button" class="text-green-400">Don't have an account? Sign up</a>
         </div>
       </div>
     </div>

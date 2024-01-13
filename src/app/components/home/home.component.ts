@@ -14,7 +14,6 @@ export class HomeComponent implements AfterViewChecked {
   public paddingTop!: string;
   @ViewChild('heroSection') heroSection?: ElementRef;
 
-
   constructor(private navbarService: NavbarService, private cd: ChangeDetectorRef) {}
 
   ngAfterViewChecked(): void {

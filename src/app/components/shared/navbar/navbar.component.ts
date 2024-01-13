@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { TitleService } from '../../../services/title/title.service';
 import { routes } from '../../../app.routes';
 import { RouterModule } from '@angular/router';
@@ -14,7 +14,7 @@ import { RegisterComponent } from '../../auth/register/register.component';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements AfterViewInit {
+export class NavbarComponent implements AfterViewInit, OnInit {
   public title?: string;
   public filter = 'backdrop-filter: saturate(180%) blur(20px)';
 
@@ -22,8 +22,9 @@ export class NavbarComponent implements AfterViewInit {
 
   private modalService = inject(NgbModal);
 
-  @ViewChild('miElenavBarmento') navBar?: ElementRef;
+  screenWidth!: number;
 
+  @ViewChild('closeButton', { static: false }) closeButton!: ElementRef;
 
   public routes = routes
         .filter(route => route && route.path)
@@ -39,6 +40,16 @@ export class NavbarComponent implements AfterViewInit {
     config.backdrop = 'static';
     config.keyboard = false;
     config.centered = true;
+    this.screenWidth = window.innerWidth;
+  }
+
+  ngOnInit(): void {
+    this.navbarService.currentModalValue.subscribe((modal) => {
+      setTimeout(() => {
+        if (modal === 'register') this.openRegister();
+        else if (modal === 'login') this.openLogin();
+      }, 300);
+    })
   }
 
   ngAfterViewInit(): void {
@@ -63,10 +74,25 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   openLogin() {
-    const modalref = this.modalService.open(LoginComponent);
+    this.closeNavbar();
+    setTimeout(() => {
+      this.modalService.open(LoginComponent);
+    }, 200);
   }
 
   openRegister() {
-    const modalref = this.modalService.open(RegisterComponent);
+    this.closeNavbar();
+    setTimeout(() => {
+      this.modalService.open(RegisterComponent);
+    }, 200);
+  }
+
+  closeNavbar() {
+    this.screenWidth < 992 ? this.closeButton.nativeElement.click() : null;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
   }
 }

@@ -1,9 +1,5 @@
 @import '../../../../scss/custom-variables';
 
-.form-control:focus {
-  box-shadow: 0 0 0 0.25rem $primary;
-}
-
 .form-check-input:focus {
   box-shadow: none;
 }
@@ -12,4 +8,20 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
+}
+
+a:hover {
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+
+.input-group {
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+  flex-direction: column;
+
+  & > * {
+    width: 100%;
+  }
 }

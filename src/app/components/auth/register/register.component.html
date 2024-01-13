@@ -1,49 +1,153 @@
-<form novalidate>
+<form [formGroup]="registerForm" (submit)="registerUser()" novalidate>
   <fieldset>
-    <div class="modal-content bg-dark text-light">
-      <div class="modal-body">
-        <h4 class="modal-title fs-4 text-center py-3" id="newReservationModalLabel">Join {{ title }} today</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.close()"></button>
+    <div>
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-body">
+          <h4 class="modal-title fs-4 text-center py-3" id="registerModalTitle">Join {{ title }} today</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.close()"></button>
 
-        <div class="mb-3">
-          <label for="registerEmail" class="form-label">Email</label>
-          <input type="email" id="registerEmail" class="form-control" required>
-        </div>
+          @if (!steps[0]) {
+            <div class="input-group">
+              <div class="mb-3">
+                <label for="registerEmail" class="form-label">Email</label>
+                <input type="email" minlength="5" maxlength="256" id="registerEmail" class="form-control" formControlName="email" required
+                [ngClass]="{'
+                  is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched || duplicatedEmail,
+                }">
+                @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                  <span class="invalid-feedback">Required</span>
+                }
+                @if (duplicatedEmail) {
+                  <span class="invalid-feedback">Email already in use</span>
+                }
+              </div>
 
-        <div class="mb-3">
-          <label for="registerPassword" class="form-label">Password</label>
-          <input type="password" id="registerPassword" class="form-control" required>
-        </div>
+              <div class="mb-3">
+                <label for="registerPassword" class="form-label">Password</label>
+                <input type="password" minlength="8" id="registerPassword" class="form-control" formControlName="password" required
+                [ngClass]="{'is-invalid':
+                  registerForm.get('password')?.invalid && registerForm.get('password')?.touched &&
+                  registerForm.get('password')?.hasError('invalidPassword')
+                }">
+                @if (registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched) {
+                  <span class="invalid-feedback">Required</span>
+                }
+                @if (registerForm.get('password')?.hasError('invalidPassword')) {
+                  <span class="invalid-feedback">
+                    Password must have a minimum of 8 characters long and contain 1 number
+                  </span>
+                }
+              </div>
+            </div>
 
-        <div class="mb-3">
-          <label for="registerName" class="form-label">Name</label>
-          <input type="text" id="registerName" class="form-control" required>
-        </div>
+            <div class="mb-3">
+              <button type="button" class="btn btn-primary w-100" (click)="firstStepCompleted()">Next</button>
+            </div>
 
-        <div class="mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="userTypeRadioButton" id="userTypeRadio" checked>
-            <label class="form-check-label" for="userTypeRadio">
-              User
-            </label>
+          } @else if (!steps[1]) {
+            <div class="input-group">
+              <div class="mb-3">
+                <label for="registerName" class="form-label">Name</label>
+                <input type="text" minlength="3" maxlength="50" id="registerName" class="form-control" formControlName="name" required
+                [ngClass]="{'is-invalid':
+                  registerForm.get('name')?.invalid && registerForm.get('name')?.touched ||
+                  registerForm.get('name')?.hasError('minlength') ||
+                  registerForm.get('name')?.hasError('maxlength')
+                }">
+                @if (registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched) {
+                  <span class="invalid-feedback">Required</span>
+                }
+                @if (registerForm.get('name')?.hasError('minlength')) {
+                  <span class="invalid-feedback">Minimum characters: 3</span>
+                }
+                @if (registerForm.get('name')?.hasError('maxlength')) {
+                  <span class="invalid-feedback">Maximum characters: 50</span>
+                }
+              </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" id="registerUserTypeU" type="radio" name="userType" formControlName="userType" value="user" checked>
+                  <label class="form-check-label" for="registerUserTypeU">
+                    User
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="registerUserTypeC" type="radio" name="userType" formControlName="userType" value="company">
+                  <label class="form-check-label" for="registerUserTypeC">
+                    Company
+                  </label>
+                </div>
+                @if (registerForm.get('userType')?.invalid) {
+                  <span class="invalid-feedback">Required</span>
+                }
+              </div>
+            </div>
+            <div class="mb-3 d-flex justify-content-between flex-column flex-md-row gap-3">
+              <button type="button" class="btn btn-secondary px-5" (click)="stepBack(0)">Back</button>
+              <button type="button" class="btn btn-primary px-5" (click)="secondStepCompleted()">Next</button>
+            </div>
+          } @else if (!company) {
+            <div class="input-group">
+              <div class="mb-3">
+                <label for="registerPosition" class="form-label">Position</label>
+                <select name="registerPosition" id="registerPosition" formControlName="position" class="form-select" [required]="checkRequired('position')"
+                [ngClass]="{'
+                  is-invalid': registerForm.get('position')?.invalid && registerForm.get('position')?.touched,
+                }">
+                  <option value="GK" selected >Goalkeeper</option>
+                  <option value="DF">Defender</option>
+                  <option value="MD">Midfielder</option>
+                  <option value="FW">Forward</option>
+                </select>
+                @if (registerForm.get('position')?.invalid && registerForm.get('position')?.touched) {
+                  <span class="invalid-feedback">Required</span>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="registerAge" class="form-label">Age</label>
+                <input type="number" id="registerAge" min="14" max="100" class="form-control" formControlName="age" [required]="checkRequired('age')"
+                [ngClass]="{'
+                  is-invalid': registerForm.get('age')?.invalid && registerForm.get('age')?.touched,
+                }">
+                @if (registerForm.get('age')?.invalid && registerForm.get('age')?.touched) {
+                  <span class="invalid-feedback">Required</span>
+                }
+              </div>
+            </div>
+          } @else {
+            <div class="input-group">
+              <div class="mb-3">
+                <label for="registerBankAccount" class="form-label">IBAN</label>
+                <input type="text" id="registerBankAccount" minlength="24" maxlength="24" class="form-control" formControlName="bank_account" [required]="checkRequired('bank_account')"
+                [ngClass]="{'
+                  is-invalid': registerForm.get('bank_account')?.invalid && registerForm.get('bank_account')?.touched || registerForm.get('bank_account')?.hasError('ibanInvalid')
+                }">
+                @if (registerForm.get('bank_account')?.invalid && registerForm.get('bank_account')?.touched) {
+                  <span class="invalid-feedback">Required</span>
+                }
+                @if (registerForm.get('bank_account')?.errors?.['error']['patternInvalid']) {
+                  <span class="invalid-feedback">IBAN Code pattern is invalid</span>
+                }
+                @if (registerForm.get('bank_account')?.errors?.['error']['countryUnsupported']) {
+                  <span class="invalid-feedback">Country not supported</span>
+                }
+                @if (registerForm.get('bank_account')?.errors?.['error']['codeLengthInvalid']) {
+                  <span class="invalid-feedback">IBAN Code length is invalid</span>
+                }
+              </div>
+            </div>
+          }
+          @if (steps[1]) {
+            <div class="mb-3 d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary px-5" (click)="stepBack(1)">Back</button>
+              <button type="submit" class="btn btn-primary px-5">Register</button>
+            </div>
+          }
+
+          <div class="mb-3 text-end">
+            <a (click)="openLogIn()" type="text" class="text-green-400">Already a {{ title }} user? Log in</a>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="userTypeRadioButton" id="companyTypeRadio">
-            <label class="form-check-label" for="companyTypeRadio">
-              Company
-            </label>
-          </div>
-        </div>
-
-        @if (company) {
-          <p>company</p>
-        }
-
-        <div class="mb-3">
-          <button type="submit" class="btn btn-primary w-100">Register</button>
-        </div>
-        <div class="mb-3 text-end">
-          <span type="button" class="text-primary">Already a {{ title }} user? Log in</span>
         </div>
       </div>
     </div>
