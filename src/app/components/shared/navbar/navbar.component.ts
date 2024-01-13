@@ -6,6 +6,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { LoginComponent } from '../../auth/login/login.component';
 import { RegisterComponent } from '../../auth/register/register.component';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,11 +19,11 @@ export class NavbarComponent implements AfterViewInit, OnInit {
   public title?: string;
   public filter = 'backdrop-filter: saturate(180%) blur(20px)';
 
-  public user: boolean = false;
-
   private modalService = inject(NgbModal);
 
   screenWidth!: number;
+
+  public user = this.authService.logged;
 
   @ViewChild('closeButton', { static: false }) closeButton!: ElementRef;
 
@@ -34,6 +35,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
     private titleService: TitleService,
     private navbarService: NavbarService,
     private el: ElementRef,
+    private authService: AuthService,
     config: NgbModalConfig
   ) {
     this.title = this.titleService.getPageTitle();
@@ -49,7 +51,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
         if (modal === 'register') this.openRegister();
         else if (modal === 'login') this.openLogin();
       }, 300);
-    })
+    });
   }
 
   ngAfterViewInit(): void {

@@ -20,7 +20,7 @@
               }
             </li>
           }
-          @if (!user) {
+          @if (!user()) {
             <li class="nav-item">
               <div class="d-flex gap-2 ms-lg-4 flex-column flex-lg-row">
                 <button class="btn btn-primary text-white" (click)="openLogin()">Log In</button>
