@@ -1,5 +1,5 @@
 import { TitleService } from './../../../services/title/title.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarService } from '../../../services/navbar/navbar.service';

@@ -1,11 +1,11 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { NgbProgressbar } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarService } from '../../services/navbar/navbar.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgbProgressbar],
+  imports: [RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
