@@ -27,6 +27,10 @@ nav {
   #offcanvasNavbar {
     border-radius: 1rem 0 0 1rem;
 
+    .nav-link {
+      width: fit-content;
+    }
+
     .router-link-active {
       box-shadow: 0 2px 0 0 $primary;
     }
