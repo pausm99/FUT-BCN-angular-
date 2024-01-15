@@ -8,8 +8,8 @@
   </ul>
 </div>
 <div class="gap-3 fields-grid">
-  @for (item of stars; track $index) {
-    <div class="field-card rounded-3">
+  @for (field of fields; track $index) {
+    <div class="field-card rounded-3 position-relative">
       <div class="field-card-header">
         <div class="image"></div>
         <div>
@@ -20,15 +20,21 @@
               </svg>
             }
           </div>
-          <h3 class="field-name">Nom del camp</h3>
+          <h3 class="field-name">{{ field.name }}</h3>
         </div>
       </div>
 
       <div class="field-card-body">
-        <span><Address>C. Borrell 45</Address></span>
+        <span><Address>{{ field.address }}</Address></span>
         <div class="d-flex justify-content-between align-items-center">
-          <span class="rounded-pill px-3 field-type">FUT 7</span>
-          <button class="btn btn-primary">Book</button>
+          <span class="rounded-pill px-3 field-type">{{ field.type }}</span>
+          @if (!field.public) {
+            <button class="btn btn-primary">Book</button>
+          }
+          @else {
+            <button class="btn btn-danger">View</button>
+            <span class="rounded-pill bg-secondary position-absolute public-pill">Public</span>
+          }
         </div>
       </div>
     </div>

@@ -59,6 +59,12 @@
       margin-top: 1rem;
       color: #3C4048;
 
+      .public-pill {
+        padding: 2px 15px;
+        top: 10px;
+        right: 12px;
+      }
+
       .field-type {
         background-color: var(--green-200);
       }
