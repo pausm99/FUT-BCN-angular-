@@ -1,11 +1,11 @@
 import { TitleService } from './../../../services/title/title.service';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ export class LoginComponent {
   constructor(
     private titleService: TitleService,
     private navbarService: NavbarService,
-    private usersService: UserService, private http: HttpClient) {
+    private usersService: UserService) {
     this.title = this.titleService.getPageTitle();
   }
 

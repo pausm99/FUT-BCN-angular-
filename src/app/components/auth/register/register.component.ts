@@ -63,13 +63,12 @@ export class RegisterComponent implements OnInit {
         age: !this.company ? values.age.value! : undefined,
         bank_account: this.company ? values.bank_account.value! : undefined,
       }
-      console.log(user);
       this.userService.register(user).subscribe({
         next: () => {
           this.activeModal.close();
           this.registerForm.reset();
           const { email, password } = user;
-          this.userService.login({ email, password });
+          this.userService.login({ email, password }).subscribe();
         }
       })
     }

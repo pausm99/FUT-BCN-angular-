@@ -21,8 +21,4 @@ export class UserService {
   login(body: any): Observable<any> {
     return this.http.post<any>(`http://localhost:3000/user/login`, body);
   }
-
-  secret(): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/secret`);
-  }
 }
