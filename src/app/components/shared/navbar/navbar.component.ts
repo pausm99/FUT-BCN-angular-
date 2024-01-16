@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { TitleService } from '../../../services/title/title.service';
 import { routes } from '../../../app.routes';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { LoginComponent } from '../../auth/login/login.component';
@@ -36,6 +36,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
     private navbarService: NavbarService,
     private el: ElementRef,
     private authService: AuthService,
+    private router: Router,
     config: NgbModalConfig
   ) {
     this.title = this.titleService.getPageTitle();
@@ -87,6 +88,11 @@ export class NavbarComponent implements AfterViewInit, OnInit {
     setTimeout(() => {
       this.modalService.open(RegisterComponent);
     }, 200);
+  }
+
+  logout() {
+    this.router.navigate(['/home']);
+    this.authService.logOut();
   }
 
   closeNavbar() {
