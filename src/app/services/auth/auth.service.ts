@@ -6,6 +6,7 @@ import { Injectable, signal } from '@angular/core';
 export class AuthService {
 
   public logged = signal<boolean>(false);
+  public redirectURL: string = '';
 
   constructor() {
     this.logged.set(this.isLoggedIn())

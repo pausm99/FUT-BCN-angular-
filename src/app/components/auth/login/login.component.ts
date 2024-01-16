@@ -5,6 +5,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 
 
 @Component({
@@ -30,7 +32,9 @@ export class LoginComponent {
   constructor(
     private titleService: TitleService,
     private navbarService: NavbarService,
-    private usersService: UserService) {
+    private usersService: UserService,
+    private authService: AuthService,
+    private router: Router) {
     this.title = this.titleService.getPageTitle();
   }
 
@@ -44,6 +48,8 @@ export class LoginComponent {
       this.usersService.login(body).subscribe({
         next: () => {
           this.activeModal.close();
+          const redirectURL = this.authService.redirectURL || '/home'
+          this.router.navigate([redirectURL]);
         },
         error: (err) => {
           if (err.status === 401) this.invalidCredentials = true;
