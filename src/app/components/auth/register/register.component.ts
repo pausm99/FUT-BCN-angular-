@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(256)]),
     password: new FormControl('', [Validators.required, CustomValidators.passwordValidator]),
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-    userType: new FormControl('player', [Validators.required]),
+    userRole: new FormControl('player', [Validators.required]),
     position: new FormControl('GK', CustomValidators.conditionalRequired('bank_account', this.company)),
     age: new FormControl('', CustomValidators.conditionalRequired('bank_account', this.company)),
     bank_account: new FormControl('', CustomValidators.conditionalRequired('bank_account', this.company)),
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.registerForm.get('userType')?.valueChanges.subscribe(() => {
+    this.registerForm.get('userRole')?.valueChanges.subscribe(() => {
       this.company = !this.company;
     });
     this.registerForm.get('bank_account')?.addValidators(validateIBAN)
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
         email: values.email.value!,
         password: values.password.value!,
         name: values.name.value!,
-        type: values.userType.value!,
+        role: values.userRole.value!,
         position: !this.company ? values.position.value! : undefined,
         age: !this.company ? values.age.value! : undefined,
         bank_account: this.company ? values.bank_account.value! : undefined,
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
 
   secondStepCompleted(): void {
     const controls = this.registerForm.controls;
-    if (controls.userType.valid && controls.name.valid) this.steps[1] = true;
+    if (controls.userRole.valid && controls.name.valid) this.steps[1] = true;
   }
 
   stepBack(i: number): void {

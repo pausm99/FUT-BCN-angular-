@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { environment } from '../../../environments/environment';
@@ -11,6 +11,8 @@ const API_URL = environment.api_url;
 })
 export class UserService {
 
+  public role = signal<string>('');
+
   constructor(private http: HttpClient) { }
 
   register(user: User): Observable<any> {
@@ -21,7 +23,7 @@ export class UserService {
     return this.http.get<any>(`${API_URL}/user/${email}`);
   }
 
-  login(body: any): Observable<any> {
-    return this.http.post<any>(`${API_URL}/user/login`, body);
+  login(body: any): Observable<User> {
+    return this.http.post<User>(`${API_URL}/user/login`, body);
   }
 }

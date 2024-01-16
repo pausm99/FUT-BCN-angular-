@@ -66,18 +66,18 @@
               </div>
               <div class="mb-3">
                 <div class="form-check">
-                  <input class="form-check-input" id="registerUserTypeU" type="radio" name="userType" formControlName="userType" value="player" checked>
-                  <label class="form-check-label" for="registerUserTypeU">
+                  <input class="form-check-input" id="registerUserRolePlayer" type="radio" name="userRole" formControlName="userRole" value="player" checked>
+                  <label class="form-check-label" for="registerUserRolePlayer">
                     User
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" id="registerUserTypeC" type="radio" name="userType" formControlName="userType" value="company">
-                  <label class="form-check-label" for="registerUserTypeC">
+                  <input class="form-check-input" id="registerUserRoleCompany" type="radio" name="userRole" formControlName="userRole" value="company">
+                  <label class="form-check-label" for="registerUserRoleCompany">
                     Company
                   </label>
                 </div>
-                @if (registerForm.get('userType')?.invalid) {
+                @if (registerForm.get('userRole')?.invalid) {
                   <span class="invalid-feedback">Required</span>
                 }
               </div>
