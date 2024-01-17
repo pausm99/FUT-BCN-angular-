@@ -46,10 +46,9 @@ export class LoginComponent {
         password: controls.password.value
       }
       this.usersService.login(body).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.usersService.role.set(res.role);
+        next: () => {
           this.activeModal.close();
+
           const redirectURL = this.authService.redirectURL || '/home'
           this.router.navigate([redirectURL]);
         },
