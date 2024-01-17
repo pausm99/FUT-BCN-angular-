@@ -7,6 +7,7 @@ import { NavbarService } from '../../../services/navbar/navbar.service';
 import { LoginComponent } from '../../auth/login/login.component';
 import { RegisterComponent } from '../../auth/register/register.component';
 import { AuthService } from '../../../services/auth/auth.service';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +25,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
   screenWidth!: number;
 
   public user = this.authService.logged;
+  public userInfo = this.usersService.userInfo;
 
   @ViewChild('closeButton', { static: false }) closeButton!: ElementRef;
 
@@ -37,6 +39,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
     private el: ElementRef,
     private authService: AuthService,
     private router: Router,
+    private usersService: UserService,
     config: NgbModalConfig
   ) {
     this.title = this.titleService.getPageTitle();
@@ -93,6 +96,11 @@ export class NavbarComponent implements AfterViewInit, OnInit {
   logout() {
     this.router.navigate(['/home']);
     this.authService.logOut();
+    this.usersService.userInfo.set({
+      email: '',
+      name: '',
+      role: ''
+    });
   }
 
   closeNavbar() {

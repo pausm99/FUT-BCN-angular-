@@ -6,12 +6,22 @@ import { environment } from '../../../environments/environment';
 
 const API_URL = environment.api_url;
 
+interface UserSimple {
+  email: string;
+  name: string;
+  role: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  public role = signal<string>('');
+  public userInfo = signal<UserSimple>({
+    email: '',
+    name: '',
+    role: ''
+  });
 
   constructor(private http: HttpClient) { }
 
