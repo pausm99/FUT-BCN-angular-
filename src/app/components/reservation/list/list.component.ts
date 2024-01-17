@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FieldService } from '../../../services/field.service';
+import { FieldService } from '../../../services/field/field.service';
 import { Field } from '../../../interfaces/field';
 
 const maxStars: number = 5;
