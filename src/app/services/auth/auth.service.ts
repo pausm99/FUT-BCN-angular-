@@ -8,12 +8,12 @@ import { UserService } from '../user/user.service';
 export class AuthService {
 
   public logged = signal<boolean>(false);
-  public redirectURL: string = '';
+  public redirectURL: string | null = null;
 
   constructor(private userService: UserService) {
     this.logged.set(this.isLoggedIn());
     const decodedTokenFromStorage = this.decodeToken(this.getToken() || '');
-    userService.userInfo.set(decodedTokenFromStorage);
+    if (decodedTokenFromStorage) userService.userInfo.set(decodedTokenFromStorage);
   }
 
   setToken(token: string): void {
@@ -31,6 +31,7 @@ export class AuthService {
     localStorage.removeItem('apiToken');
     this.logged.set(false);
     this.userService.userInfo.set({
+      id: 0,
       email: '',
       name: '',
       role: ''
@@ -41,10 +42,13 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  decodeToken(token: string) {
-    const decodedToken: any = jwtDecode(token);
-    const user = decodedToken.userSimple;
-
-    return user;
+  decodeToken(token: string): any | null {
+    try {
+      const decodedToken: any = jwtDecode(token);
+      const user = decodedToken.userSimple;
+      return user;
+    } catch (error) {
+      return null;
+    }
   }
 }
