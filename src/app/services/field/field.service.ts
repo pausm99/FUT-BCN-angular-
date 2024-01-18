@@ -16,4 +16,8 @@ export class FieldService {
   getAllFields(): Observable<Field[]> {
     return this.http.get<Field[]>(`${API_URL}/fields`);
   }
+
+  createNewField(field: Field): Observable<Field> {
+    return this.http.post<Field>(`${API_URL}/fields`, field);
+  }
 }
