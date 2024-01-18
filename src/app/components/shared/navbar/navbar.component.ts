@@ -31,7 +31,8 @@ export class NavbarComponent implements AfterViewInit, OnInit {
 
   public routes = routes
         .filter(route => route && route.path)
-        .filter(route => route && !route.path?.includes('**'));
+        .filter(route => route && !route.path?.includes('**'))
+        .filter(route => route && !route.path?.includes('profile'));
 
   constructor(
     private titleService: TitleService,
@@ -97,6 +98,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/home']);
     this.authService.logOut();
     this.usersService.userInfo.set({
+      id: 0,
       email: '',
       name: '',
       role: ''
