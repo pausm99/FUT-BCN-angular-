@@ -5,7 +5,8 @@ const targetPath = './src/environments/environment.ts';
 
 const envFileContent = `
   export const environment = {
-    api_url: "${process.env.API_URL}"
+    api_url: "${process.env.API_URL}",
+    mapbox_api_key: "${process.env.MAPBOX_API_KEY}"
   }
 `;
 
