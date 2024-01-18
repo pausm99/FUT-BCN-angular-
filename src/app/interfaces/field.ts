@@ -1,8 +1,8 @@
 export interface Field {
-  id: number
+  id?: number
   company_id: number;
   name: string;
-  type: 'FutSala' | 'Fut5' | 'Fut7' | 'Fut11';
+  type: string;
   location_lat: number;
   location_lng: number;
   address : string;
