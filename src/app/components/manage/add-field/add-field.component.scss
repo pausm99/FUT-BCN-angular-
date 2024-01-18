@@ -1,0 +1,26 @@
+.btn-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+#openMapButton {
+  display: flex;
+
+  button {
+    flex: 5;
+  }
+
+  div {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    video {
+      height: 100%;
+      width: 100%;
+      max-height: 30px;
+    }
+  }
+}

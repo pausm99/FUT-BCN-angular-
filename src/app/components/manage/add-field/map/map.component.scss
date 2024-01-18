@@ -1,0 +1,16 @@
+.modal-body {
+  height: 75dvh;
+  min-height: 500px;
+
+  .mapContainer {
+    height: 80%;
+    position: relative;
+
+    #mapDiv {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+}

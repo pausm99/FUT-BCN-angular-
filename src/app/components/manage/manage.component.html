@@ -1,0 +1,7 @@
+<section #manageSection [style.paddingTop]="paddingTop" class="bg-dark py-5 text-light">
+  <div class="container px-3 px-lg-5">
+    <h1>Manage your fields</h1>
+    <app-list [company]="isCompany"></app-list>
+    <button class="btn btn-primary" (click)="addNewField()">ADD FIELD</button>
+  </div>
+</section>

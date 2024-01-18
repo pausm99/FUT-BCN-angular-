@@ -1,0 +1,9 @@
+<div class="modal-content bg-dark text-light">
+  <div class="modal-body d-flex flex-column justify-content-between">
+    <h4 class="modal-title fs-4 text-center" id="newReservationModalLabel">Place your field</h4>
+    <div class="mapContainer rounded-3">
+      <div id="mapDiv" #mapDiv></div>
+    </div>
+    <button class="btn btn-primary" [disabled]="latLang === undefined" (click)="closeMap()">Confirm</button>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<form [formGroup]="fieldForm" (submit)="addField()" novalidate>
+  <fieldset>
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-body">
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.close()"></button>
+
+        <h3 class="modal-title fs-4 text-center py-3" id="newReservationModalLabel">Add a new football field</h3>
+
+        <div class="row row-gap-3">
+          <div class="col-12 col-md-6">
+            <label for="fieldName" class="form-label">Name</label>
+            <input type="text" id="fieldName" class="form-control" formControlName="name" required>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="fieldAddress" class="form-label">Address</label>
+            <input type="text" id="fieldAddress" class="form-control" formControlName="address" required>
+          </div>
+
+          <div class="col-12 align-items-center" id="openMapButton">
+            <button type="button" class="btn btn-secondary d-flex gap-3" (click)="openMap()">
+              <i class="bi bi-globe-americas"></i>
+              Place your field
+            </button>
+            <div>
+              @if (coordinates !== undefined) {
+                <video src="../../../../assets/gifs/check_animation.webm" autoplay></video>
+              }
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label for="fieldTypeSelector" class="form-label">Type</label>
+            <select name="fieldTypeSelector" id="fieldTypeSelector" formControlName="type" class="form-select">
+              <option value="FutSala">Fut Sala</option>
+              <option value="Fut5">Fut 5</option>
+              <option value="Fut7">Fut 7</option>
+              <option value="Fut11">Fut 11</option>
+            </select>
+            <div class="form-text text-light"><a [routerLink]="['/home']" (click)="activeModal.close()" routerLinkActive="router-link-active" >Check the football field article for further information</a></div>
+          </div>
+
+          <div class="col-6">
+            <label for="fieldLength" class="form-label">Length <small>(meters)</small></label>
+            <input type="number" min="1" id="fieldLength" class="form-control" formControlName="length" required>
+          </div>
+
+          <div class="col-6">
+            <label for="fieldWidth" class="form-label">Width <small>(meters)</small></label>
+            <input type="number" min="1" id="fieldWidth" class="form-control" formControlName="width" required>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Opening Time</label>
+            <ngb-timepicker id="fieldOpeningTime" formControlName="opening_time" required/>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Closing Time</label>
+            <ngb-timepicker id="fieldClosingTime" formControlName="closing_time" required/>
+          </div>
+
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="fieldForm.invalid || coordinates === undefined">Add football field</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </fieldset>
+</form>
