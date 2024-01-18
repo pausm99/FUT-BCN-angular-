@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 const API_URL = environment.api_url;
 
 interface UserSimple {
+  id: number;
   email: string;
   name: string;
   role: string;
@@ -18,6 +19,7 @@ interface UserSimple {
 export class UserService {
 
   public userInfo = signal<UserSimple>({
+    id: 0,
     email: '',
     name: '',
     role: ''
