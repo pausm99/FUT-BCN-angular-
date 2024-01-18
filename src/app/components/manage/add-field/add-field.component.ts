@@ -70,7 +70,7 @@ export class AddFieldComponent {
     })
   }
 
-  addField() {
+  async addField() {
     if (this.fieldForm.valid || this.coordinates !== undefined) {
 
       const controls = this.fieldForm.controls;
@@ -92,11 +92,11 @@ export class AddFieldComponent {
       console.log(field)
 
       this.fieldService.createNewField(field).subscribe({
-        next: (res) => {
-          console.log(res);
+        next: (result) => {
+          this.fieldService.fields.update(items => [...items, result]);
           this.activeModal.close();
         }
-      });
+      })
 
     }
     else {

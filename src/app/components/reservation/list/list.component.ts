@@ -14,7 +14,7 @@ const maxStars: number = 5;
 })
 export class ListComponent implements OnInit {
 
-  public fields: Field[] = [];
+  public fields = this.fieldService.fields;
   public stars: any[] = new Array(maxStars);
 
   @Input() company: boolean = false;
@@ -22,16 +22,12 @@ export class ListComponent implements OnInit {
   constructor(private fieldService: FieldService, private userService: UserService) {}
 
   ngOnInit(): void {
-    if (!this.company) {
-      this.fieldService.getAllFields().subscribe((res) => {
-        this.fields = res;
-      });
-    }
-    else {
+    if (this.company) {
       const company_id = this.userService.userInfo().id;
-      this.fieldService.getFieldsByCompanyId(company_id).subscribe((res) => {
-        this.fields = res;
-      })
+      this.fieldService.setFieldSignalByType(company_id);
+    } else {
+      this.fieldService.setFieldSignalByType(null);
     }
   }
+
 }
