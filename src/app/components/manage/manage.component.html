@@ -1,9 +1,14 @@
 <section #manageSection [style.paddingTop]="paddingTop" class="bg-dark py-5 text-light">
   <div class="container px-3 px-lg-5">
-    <div class="d-flex flex-column gap-3">
-      <h1>Manage your fields</h1>
+    <div class="d-flex flex-column gap-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1>Manage your fields</h1>
+        <button class="btn btn-primary h-auto" (click)="addNewField()">
+          <i class="bi bi-plus-lg"></i>
+          ADD FIELD
+        </button>
+      </div>
       <app-list [company]="isCompany"></app-list>
-      <button class="btn btn-primary" (click)="addNewField()">ADD FIELD</button>
     </div>
   </div>
 </section>

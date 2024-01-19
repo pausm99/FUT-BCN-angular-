@@ -8,7 +8,7 @@
 
 .fields-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
 
   .field-card-wrapper {
     box-shadow: 2px 4px 12px rgba(0,0,0,.08);
@@ -41,7 +41,7 @@
           width: 4rem;
           border-radius: 9999px;
           object-fit: cover;
-          background-color: $primary;
+          background-color: gray;
         }
 
         .stars {
@@ -73,16 +73,16 @@
         margin-top: 1rem;
         color: #3C4048;
 
-        .public-pill {
-          padding: 2px 15px;
-          top: 10px;
-          right: 12px;
-        }
-
         .field-type {
           background-color: var(--green-200);
         }
       }
     }
+  }
+}
+
+@media (min-width: 425px) {
+  .fields-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
