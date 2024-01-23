@@ -1,23 +1,5 @@
-:root {
-  --white-text: #ffffff;
-  --green-50: #f3faf3;
-  --green-100: #e2f6e3;
-  --green-200: #c7ebc9;
-  --green-300: #9bda9e;
-  --green-400: #67c16b;
-  --green-500: #42a547;
-  // $green-600: #2e7d32; --> bootstrap $primary
-  --green-700: #2a6b2d;
-  --green-800: #265529;
-  --green-900: #204724;
-  --green-950: #0d260f;
-
-  --off-white: #FBFBFB;
-}
-
-@import 'scss/custom-variables';
+@import './scss/custom-variables'; // Importar tus variables personalizadas
 @import 'bootstrap/scss/bootstrap';
-
 
 @font-face {
   font-family: 'SF Pro Display';
@@ -47,17 +29,134 @@
   font-style: italic;
 }
 
-body, * {
-  font-family: 'SF Pro Text', Helvetica, sans-serif !important;
+:root {
+  --white-color:                  #FBFBFB;
+  --primary-color:                #{$primary};
+  --secondary-color:              #{$secondary};
+  --section-bg-color:             #FBFBFB;
+  --custom-btn-bg-color:          #{$secondary};
+  --custom-btn-bg-hover-color:    #{$primary};
+  --dark-color:                   #000000;
+  --p-color:                      #717275;
+  --border-color:                 #1ddf9e;
+  --link-hover-color:             #{$primary};
+
+  --body-font-family:             'SF Pro Text', sans-serif;
+  --title-font-family:            'SF Pro Display', sans-serif;
+
+  --h1-font-size:                 3.625rem;
+  --h2-font-size:                 2.875rem;
+  --h3-font-size:                 2rem;
+  --h4-font-size:                 1.75rem;
+  --h5-font-size:                 1.5rem;
+  --h6-font-size:                 1.375rem;
+  --p-font-size:                  1.25rem;
+  --menu-font-size:               1rem;
+  --btn-font-size:                1.125rem;
+  --copyright-font-size:          1rem;
+
+  --border-radius-large:          6.25rem;
+  --border-radius-medium:         1.25rem;
+  --border-radius-small:          0.625rem;
+
+  --font-weight-normal:           400;
+  --font-weight-medium:           500;
+  --font-weight-semibold:         600;
+  --font-weight-bold:             700;
+}
+
+body {
+  background-color: var(--white-color);
+  font-family: var(--body-font-family);
   box-sizing: border-box;
+}
+
+/*---------------------------------------
+  TYPOGRAPHY
+-----------------------------------------*/
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--dark-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--title-font-family);
+  font-weight: var(--font-weight-semibold);
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  color: #FBFBFB;
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-weight-bold);
+}
+
+h3 {
+  font-size: var(--h3-font-size);
+}
+
+h4 {
+  font-size: var(--h4-font-size);
+}
+
+h5 {
+  font-size: var(--h5-font-size);
+}
+
+h6 {
+  color: var(--primary-color);
+  font-size: var(--h6-font-size);
+}
+
+p {
+  color: var(--p-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-normal);
+}
+
+ul li {
+  color: var(--p-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-normal);
+}
+
+a,
+button {
+  touch-action: manipulation;
+  transition: all 0.3s;
+}
+
+a {
+  display: inline-block;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+b,
+strong {
+  font-weight: var(--font-weight-bold);
 }
 
 i {
   font-family: 'SF Pro Italic' !important;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'SF Pro Display', Helvetica, sans-serif !important;
 }
 
 a {
@@ -66,45 +165,19 @@ a {
 
 input {
   border: none !important;
+  background-color: inherit !important;
 }
 
-.text-green-50 {
-  color: var(--green-50) !important;
-}
-.text-green-100 {
-  color: var(--green-100) !important;
-}
-.text-green-200 {
-  color: var(--green-300) !important;
-}
-.text-green-300 {
-  color: var(--green-300) !important;
-}
-.text-green-400 {
-  color: var(--green-400) !important;
-}
-.text-green-500 {
-  color: var(--green-500) !important;
-}
-.text-green-700 {
-  color: var(--green-700) !important;
-}
-.text-green-800 {
-  color: var(--green-800) !important;
-}
-.text-green-900 {
-  color: var(--green-900) !important;
-}
-.text-green-950 {
-  color: var(--green-950) !important;
+.section-padding {
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
-.form-label {
-  margin-bottom: 0.25rem !important;
-}
-
-.form-control:focus, .form-select:focus {
-  box-shadow: 0 0 0 0.25rem $primary !important;
+.section {
+  padding-top: 120px;
+  padding-bottom: 75px;
+  background-image: linear-gradient(15deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-radius: 0 0 20px 20px;
 }
 
 .offcanvas-backdrop.show {
@@ -115,5 +188,51 @@ input {
   justify-content: center;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+
+@media screen and (min-width: 480px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.625rem;
+  }
+
+  h4 {
+    font-size: 1.375rem;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 991px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    font-size: 1.125rem;
+  }
+}

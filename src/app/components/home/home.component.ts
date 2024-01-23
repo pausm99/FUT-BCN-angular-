@@ -9,20 +9,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewChecked {
+export class HomeComponent {
 
-  public paddingTop!: string;
-  @ViewChild('heroSection') heroSection?: ElementRef;
-
-  constructor(private navbarService: NavbarService, private cd: ChangeDetectorRef) {}
-
-  ngAfterViewChecked(): void {
-    let heroElement = this.heroSection?.nativeElement;
-    const styles = window.getComputedStyle(heroElement);
-    const paddingBottom = Number(styles.paddingBottom.split('px')[0]);
-    const paddingTop = paddingBottom + this.navbarService.getHeight();
-    this.paddingTop = paddingTop + 'px !important';
-    this.cd.detectChanges();
-  }
 
 }

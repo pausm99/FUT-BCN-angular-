@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { TitleService } from '../../../services/title/title.service';
 import { routes } from '../../../app.routes';
 import { Router, RouterModule } from '@angular/router';
@@ -8,26 +8,29 @@ import { LoginComponent } from '../../auth/login/login.component';
 import { RegisterComponent } from '../../auth/register/register.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements AfterViewInit, OnInit {
+export class NavbarComponent implements OnInit {
   public title?: string;
-  public filter = 'backdrop-filter: saturate(180%) blur(20px)';
 
   private modalService = inject(NgbModal);
 
   screenWidth!: number;
 
+  public isAtTop: boolean = true;
+
   public user = this.authService.logged;
   public userInfo = this.usersService.userInfo;
 
   @ViewChild('closeButton', { static: false }) closeButton!: ElementRef;
+  @ViewChild('navbarNav', { static: false }) navBarNav!: ElementRef;
 
   public routes = routes
         .filter(route => route && route.path)
@@ -37,7 +40,6 @@ export class NavbarComponent implements AfterViewInit, OnInit {
   constructor(
     private titleService: TitleService,
     private navbarService: NavbarService,
-    private el: ElementRef,
     private authService: AuthService,
     private router: Router,
     private usersService: UserService,
@@ -57,27 +59,6 @@ export class NavbarComponent implements AfterViewInit, OnInit {
         else if (modal === 'login') this.openLogin();
       }, 300);
     });
-  }
-
-  ngAfterViewInit(): void {
-    const height = this.getNavbarHeight();
-    this.navbarService.setHeight(height);
-  }
-
-  getNavbarHeight() {
-    return this.el.nativeElement.querySelector(':first-child').offsetHeight;
-  }
-
-  quitFilter() {
-    setTimeout(() => {
-      this.filter = 'backdrop-filter: none';
-    }, 100);
-  }
-
-  addFilter() {
-    setTimeout(() => {
-      this.filter = 'backdrop-filter: saturate(180%) blur(20px)';
-    }, 200);
   }
 
   openLogin() {
@@ -106,11 +87,20 @@ export class NavbarComponent implements AfterViewInit, OnInit {
   }
 
   closeNavbar() {
-    this.screenWidth < 992 ? this.closeButton.nativeElement.click() : null;
+    if (this.navbarIsOpened()) this.screenWidth < 992 ? this.closeButton.nativeElement.click() : null;
+  }
+
+  navbarIsOpened(): boolean {
+    return this.navBarNav.nativeElement.classList.contains('show');
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.screenWidth = window.innerWidth;
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    this.isAtTop = window.scrollY <= 30;
   }
 }

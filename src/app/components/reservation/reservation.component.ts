@@ -1,28 +1,15 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { NavbarService } from '../../services/navbar/navbar.service';
+import { NavbarService } from './../../services/navbar/navbar.service';
+import { Component } from '@angular/core';
 import { ListComponent } from './list/list.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-reservation',
   standalone: true,
-  imports: [ListComponent],
+  imports: [ListComponent, RouterOutlet],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.scss'
 })
 export class ReservationComponent {
-
-  public paddingTop!: string;
-  @ViewChild('reservationSection') reservationSection?: ElementRef;
-
-  constructor(private navbarService: NavbarService, private cd: ChangeDetectorRef) {}
-
-  ngAfterViewChecked(): void {
-    let heroElement = this.reservationSection?.nativeElement;
-    const styles = window.getComputedStyle(heroElement);
-    const paddingBottom = Number(styles.paddingBottom.split('px')[0]);
-    const paddingTop = paddingBottom + this.navbarService.getHeight();
-    this.paddingTop = paddingTop + 'px !important';
-    this.cd.detectChanges();
-  }
 
 }

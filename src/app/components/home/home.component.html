@@ -1,4 +1,4 @@
-<div class="bg-black py-5" [style.paddingTop]="paddingTop" #heroSection>
+<!-- <div class="bg-black py-5"  #heroSection>
   <div class="container px-5">
       <div class="row gx-5 align-items-center justify-content-center">
           <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -7,157 +7,546 @@
                   <p class="lead fw-normal text-white mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                       <button class="btn btn-primary btn-lg main-button" [routerLink]="['/reservation']" routerLinkActive="router-link-active" >Reserva</button>
-                      <!-- <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a> -->
                   </div>
               </div>
           </div>
           <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
       </div>
   </div>
-</div>
-<!-- Features section-->
-<section class="py-5" id="features">
-  <div class="container px-5 my-5">
-      <div class="row gx-5">
-          <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Uno para dominarlos a todos.</h2></div>
-          <div class="col-lg-8">
-              <div class="row gx-5 row-cols-1 row-cols-md-2">
-                  <div class="col mb-5 h-100">
-                      <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-                      <h2 class="h5">Featured title</h2>
-                      <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+</div> -->
+<section class="hero-section d-flex justify-content-center align-items-center" id="hero-section">
+  <div class="container">
+      <div class="row">
+
+          <div class="col-lg-8 col-12 mx-auto">
+              <h1 class="text-center">Reserva campos de fútbol en Barcelona</h1>
+
+              <h6 class="text-center">platform for creatives around the world</h6>
+
+              <form method="get" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
+                  <div class="input-group input-group-lg">
+                      <span class="input-group-text bi-search" id="basic-addon1">
+
+                      </span>
+
+                      <input name="keyword" type="search" class="form-control" id="keyword" placeholder="Design, Code, Marketing, Finance ..." aria-label="Search">
+
+                      <button type="submit" class="form-control ms-1">Search</button>
                   </div>
-                  <div class="col mb-5 h-100">
-                      <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
-                      <h2 class="h5">Featured title</h2>
-                      <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+              </form>
+          </div>
+
+      </div>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="container">
+      <div class="row justify-content-center">
+
+          <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+              <div class="custom-block bg-white shadow-lg">
+                  <a href="topics-detail.html">
+                      <div class="d-flex">
+                          <div>
+                              <h5 class="mb-2">Web Design</h5>
+
+                              <p class="mb-0">When you search for free CSS templates, you will notice that TemplateMo is one of the best websites.</p>
+                          </div>
+
+                          <span class="badge bg-design rounded-pill ms-auto">14</span>
+                      </div>
+
+                      <img src="../../../assets/images/topics/undraw_Remote_design_team_re_urdx.png" class="custom-block-image img-fluid" alt="">
+                  </a>
+              </div>
+          </div>
+
+          <div class="col-lg-6 col-12">
+              <div class="custom-block custom-block-overlay">
+                  <div class="d-flex flex-column h-100">
+                      <img src="../../../assets/images/businesswoman-using-tablet-analysis.jpg" class="custom-block-image img-fluid" alt="">
+
+                      <div class="custom-block-overlay-text d-flex">
+                          <div>
+                              <h5 class="text-white mb-2">Finance</h5>
+
+                              <p class="text-white">Topic Listing Template includes homepage, listing page, detail page, and contact page. You can feel free to edit and adapt for your CMS requirements.</p>
+
+                              <a href="topics-detail.html" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
+                          </div>
+
+                          <span class="badge bg-finance rounded-pill ms-auto">25</span>
+                      </div>
+
+                      <div class="social-share d-flex">
+                          <p class="text-white me-4">Share:</p>
+
+                          <ul class="social-icon">
+                              <li class="social-icon-item">
+                                  <a href="#" class="social-icon-link bi-twitter"></a>
+                              </li>
+
+                              <li class="social-icon-item">
+                                  <a href="#" class="social-icon-link bi-facebook"></a>
+                              </li>
+                          </ul>
+                      </div>
+
+                      <div class="section-overlay"></div>
                   </div>
-                  <div class="col mb-5 mb-md-0 h-100">
-                      <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
-                      <h2 class="h5">Featured title</h2>
-                      <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</section>
+
+
+<section class="explore-section section-padding" id="section_2">
+  <div class="container">
+
+          <div class="col-12 text-center">
+              <h2 class="mb-4">Browse Topics</h2>
+          </div>
+
+  </div>
+
+  <div class="container-fluid">
+      <div class="row">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="design-tab" data-bs-toggle="tab" data-bs-target="#design-tab-pane" type="button" role="tab" aria-controls="design-tab-pane" aria-selected="true">Design</button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="marketing-tab" data-bs-toggle="tab" data-bs-target="#marketing-tab-pane" type="button" role="tab" aria-controls="marketing-tab-pane" aria-selected="false">Marketing</button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="finance-tab" data-bs-toggle="tab" data-bs-target="#finance-tab-pane" type="button" role="tab" aria-controls="finance-tab-pane" aria-selected="false">Finance</button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="music-tab" data-bs-toggle="tab" data-bs-target="#music-tab-pane" type="button" role="tab" aria-controls="music-tab-pane" aria-selected="false">Music</button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education-tab-pane" type="button" role="tab" aria-controls="education-tab-pane" aria-selected="false">Education</button>
+              </li>
+          </ul>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+
+          <div class="col-12">
+              <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabindex="0">
+                      <div class="row">
+                          <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Web Design</h5>
+
+                                              <p class="mb-0">Topic Listing Template based on Bootstrap 5</p>
+                                          </div>
+
+                                          <span class="badge bg-design rounded-pill ms-auto">14</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_Remote_design_team_re_urdx.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+
+                          <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Graphic</h5>
+
+                                                  <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-design rounded-pill ms-auto">75</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_Redesign_feedback_re_jvm0.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+
+                          <div class="col-lg-4 col-md-6 col-12">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Logo Design</h5>
+
+                                                  <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-design rounded-pill ms-auto">100</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/colleagues-working-cozy-office-medium-shot.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                  <div class="col h-100">
-                      <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
-                      <h2 class="h5">Featured title</h2>
-                      <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+
+                  <div class="tab-pane fade" id="marketing-tab-pane" role="tabpanel" aria-labelledby="marketing-tab" tabindex="0">
+                      <div class="row">
+                          <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                  <div class="custom-block bg-white shadow-lg">
+                                      <a href="topics-detail.html">
+                                          <div class="d-flex">
+                                              <div>
+                                                  <h5 class="mb-2">Advertising</h5>
+
+                                                  <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                              </div>
+
+                                              <span class="badge bg-advertising rounded-pill ms-auto">30</span>
+                                          </div>
+
+                                          <img src="../../../assets/images/topics/undraw_online_ad_re_ol62.png" class="custom-block-image img-fluid" alt="">
+                                      </a>
+                                  </div>
+                              </div>
+
+                              <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                  <div class="custom-block bg-white shadow-lg">
+                                      <a href="topics-detail.html">
+                                          <div class="d-flex">
+                                              <div>
+                                                  <h5 class="mb-2">Video Content</h5>
+
+                                                  <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                              </div>
+
+                                              <span class="badge bg-advertising rounded-pill ms-auto">65</span>
+                                          </div>
+
+                                          <img src="../../../assets/images/topics/undraw_Group_video_re_btu7.png" class="custom-block-image img-fluid" alt="">
+                                      </a>
+                                  </div>
+                              </div>
+
+                              <div class="col-lg-4 col-md-6 col-12">
+                                  <div class="custom-block bg-white shadow-lg">
+                                      <a href="topics-detail.html">
+                                          <div class="d-flex">
+                                              <div>
+                                                  <h5 class="mb-2">Viral Tweet</h5>
+
+                                                  <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                              </div>
+
+                                              <span class="badge bg-advertising rounded-pill ms-auto">50</span>
+                                          </div>
+
+                                          <img src="../../../assets/images/topics/undraw_viral_tweet_gndb.png" class="custom-block-image img-fluid" alt="">
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                    </div>
+
+                  <div class="tab-pane fade" id="finance-tab-pane" role="tabpanel" aria-labelledby="finance-tab" tabindex="0">   <div class="row">
+                          <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-0">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Investment</h5>
+
+                                              <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-finance rounded-pill ms-auto">30</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_Finance_re_gnv2.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+
+                          <div class="col-lg-6 col-md-6 col-12">
+                              <div class="custom-block custom-block-overlay">
+                                  <div class="d-flex flex-column h-100">
+                                      <img src="../../../assets/images/businesswoman-using-tablet-analysis.jpg" class="custom-block-image img-fluid" alt="">
+
+                                      <div class="custom-block-overlay-text d-flex">
+                                          <div>
+                                              <h5 class="text-white mb-2">Finance</h5>
+
+                                              <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint animi necessitatibus aperiam repudiandae nam omnis</p>
+
+                                              <a href="topics-detail.html" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
+                                          </div>
+
+                                          <span class="badge bg-finance rounded-pill ms-auto">25</span>
+                                      </div>
+
+                                      <div class="social-share d-flex">
+                                          <p class="text-white me-4">Share:</p>
+
+                                          <ul class="social-icon">
+                                              <li class="social-icon-item">
+                                                  <a href="#" class="social-icon-link bi-twitter"></a>
+                                              </li>
+
+                                              <li class="social-icon-item">
+                                                  <a href="#" class="social-icon-link bi-facebook"></a>
+                                              </li>
+
+                                              <li class="social-icon-item">
+                                                  <a href="#" class="social-icon-link bi-pinterest"></a>
+                                              </li>
+                                          </ul>
+
+                                          <a href="#" class="custom-icon bi-bookmark ms-auto"></a>
+                                      </div>
+
+                                      <div class="section-overlay"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="music-tab-pane" role="tabpanel" aria-labelledby="music-tab" tabindex="0">
+                      <div class="row">
+                          <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Composing Song</h5>
+
+                                              <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-music rounded-pill ms-auto">45</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_Compose_music_re_wpiw.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+
+                          <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Online Music</h5>
+
+                                              <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-music rounded-pill ms-auto">45</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_happy_music_g6wc.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+
+                          <div class="col-lg-4 col-md-6 col-12">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Podcast</h5>
+
+                                              <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-music rounded-pill ms-auto">20</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_Podcast_audience_re_4i5q.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="education-tab-pane" role="tabpanel" aria-labelledby="education-tab" tabindex="0">
+                      <div class="row">
+                          <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-3">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Graduation</h5>
+
+                                              <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-education rounded-pill ms-auto">80</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_Graduation_re_gthn.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+
+                          <div class="col-lg-6 col-md-6 col-12">
+                              <div class="custom-block bg-white shadow-lg">
+                                  <a href="topics-detail.html">
+                                      <div class="d-flex">
+                                          <div>
+                                              <h5 class="mb-2">Educator</h5>
+
+                                              <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                          </div>
+
+                                          <span class="badge bg-education rounded-pill ms-auto">75</span>
+                                      </div>
+
+                                      <img src="../../../assets/images/topics/undraw_Educator_re_ju47.png" class="custom-block-image img-fluid" alt="">
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>
       </div>
   </div>
 </section>
-<!-- Testimonial section-->
-<div class="py-5 bg-light">
-  <div class="container px-5 my-5">
-      <div class="row gx-5 justify-content-center">
-          <div class="col-lg-10 col-xl-7">
-              <div class="text-center">
-                  <div class="fs-4 mb-4 fst-italic">"Working with Start Bootstrap templates has saved me tons of development time when building new projects! Starting with a Bootstrap template just makes things easier!"</div>
-                  <div class="d-flex align-items-center justify-content-center">
-                      <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                      <div class="fw-bold">
-                          Tom Ato
-                          <span class="fw-bold text-primary mx-1">/</span>
-                          CEO, Pomodoro
+
+
+<section class="timeline-section section-padding" id="section_3">
+  <div class="section-overlay"></div>
+
+  <div class="container">
+      <div class="row">
+
+          <div class="col-12 text-center">
+              <h2 class="text-white mb-4">How does it work?</h2>
+          </div>
+
+          <div class="col-lg-10 col-12 mx-auto">
+              <div class="timeline-container">
+                  <ul class="vertical-scrollable-timeline" id="vertical-scrollable-timeline">
+                      <div class="list-progress">
+                          <div class="inner"></div>
                       </div>
-                  </div>
+
+                      <li>
+                          <h4 class="text-white mb-3">Search your favourite topic</h4>
+
+                          <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, cumque magnam? Sequi, cupiditate quibusdam alias illum sed esse ad dignissimos libero sunt, quisquam numquam aliquam? Voluptas, accusamus omnis?</p>
+
+                          <div class="icon-holder">
+                            <i class="bi-search"></i>
+                          </div>
+                      </li>
+
+                      <li>
+                          <h4 class="text-white mb-3">Bookmark &amp; Keep it for yourself</h4>
+
+                          <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint animi necessitatibus aperiam repudiandae nam omnis est vel quo, nihil repellat quia velit error modi earum similique odit labore. Doloremque, repudiandae?</p>
+
+                          <div class="icon-holder">
+                            <i class="bi-bookmark"></i>
+                          </div>
+                      </li>
+
+                      <li>
+                          <h4 class="text-white mb-3">Read &amp; Enjoy</h4>
+
+                          <p class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi vero quisquam, rem assumenda similique voluptas distinctio, iste est hic eveniet debitis ut ducimus beatae id? Quam culpa deleniti officiis autem?</p>
+
+                          <div class="icon-holder">
+                            <i class="bi-book"></i>
+                          </div>
+                      </li>
+                  </ul>
               </div>
+          </div>
+
+          <div class="col-12 text-center mt-5">
+              <p class="text-white">
+                  Want to learn more?
+                  <a href="#" class="btn custom-btn custom-border-btn ms-3">Check out Youtube</a>
+              </p>
           </div>
       </div>
   </div>
-</div>
-<!-- Blog preview section-->
-<section class="py-5">
-  <div class="container px-5 my-5">
-      <div class="row gx-5 justify-content-center">
-          <div class="col-lg-8 col-xl-6">
-              <div class="text-center">
-                  <h2 class="fw-bolder">From our blog</h2>
-                  <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+</section>
+
+
+<section class="faq-section section-padding" id="section_4">
+  <div class="container">
+      <div class="row">
+
+          <div class="col-lg-6 col-12">
+              <h2 class="mb-4">Frequently Asked Questions</h2>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="col-lg-5 col-12">
+              <img src="../../../assets/images/faq_graphic.jpg" class="img-fluid" alt="FAQs">
+          </div>
+
+          <div class="col-lg-6 col-12 m-auto">
+              <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          What is Topic Listing?
+                          </button>
+                      </h2>
+
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                              Topic Listing is free Bootstrap 5 CSS template. <strong>You are not allowed to redistribute this template</strong> on any other template collection website without our permission. Please contact TemplateMo for more detail. Thank you.
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          How to find a topic?
+                      </button>
+                      </h2>
+
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                              You can search on Google with <strong>keywords</strong> such as templatemo portfolio, templatemo one-page layouts, photography, digital marketing, etc.
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Does it need to paid?
+                      </button>
+                      </h2>
+
+                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                              You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                          </div>
+                      </div>
+                  </div>
               </div>
           </div>
+
       </div>
-      <div class="row gx-5">
-          <div class="col-lg-4 mb-5">
-              <div class="card h-100 shadow border-0">
-                  <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
-                  <div class="card-body p-4">
-                      <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                      <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Blog post title</h5></a>
-                      <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                  <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                      <div class="d-flex align-items-end justify-content-between">
-                          <div class="d-flex align-items-center">
-                              <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                              <div class="small">
-                                  <div class="fw-bold">Kelly Rowan</div>
-                                  <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-4 mb-5">
-              <div class="card h-100 shadow border-0">
-                  <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
-                  <div class="card-body p-4">
-                      <div class="badge bg-primary bg-gradient rounded-pill mb-2">Media</div>
-                      <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Another blog post title</h5></a>
-                      <p class="card-text mb-0">This text is a bit longer to illustrate the adaptive height of each card. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                  <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                      <div class="d-flex align-items-end justify-content-between">
-                          <div class="d-flex align-items-center">
-                              <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                              <div class="small">
-                                  <div class="fw-bold">Josiah Barclay</div>
-                                  <div class="text-muted">March 23, 2023 &middot; 4 min read</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-4 mb-5">
-              <div class="card h-100 shadow border-0">
-                  <img class="card-img-top" src="https://dummyimage.com/600x350/6c757d/343a40" alt="..." />
-                  <div class="card-body p-4">
-                      <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                      <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">The last blog post title is a little bit longer than the others</h5></a>
-                      <p class="card-text mb-0">Some more quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                  <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                      <div class="d-flex align-items-end justify-content-between">
-                          <div class="d-flex align-items-center">
-                              <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                              <div class="small">
-                                  <div class="fw-bold">Evelyn Martinez</div>
-                                  <div class="text-muted">April 2, 2023 &middot; 10 min read</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- Call to action-->
-      <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
-          <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
-              <div class="mb-4 mb-xl-0">
-                  <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>
-                  <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>
-              </div>
-              <div class="ms-xl-4">
-                  <div class="input-group mb-2">
-                      <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
-                      <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
-                  </div>
-                  <div class="small text-white-50">We care about privacy, and will never share your data.</div>
-              </div>
-          </div>
-      </aside>
   </div>
 </section>
