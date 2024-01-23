@@ -1,4 +1,4 @@
-@import './scss/custom-variables'; // Importar tus variables personalizadas
+@import './scss/custom-variables';
 @import 'bootstrap/scss/bootstrap';
 
 @font-face {
@@ -69,6 +69,8 @@ body {
   background-color: var(--white-color);
   font-family: var(--body-font-family);
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /*---------------------------------------
@@ -186,6 +188,22 @@ input {
 
 .ngb-tp {
   justify-content: center;
+}
+
+/*---------------------------------------
+  MAPBOXGL
+-----------------------------------------*/
+
+.mapboxgl-popup-content {
+  background-color: var(--white-color);
+}
+
+.mapboxgl-popup-close-button {
+  outline: none;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background-color: inherit !important;
 }
 
 

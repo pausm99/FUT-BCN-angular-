@@ -1,7 +1,27 @@
-:host {
-  height: 70dvh;
+#mapListDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+}
 
-  #mapListDiv {
-    height: 100%;
+.map-controls {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1002;
+
+  #closeMapButton, #centerMapButton {
+    padding: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 2px rgba(0,0,0,0.3);
+    color: var(--white-color);
   }
 }
+
+
+
+
+

@@ -13,6 +13,12 @@ export const routes: Routes = [
     loadComponent: () => import('./components/reservation/reservation.component').then(c => c.ReservationComponent),
     canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      {
+        path: 'list',
+        title: 'Fields list',
+        loadComponent: () => import('./components/reservation/list/list.component').then(c => c.ListComponent)
+      },
       {
         path: 'map',
         title: "Map",

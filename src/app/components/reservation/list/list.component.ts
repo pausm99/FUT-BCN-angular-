@@ -2,13 +2,14 @@ import { UserService } from './../../../services/user/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FieldService } from '../../../services/field/field.service';
 import { Field } from '../../../interfaces/field';
+import { RouterLink } from '@angular/router';
 
 const maxStars: number = 5;
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
