@@ -27,6 +27,7 @@
 }
 
 .navbar-nav {
+
 	.nav-link {
 		display: inline-block;
 		color: var(--white-color);
@@ -37,14 +38,18 @@
 		position: relative;
 		padding-top: 15px;
 		padding-bottom: 15px;
+    transition: all 200ms;
+
 
 		&:hover {
-			color: var(--gray);
+			color: var(--dark-color);
 		}
 	}
 
-  .router-link-active {
-    color: var(--gray);
+  .nav-link.router-link-active {
+    transition: all 200ms;
+		color: var(--dark-color);
+    border-bottom: 1px solid var(--primary-color);
   }
 }
 
