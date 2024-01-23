@@ -1,13 +1,5 @@
 @import '../../../../scss/custom-variables';
 
-.filter-menu {
-  background-color: var(--white-color);
-  padding: 0.5rem 1rem;
-
-  ul {
-    flex-wrap: wrap;
-  }
-}
 
 .fields-grid {
   display: grid;
@@ -15,21 +7,19 @@
   align-items: stretch;
 
   .field-card-wrapper {
-    transition:  transform 200ms;
+    transition:  all .3s cubic-bezier(0,0,.5,1);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
 
     &:hover {
       transform: scale(102%);
-      transition:  transform 200ms;
+      box-shadow: 2px 4px 16px rgba(0,0,0,.16);
+      transition:  all .3s cubic-bezier(0,0,.5,1);
     }
 
-    &:hover .field-card {
-      transform: scale(1);
-      transition: transform 200ms;
-    }
 
     .field-card {
       height: 100%;
-      box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+      //box-shadow: 2px 4px 12px rgba(0,0,0,.08);
       background-color: var(--white-color);
       padding: 2rem;
 

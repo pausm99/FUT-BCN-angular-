@@ -121,7 +121,7 @@ export class MapListComponent implements AfterViewInit {
       <h5 class="text-center">${field.name}</h5>
       <p>${field.address}</p>
       <div class="d-flex justify-content-between">
-        <span class="rounded-pill px-3 bg-secondary-subtle field-type">${field.type}</span>` +
+        <span class="rounded-pill px-3 bg-secondary field-type">${field.type}</span>` +
         publicField +
       `</div>`;
 

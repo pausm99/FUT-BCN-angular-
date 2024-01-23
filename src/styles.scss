@@ -30,12 +30,13 @@
 }
 
 :root {
-  --white-color:                  #FBFBFB;
+  --white-color:                  #{$white};
   --primary-color:                #{$primary};
   --secondary-color:              #{$secondary};
-  --section-bg-color:             #FBFBFB;
+  --section-bg-color:             #{$white};
   --custom-btn-bg-color:          #{$secondary};
   --custom-btn-bg-hover-color:    #{$primary};
+  --gray:                         #454945;
   --dark-color:                   #000000;
   --p-color:                      #717275;
   --border-color:                 #1ddf9e;
@@ -76,14 +77,6 @@ body {
 /*---------------------------------------
   TYPOGRAPHY
 -----------------------------------------*/
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--dark-color);
-}
 
 h1,
 h2,
@@ -161,13 +154,16 @@ i {
   font-family: 'SF Pro Italic' !important;
 }
 
-a {
-  text-decoration: none !important;
+.form-control, .form-select {
+  border: none !important;
 }
 
-input {
-  border: none !important;
-  background-color: inherit !important;
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(#82bd69, 1)
+}
+
+a {
+  text-decoration: none !important;
 }
 
 .section-padding {

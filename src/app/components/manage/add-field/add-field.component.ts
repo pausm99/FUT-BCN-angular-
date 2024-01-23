@@ -86,7 +86,7 @@ export class AddFieldComponent {
         width: controls.width.value!,
         length: controls.length.value!,
         opening_time: controls.opening_time.value!,
-        closing_time: controls.closing_time.value!
+        closing_time: controls.closing_time.value!,
       }
 
       console.log(field)
