@@ -17,7 +17,7 @@
                   <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
                 @if (route.path === 'manage' && userInfo().role === 'company') {
-                  <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
+                  <a class="nav-link" [routerLink]="route.path" [queryParams]="{company: true}" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
               </li>
             }
