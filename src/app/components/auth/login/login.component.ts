@@ -49,8 +49,13 @@ export class LoginComponent {
         next: () => {
           this.activeModal.close();
 
+          const companyParams = this.authService.queryParams;
+
           const redirectURL = this.authService.redirectURL || '/home'
-          this.router.navigate([redirectURL]);
+          const a = this.router.navigate(
+            [redirectURL],
+            { queryParams: { company: companyParams } }
+          );
         },
         error: (err) => {
           if (err.status === 401) this.invalidCredentials = true;

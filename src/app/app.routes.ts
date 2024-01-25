@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { FieldGuard } from './guards/field/field.guard';
+import { ManageGuard } from './guards/manage/manage.guard';
 
 export const routes: Routes = [
   {
@@ -48,13 +49,13 @@ export const routes: Routes = [
     path: 'manage',
     title: 'Manage',
     loadComponent: () => import('./components/manage/manage.component').then(c => c.ManageComponent),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ManageGuard],
     children: [
       {
         path: '',
-        title: 'Field list',
+        title: 'Manage your fields',
         loadComponent: () => import('./components/fields/list/list.component').then(c => c.ListComponent)
-      },
+      }
     ]
   },
   {

@@ -9,6 +9,7 @@ export class AuthService {
 
   public logged = signal<boolean>(false);
   public redirectURL: string | null = null;
+  public queryParams: string | null = null;
 
   constructor(private userService: UserService) {
     this.logged.set(this.isLoggedIn());

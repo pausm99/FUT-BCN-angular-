@@ -15,7 +15,12 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   } else {
     router.navigate(['/home']);
     modalService.open(LoginComponent);
-    authService.redirectURL = state.url;
+
+    authService.redirectURL = state.url.split('?')[0];
+
+    const queryParams = route.queryParamMap.get('company');
+    if (queryParams) authService.queryParams = queryParams;
+    else authService.queryParams = null;
 
     return false;
   }
