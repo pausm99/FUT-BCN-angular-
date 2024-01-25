@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Injector, OnChanges, SimpleChanges, ViewChild, effect, inject, runInInjectionContext } from '@angular/core';
-import mapboxgl, { LngLat, Map, Marker, Popup } from 'mapbox-gl';
+import { AfterViewInit, Component, ElementRef, Injector, ViewChild, effect, inject, runInInjectionContext } from '@angular/core';
+import mapboxgl, { LngLat, Map, Marker } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { environment } from '../../../../environments/environment';
 import { FieldService } from '../../../services/field/field.service';
@@ -107,7 +107,7 @@ export class MapListComponent implements AfterViewInit {
     actionButton.innerHTML = `<button class="btn ${field.public ? 'btn-danger' : 'btn-primary' } w-100 mt-2">${action}</button>`;
 
     actionButton.addEventListener('click', () => {
-      this.router.navigate(['/reservation'])
+      this.router.navigate([`/fields/${field.id}`]);
     });
 
     const div = document.createElement('div');

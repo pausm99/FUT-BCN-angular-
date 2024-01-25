@@ -35,7 +35,8 @@ export class NavbarComponent implements OnInit {
   public routes = routes
         .filter(route => route && route.path)
         .filter(route => route && !route.path?.includes('**'))
-        .filter(route => route && !route.path?.includes('profile'));
+        .filter(route => route && !route.path?.includes('profile'))
+        .filter(route => route && !route.path?.includes('reservation'));
 
   constructor(
     private titleService: TitleService,

@@ -13,7 +13,9 @@ export class FieldService {
 
   public fields = signal<Field[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getAllFields();
+  }
 
   getAllFields(): void {
     this.http.get<Field[]>(`${API_URL}/fields`).subscribe({
@@ -26,9 +28,22 @@ export class FieldService {
   }
 
   getFieldsByCompanyId(company_id: number): void {
-    this.http.get<Field[]>(`${API_URL}/fields/${company_id}`).subscribe({
+    this.http.get<Field[]>(`${API_URL}/fields/byCompany?company_id=${company_id}`).subscribe({
       next: (result) => this.fields.set(result)
     })
+  }
+
+  async getFieldById(id: number): Promise<Field> {
+    return new Promise((resolve, reject) => {
+      this.http.get<Field>(`${API_URL}/fields/${id}`).subscribe({
+        next: (res) => {
+          resolve(res); // Resuelve la promesa con el resultado
+        },
+        error: (error) => {
+          reject(error); // Rechaza la promesa en caso de error
+        }
+      });
+    });
   }
 
   setFieldSignalByType(companyID: number | null) {

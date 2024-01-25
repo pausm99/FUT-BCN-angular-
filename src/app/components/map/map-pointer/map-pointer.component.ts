@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import mapboxgl, { LngLat } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 mapboxgl.accessToken = environment.mapbox_api_key;
@@ -10,10 +10,10 @@ mapboxgl.accessToken = environment.mapbox_api_key;
   selector: 'app-map',
   standalone: true,
   imports: [],
-  templateUrl: './map.component.html',
-  styleUrl: './map.component.scss'
+  templateUrl: './map-pointer.component.html',
+  styleUrl: './map-pointer.component.scss'
 })
-export class MapComponent implements AfterViewInit {
+export class MapPointerComponent implements AfterViewInit {
 
   activeModal = inject(NgbActiveModal);
 

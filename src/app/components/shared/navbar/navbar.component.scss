@@ -49,7 +49,6 @@
   .nav-link.router-link-active {
     transition: all 200ms;
 		color: var(--dark-color);
-    border-bottom: 1px solid var(--primary-color);
   }
 }
 
@@ -122,5 +121,11 @@
 			transform: rotate(-45deg);
 		}
 	}
+}
+
+@media (min-width: 992px) {
+  .nav-link.router-link-active {
+    border-bottom: 1px solid var(--primary-color);
+  }
 }
 

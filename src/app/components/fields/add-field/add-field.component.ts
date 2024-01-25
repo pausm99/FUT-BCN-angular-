@@ -1,13 +1,13 @@
 import { Component, Injectable, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal, NgbTimeAdapter, NgbTimeStruct, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
-import { MapComponent } from './map/map.component';
 import { LngLat } from 'mapbox-gl';
 import { RouterLink } from '@angular/router';
 import { CustomValidators } from '../../../validators/custom.validator';
 import { FieldService } from '../../../services/field/field.service';
 import { Field } from '../../../interfaces/field';
 import { UserService } from '../../../services/user/user.service';
+import { MapPointerComponent } from '../../map/map-pointer/map-pointer.component';
 
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
@@ -61,7 +61,7 @@ export class AddFieldComponent {
 
   openMap() {
     console.log(this.coordinates);
-    const modal = this.modal.open(MapComponent);
+    const modal = this.modal.open(MapPointerComponent);
     modal.closed.subscribe({
       next: (res) => {
         console.log(res);
