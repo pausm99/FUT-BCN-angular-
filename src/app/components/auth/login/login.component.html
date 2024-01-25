@@ -28,7 +28,7 @@
           @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
             <span class="invalid-feedback">Required</span>
           }
-          <a type="button" id="passwordHeld" class="form-text text-green-400">Forgot your password?</a>
+          <a type="button" id="passwordHeld" class="form-text text-secondary">Forgot your password?</a>
         </div>
 
         @if (invalidCredentials || serverError) {
@@ -55,7 +55,7 @@
         </div>
 
         <div class="mb-3 text-center">
-          <a (click)="openRegister()" type="button" class="text-green-400">Don't have an account? Sign up</a>
+          <a (click)="openRegister()" type="button" class="text-secondary">Don't have an account? Sign up</a>
         </div>
       </div>
     </div>
