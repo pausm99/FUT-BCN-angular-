@@ -60,11 +60,9 @@ export class AddFieldComponent {
   constructor(private modal: NgbModal, private fieldService: FieldService, private userService: UserService) {}
 
   openMap() {
-    console.log(this.coordinates);
     const modal = this.modal.open(MapPointerComponent);
     modal.closed.subscribe({
       next: (res) => {
-        console.log(res);
         this.coordinates = res.coordinates;
       }
     })

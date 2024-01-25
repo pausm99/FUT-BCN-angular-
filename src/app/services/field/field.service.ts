@@ -33,17 +33,8 @@ export class FieldService {
     })
   }
 
-  async getFieldById(id: number): Promise<Field> {
-    return new Promise((resolve, reject) => {
-      this.http.get<Field>(`${API_URL}/fields/${id}`).subscribe({
-        next: (res) => {
-          resolve(res); // Resuelve la promesa con el resultado
-        },
-        error: (error) => {
-          reject(error); // Rechaza la promesa en caso de error
-        }
-      });
-    });
+  getFieldById(id: number): Observable<Field> {
+    return this.http.get<Field>(`${API_URL}/fields/${id}`);
   }
 
   setFieldSignalByType(companyID: number | null) {

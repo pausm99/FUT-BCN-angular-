@@ -12,10 +12,4 @@ import { RouterOutlet } from '@angular/router';
 })
 export class ManageComponent {
 
-  constructor(private modal: NgbModal) {}
-
-  addNewField() {
-    this.modal.open(AddFieldComponent);
-  }
-
 }
