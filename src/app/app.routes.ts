@@ -11,12 +11,6 @@ export const routes: Routes = [
     loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent)
   },
   {
-    path: 'reservation',
-    title: 'Reservation',
-    loadComponent: () => import('./components/reservation/reservation.component').then(c => c.ReservationComponent),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'profile',
     title: 'Profile',
     loadComponent: () => import('./components/profile/profile.component').then(c => c.ProfileComponent),
