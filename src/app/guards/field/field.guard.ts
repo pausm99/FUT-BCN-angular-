@@ -20,7 +20,7 @@ export const FieldGuard: CanActivateFn = async (route, state) => {
     }
 
   } catch (error) {
-    console.error('Error al obtener el campo:', error);
+    console.error('Error obtaining field:', error);
   }
 
   router.navigate(['/home']);
