@@ -1,1 +1,7 @@
-<p>field-view works!</p>
+<h1 class="mb-5">{{field?.name}}</h1>
+@if (field) {
+  <app-info [field]="field" [manage]="false"></app-info>
+}
+@else {
+  <h2>Football field info can't be displayed</h2>
+}

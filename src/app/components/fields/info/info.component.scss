@@ -13,7 +13,7 @@ h2 {
     padding: 1.5rem;
     background-color: var(--white-color);
 
-    span {
+    span:not(.public-tag) {
       font-size: 2rem;
     }
 
@@ -25,6 +25,10 @@ h2 {
     img {
       max-height: 25px;
       margin-right: 0.5rem;
+    }
+
+    .public-tag {
+      height: fit-content;
     }
 
     .addressMapDiv {

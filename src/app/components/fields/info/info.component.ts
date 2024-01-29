@@ -38,7 +38,7 @@ export class InfoComponent implements AfterViewInit {
     this.changeDatesFormat();
     this.changeDimensionsFormat();
 
-    if (!this.manage) {
+    if (!this.manage && !this.field.public) {
       this.userService.getUserById(this.field.company_id).subscribe({
         next: (res) => {
           this.company = res;
