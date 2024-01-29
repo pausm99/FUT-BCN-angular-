@@ -1,0 +1,43 @@
+<div class="details-section gap-4">
+  <div class="details-card" id="location-card">
+    <h2>Location</h2>
+    <div class="addressMapDiv">
+      <div #minimap id="minimap"></div>
+      <address>{{ field.address }}</address>
+    </div>
+  </div>
+
+
+  <div class="details-card" id="dimensions-card">
+    <h2><i class="bi bi-arrows-angle-expand me-2"></i>Dimensions</h2>
+    <span>{{ formattedLength }} x {{ formattedWidth }}<small>meters</small></span>
+  </div>
+
+
+  <div class="details-card" id="type-card">
+    <h2><img src="../../../../assets/images/futbol-solid.svg" alt="Football icon">Type</h2>
+    <span>{{ field.type }}</span>
+  </div>
+
+
+  <div class="details-card" id="schedule-card">
+    <h2><i class="bi bi-clock me-2"></i>Schedule</h2>
+    <span>{{ formattedDateOpening | date:'h a' }} - {{ formattedDateClosing | date:'h a' }}</span>
+  </div>
+
+  @if (!manage) {
+    <div class="details-card" id="company-card">
+      <h2><i class="bi bi-building me-2"></i>Company</h2>
+      <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center gap-3">
+        <div class="company-info d-flex w-100 flex-wrap justify-content-center justify-content-md-between justify-content-lg-start gap-3 gap-lg-4">
+          <span class="company-name">{{ company?.name }}</span>
+          <span class="phone-number"><i class="bi bi-telephone me-2"></i><a [href]="'tel:' + company?.phone">{{ company?.phone }}</a></span>
+        </div>
+        <div class="view-company-button">
+          <button class="btn btn-outline-primary">View company profile</button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

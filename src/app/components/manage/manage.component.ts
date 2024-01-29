@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddFieldComponent } from '../fields/add-field/add-field.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

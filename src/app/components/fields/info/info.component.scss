@@ -1,0 +1,124 @@
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.details-section {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  .details-card {
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: var(--white-color);
+
+    span {
+      font-size: 2rem;
+    }
+
+    small {
+      color: var(--p-color);
+      margin-left: 8px;
+    }
+
+    img {
+      max-height: 25px;
+      margin-right: 0.5rem;
+    }
+
+    .addressMapDiv {
+      position: relative;
+
+      #minimap {
+        height: 180px;
+        width: 100%;
+        border: 1px solid rgba(100, 100, 100, 0.3);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+
+        @media (min-width: 768px) {
+          & {
+            height: 230px;
+          }
+        }
+      }
+
+      address {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background-color: rgba($color: #82bd69, $alpha: 0.9);
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+    }
+
+    .company-info {
+
+      @media (min-width: 992px) {
+        & {
+          width: auto !important;
+        }
+      }
+
+      .company-name {
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media (min-width: 992px) {
+          & {
+            max-width: 400px;
+          }
+        }
+      }
+
+      .phone-number {
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  @media (min-width: 450px) {
+    & {
+      grid-template-columns: auto;
+
+      #location-card, #dimensions-card, #company-card {
+        grid-column: span 2;
+      }
+
+    }
+  }
+
+  @media (min-width: 992px) {
+    & {
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: repeat(3, auto);
+
+      #location-card {
+        grid-column: span 2;
+        grid-row: span 3;
+
+        #minimap {
+          height: 400px;
+        }
+      }
+
+      #dimensions-card {
+        grid-column: span 1;
+      }
+
+      #company-card {
+        grid-column: span 3;
+      }
+    }
+  }
+}
+

@@ -6,4 +6,5 @@ export interface User {
   age?: string;
   position?: string;
   bank_account?: string;
+  phone?: number;
 }

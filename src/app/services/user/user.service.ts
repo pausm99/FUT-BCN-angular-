@@ -32,10 +32,14 @@ export class UserService {
   }
 
   getUserByEmail(email: string): Observable<any> {
-    return this.http.get<any>(`${API_URL}/user/${email}`);
+    return this.http.get<any>(`${API_URL}/user/byMail/${email}`);
   }
 
   login(body: any): Observable<User> {
     return this.http.post<User>(`${API_URL}/user/login`, body);
+  }
+
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${API_URL}/user/${id}`);
   }
 }

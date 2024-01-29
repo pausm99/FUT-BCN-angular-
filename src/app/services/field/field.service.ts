@@ -44,4 +44,8 @@ export class FieldService {
       this.getAllFields();
     }
   }
+
+  deleteField(id: number) {
+    return this.http.delete<Field>(`${API_URL}/fields/${id}`);
+  }
 }
