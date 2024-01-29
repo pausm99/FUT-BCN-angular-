@@ -61,6 +61,12 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'reservation',
+    title: 'Reserva',
+    loadComponent: () => import('./components/reservation/reservation/reservation.component').then(c => c.ReservationComponent),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
