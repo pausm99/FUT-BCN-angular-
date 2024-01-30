@@ -1,8 +1,9 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { FieldService } from '../../services/field/field.service';
+import { catchError, of, switchMap } from 'rxjs';
 
-export const FieldGuard: CanActivateFn = async (route, state) => {
+export const FieldGuard: CanActivateFn = (route, state) => {
   const fieldService = inject(FieldService);
   const router = inject(Router);
   const id: string = route.params['id'];
@@ -12,18 +13,22 @@ export const FieldGuard: CanActivateFn = async (route, state) => {
     return false;
   }
 
-  try {
-    const field = await fieldService.getFieldById(Number(id));
+  return fieldService.getFieldById(Number(id)).pipe(
+    switchMap((field) => {
 
-    if (field) {
-      return true;
-    }
+        if (field) {
+          return of(true);
+        }
+        else {
+          router.navigate(['/home']);
+          return of(false);
+        }
+    }),
+    catchError((error) => {
+      router.navigate(['/home']);
+      return of(false);
+    })
+  );
 
-  } catch (error) {
-    console.error('Error obtaining field:', error);
-  }
-
-  router.navigate(['/home']);
-  return false;
 };
 
