@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TitleService {
-  private pageTitle: string = 'PlayFUT-BCN';
+  private pageTitle: string = 'FUT-BCN';
 
   getPageTitle(): string {
     return this.pageTitle;
