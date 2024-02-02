@@ -33,6 +33,7 @@
     "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",
     "mapbox-gl": "^3.0.1",
+    "moment-timezone": "^0.5.44",
     "ngx-iban-validator": "^1.1.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
