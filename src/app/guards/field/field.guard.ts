@@ -17,6 +17,7 @@ export const FieldGuard: CanActivateFn = (route, state) => {
     switchMap((field) => {
 
         if (field) {
+          fieldService.activeField.set(field);
           return of(true);
         }
         else {

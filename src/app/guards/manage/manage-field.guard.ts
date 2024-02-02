@@ -21,9 +21,10 @@ export const ManageFieldGuard: CanActivateFn = (route, state) => {
   }
 
   return fieldService.getFieldById(Number(id)).pipe(
-    switchMap((res) => {
+    switchMap((field) => {
 
-      if (userInfo.role === 'company' && userInfo.id === res.company_id) {
+      if (userInfo.role === 'company' && userInfo.id === field.company_id) {
+        fieldService.activeField.set(field)
         return of(true);
       } else {
         router.navigate(['/home']);

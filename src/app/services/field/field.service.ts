@@ -13,6 +13,20 @@ export class FieldService {
 
   public fields = signal<Field[]>([]);
 
+  public activeField = signal<Field>({
+    company_id: 0,
+    name: '',
+    type: '',
+    location_lat: 0,
+    location_lng: 0,
+    address: '',
+    public: false,
+    width: 0,
+    length: 0,
+    opening_time: '',
+    closing_time: ''
+  });
+
   constructor(private http: HttpClient) {
     this.getAllFields();
   }
