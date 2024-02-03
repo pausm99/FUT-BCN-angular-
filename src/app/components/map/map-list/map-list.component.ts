@@ -101,12 +101,18 @@ export class MapListComponent implements AfterViewInit {
 
   getPopupHtml(field: Field) {
 
-
     const actionButton = document.createElement('div');
     actionButton.innerHTML = `<button class="btn ${field.public ? 'btn-danger' : 'btn-primary' } w-100 mt-2">Book</button>`;
 
     actionButton.addEventListener('click', () => {
       this.router.navigate([`/reservation/${field.id}`]);
+    });
+
+    const actionButton2 = document.createElement('div');
+    actionButton2.innerHTML = `<button class="btn btn-secondary w-100 mt-1">View</button>`;
+
+    actionButton2.addEventListener('click', () => {
+      this.router.navigate([`/field/${field.id}`]);
     });
 
     const div = document.createElement('div');
@@ -115,9 +121,10 @@ export class MapListComponent implements AfterViewInit {
     if (field.public) publicField = '<span class="rounded-pill px-3 bg-danger-subtle field-type">Public</span>';
 
     const content = document.createElement('div');
-    content.classList.add('d-flex', 'flex-column', 'gap-2', 'text-center')
+
+    content.classList.add('d-flex', 'flex-column', 'gap-2', 'text-center');
     content.innerHTML = `
-      <h5 class="text-center">${field.name}</h5>
+      <h2>${field.name}</h2>
       <p>${field.address}</p>
       <div class="d-flex justify-content-between">
         <span class="rounded-pill px-3 bg-secondary field-type">${field.type}</span>` +
@@ -125,7 +132,11 @@ export class MapListComponent implements AfterViewInit {
       `</div>`;
 
     content.appendChild(actionButton);
+    content.appendChild(actionButton2);
+
     div.appendChild(content);
+
+
 
     return div;
   }
