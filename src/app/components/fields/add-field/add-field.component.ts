@@ -87,7 +87,6 @@ export class AddFieldComponent {
         closing_time: controls.closing_time.value!,
       }
 
-      console.log(field)
 
       this.fieldService.createNewField(field).subscribe({
         next: (result) => {
