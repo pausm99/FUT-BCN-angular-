@@ -1,0 +1,36 @@
+.legend {
+  background-color: var(--white-color);
+  width: fit-content;
+  padding: 0.25rem 0.75rem;
+
+  &-item {
+
+    & > * {
+      display: inline-block;
+    }
+
+    &-color {
+      margin-right: 4px;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+    }
+
+    &:nth-child(1) &-color {
+      background-color: var(--primary-color);
+    }
+
+    &:nth-child(2) &-color {
+      background-color: rgba($color: #FF0000, $alpha: 0.8);
+    }
+
+  }
+
+}
+
+.availability-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
