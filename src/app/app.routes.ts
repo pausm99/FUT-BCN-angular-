@@ -56,15 +56,27 @@ export const routes: Routes = [
         path: 'field/:id',
         title: 'Manage field',
         loadComponent: () => import('./components/fields/manage-field/manage-field.component').then(c => c.ManageFieldComponent),
-        canActivate: [ManageFieldGuard]
+        canActivate: [ManageFieldGuard],
+        children: [
+          {
+            path: '',
+            title: 'Manage field',
+            loadComponent: () => import('./components/fields/info/info.component').then(c => c.InfoComponent)
+          },
+          {
+            path: 'schedule',
+            title: 'Manage field schedule',
+            loadComponent: () => import('./components/reservation/program/program.component').then(c => c.ProgramComponent)
+          }
+        ]
       }
     ]
   },
   {
-    path: 'reservation',
-    title: 'Reserva',
+    path: 'reservation/:id',
+    title: 'Book',
     loadComponent: () => import('./components/reservation/reservation/reservation.component').then(c => c.ReservationComponent),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, FieldGuard]
   },
   {
     path: '',
