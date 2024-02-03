@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { DatePipe } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../interfaces/user';
+import { FieldService } from '../../../services/field/field.service';
 
 mapboxgl.accessToken = environment.mapbox_api_key;
 
@@ -18,7 +19,7 @@ mapboxgl.accessToken = environment.mapbox_api_key;
 })
 export class InfoComponent implements AfterViewInit {
 
-  @Input() field!: Field;
+  field?: Field;
   @Input() manage!: boolean;
 
   public company?: User;
@@ -31,15 +32,22 @@ export class InfoComponent implements AfterViewInit {
   public formattedLength?: number;
   public formattedWidth?: number;
 
-  constructor(private cdr: ChangeDetectorRef, private userService: UserService) {}
+  constructor(
+    private fieldService: FieldService,
+    private cdr: ChangeDetectorRef,
+    private userService: UserService)
+    {
+      this.field = this.fieldService.activeField()
+  }
 
   ngAfterViewInit(): void {
     this.configureMap();
     this.changeDatesFormat();
     this.changeDimensionsFormat();
 
-    if (!this.manage && !this.field.public) {
-      this.userService.getUserById(this.field.company_id).subscribe({
+
+    if (!this.manage && !this.field?.public) {
+      this.userService.getUserById(this.field!.company_id).subscribe({
         next: (res) => {
           this.company = res;
         },
