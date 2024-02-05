@@ -1,16 +1,18 @@
-import { Reservation } from './../../../interfaces/reservation';
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Reservation } from '../../interfaces/reservation';
+import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, DatesSetArg, EventInput } from '@fullcalendar/core';
+import { CalendarOptions, DatesSetArg, EventClickArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'
-import { FieldService } from '../../../services/field/field.service';
-import { Field } from '../../../interfaces/field';
-import { AvailableReservationsService } from '../../../services/availableReservations/available-reservations.service';
-import { AvailableReservation } from '../../../interfaces/available-reservation';
+import { FieldService } from '../../services/field/field.service';
+import { Field } from '../../interfaces/field';
+import { AvailableReservationsService } from '../../services/availableReservations/available-reservations.service';
+import { AvailableReservation } from '../../interfaces/available-reservation';
 import moment from 'moment-timezone';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalReservationComponent } from './modal-reservation/modal-reservation.component';
 
 
 @Component({
@@ -23,6 +25,8 @@ import moment from 'moment-timezone';
 export class ReservationComponent implements OnInit, OnDestroy {
 
   public events = signal<EventInput[]>([]);
+
+  public modalService = inject(NgbModal);
 
   public field?: Field;
 
@@ -45,6 +49,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
     datesSet: (dates) => {
       this.getDataFromDateRange(dates);
     },
+    eventClick: (info) => {
+      this.handleEventClick(info);
+    }
   };
 
   constructor(
@@ -85,6 +92,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
       if (moment(reservation.date_time_start).format() > now) {
 
         const formattedEvent: EventInput = {
+          id: (!isAvailable ? 'res' : 'avRes') + reservation.id,
           start: reservation.date_time_start,
           end: reservation.date_time_end,
           color: !isAvailable ? 'red' : 'green',
@@ -125,6 +133,22 @@ export class ReservationComponent implements OnInit, OnDestroy {
         this.reservationsToEvents(res);
       }
     })
+  }
+
+  handleEventClick(info: EventClickArg) {
+    const id = info.event._def.publicId;
+    const isAvailable = id.includes('avRes');
+
+    if (isAvailable) {
+
+      const start = info.event.start;
+      const end = info.event.end;
+
+      const modalRef = this.modalService.open(ModalReservationComponent);
+      modalRef.componentInstance.field = this.field;
+      modalRef.componentInstance.start = start;
+      modalRef.componentInstance.end = end;
+    }
   }
 
 }

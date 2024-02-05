@@ -75,7 +75,7 @@ export const routes: Routes = [
   {
     path: 'reservation/:id',
     title: 'Book',
-    loadComponent: () => import('./components/reservation/reservation/reservation.component').then(c => c.ReservationComponent),
+    loadComponent: () => import('./components/reservation/reservation.component').then(c => c.ReservationComponent),
     canActivate: [AuthGuard, FieldGuard]
   },
   {

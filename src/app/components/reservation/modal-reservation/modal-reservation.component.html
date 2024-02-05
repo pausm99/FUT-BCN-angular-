@@ -1,0 +1,23 @@
+<div class="modal-content bg-dark text-white">
+  <div class="modal-header justify-content-center">
+    <h4 class="modal-title">Confirm field reservation?</h4>
+  </div>
+  <div class="modal-body">
+
+    <div class="row justify-content-center">
+      <div class="col-6 bg-white rounded-3 text-dark py-3 text-center">
+        <strong>{{ field.name }}</strong>
+        <hr>
+        <strong>{{ date.date }}</strong>
+        <hr>
+        From <strong>{{ date.startTime }}</strong> to <strong>{{ date.endTime }}</strong>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer d-flex justify-content-center gap-5">
+    <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+    <button type="submit" class="btn btn-danger" (click)="confirm()">Confirm</button>
+  </div>
+</div>
+
