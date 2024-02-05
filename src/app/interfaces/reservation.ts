@@ -1,5 +1,6 @@
 export interface Reservation {
   id?: number;
+  type?: string;
   user_id: number;
   field_id: number;
   date_time_start: Date;

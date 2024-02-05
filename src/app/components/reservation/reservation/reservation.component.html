@@ -1,7 +1,6 @@
 <section class="section">
   <div class="container d-flex flex-column align-items-center gap-3">
     <h1 class="mb-5">{{ field?.name }} reservations</h1>
-    @if (events()) {
       <div class="bg-white p-3 rounded-3 myCalendar">
         <full-calendar [options]="calendarOptions" [events]="events()"></full-calendar>
       </div>
@@ -15,6 +14,5 @@
           <span>Occupied</span>
         </div>
       </div>
-    }
   </div>
 </section>

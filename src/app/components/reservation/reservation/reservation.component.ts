@@ -1,17 +1,15 @@
 import { Reservation } from './../../../interfaces/reservation';
-import { Component, OnDestroy, OnInit, effect, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, EventInput } from '@fullcalendar/core';
+import { CalendarOptions, DatesSetArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'
-import { ReservationService } from '../../../services/reservation/reservation.service';
 import { FieldService } from '../../../services/field/field.service';
 import { Field } from '../../../interfaces/field';
 import { AvailableReservationsService } from '../../../services/availableReservations/available-reservations.service';
 import { AvailableReservation } from '../../../interfaces/available-reservation';
-import { Subscription } from 'rxjs';
 import moment from 'moment-timezone';
 
 
@@ -23,12 +21,6 @@ import moment from 'moment-timezone';
   styleUrl: './reservation.component.scss'
 })
 export class ReservationComponent implements OnInit, OnDestroy {
-
-  public reservationsSignal = this.reservationService.reservations;
-  public reservations: Reservation[] = [];
-
-  public availableReservationsSignal = this.availableReservationsService.availableReservations;
-  public availableReservations: AvailableReservation[] = [];
 
   public events = signal<EventInput[]>([]);
 
@@ -50,13 +42,14 @@ export class ReservationComponent implements OnInit, OnDestroy {
     },
     eventMaxStack: 1,
     height: 'auto',
+    datesSet: (dates) => {
+      this.getDataFromDateRange(dates);
+    },
   };
 
-
   constructor(
-    private reservationService: ReservationService,
     private fieldService: FieldService,
-    private availableReservationsService: AvailableReservationsService
+    private availableReservationsService: AvailableReservationsService,
     ) {
 
       this.field = this.fieldService.activeField();
@@ -64,37 +57,30 @@ export class ReservationComponent implements OnInit, OnDestroy {
       this.calendarOptions.slotMinTime = this.field.opening_time;
       this.calendarOptions.slotMaxTime = this.field.closing_time;
 
-      this.reservationService.getReservationsByFieldId(this.field.id!);
-      this.availableReservationsService.getAvailableReservationsByFieldId(this.field.id!);
-
-      effect(() => {
-        this.reservations = this.reservationsSignal();
-        this.reservationsToEvents(this.reservations, false);
-      }, { allowSignalWrites: true });
-
-      effect(() => {
-        this.availableReservations = this.availableReservationsSignal();
-        this.reservationsToEvents(this.availableReservations, true);
-      }, { allowSignalWrites: true });
-
+      this.initialCalendarViewSize();
   }
 
   ngOnInit(): void {
-      this.interval = setInterval(() => {
-        this.checkExpiredEvents();
-      }, 60000)
+
+    this.interval = setInterval(() => {
+      this.checkExpiredEvents();
+    }, 60000)
+
   }
 
   ngOnDestroy(): void {
     clearInterval(this.interval);
   }
 
-  reservationsToEvents(reservations: Reservation[] | AvailableReservation[], isAvailable: boolean) {
+  reservationsToEvents(reservations: (AvailableReservation | Reservation)[]) {
 
     const now = moment(new Date()).format();
+
     let formattedEvents: EventInput[] = [];
 
     reservations.forEach(reservation => {
+
+      const isAvailable = reservation.type === 'available';
 
       if (moment(reservation.date_time_start).format() > now) {
 
@@ -102,19 +88,20 @@ export class ReservationComponent implements OnInit, OnDestroy {
           start: reservation.date_time_start,
           end: reservation.date_time_end,
           color: !isAvailable ? 'red' : 'green',
+          display: isAvailable ? undefined : 'background'
         };
 
-        if ('price' in reservation) {
-          formattedEvent.title = reservation.price.toString() + '€';
+        if (isAvailable) {
+          const availableReservation = reservation as AvailableReservation;
+          formattedEvent.title = availableReservation.price.toString() + '€';
         }
 
         formattedEvents.push(formattedEvent);
       }
     });
+
     if (formattedEvents.length > 0) this.events.update(currentEvents => [...currentEvents, ...formattedEvents]);
   }
-
-
 
   checkExpiredEvents() {
     const now = moment(new Date()).format();
@@ -123,6 +110,21 @@ export class ReservationComponent implements OnInit, OnDestroy {
     if (filteredEvents.length != this.events.length) {
       this.events.set( filteredEvents);
     }
+  }
+
+
+  initialCalendarViewSize() {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (width < 768) this.calendarOptions.initialView = 'timeGridDay';
+  }
+
+  getDataFromDateRange(dates: DatesSetArg) {
+    this.events.set([]);
+    this.availableReservationsService.getAllTypeByFieldAndTimeRange(this.field?.id!, dates.startStr.split('T')[0], dates.endStr.split('T')[0]).subscribe({
+      next: (res) => {
+        this.reservationsToEvents(res);
+      }
+    })
   }
 
 }

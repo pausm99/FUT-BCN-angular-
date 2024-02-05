@@ -3,6 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { AvailableReservation } from '../../interfaces/available-reservation';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { Reservation } from '../../interfaces/reservation';
 
 const API_URL = environment.api_url;
 
@@ -27,8 +28,8 @@ export class AvailableReservationsService {
     return this.http.post<AvailableReservation>(`${API_URL}/availableReservations`, availableReservation);
   }
 
-  getAvailableAndOccupiedReservations(fieldId: number): Observable<any> {
-    return this.http.get<any>(`${API_URL}/availableReservations/occupied/${fieldId}`);
+  getAllTypeByFieldAndTimeRange(fieldId: number, start: string, end: string): Observable<(AvailableReservation|Reservation)[]> {
+    return this.http.get<any>(`${API_URL}/availableReservations/occupied/${fieldId}?start=${start}&end=${end}`);
   }
 
   createBulkAvailableReservation(bulkReservations: AvailableReservation[]) {

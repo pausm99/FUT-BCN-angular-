@@ -1,8 +1,8 @@
-import { Component, Input, effect, inject, signal} from '@angular/core';
+import { Component, Input, inject, signal} from '@angular/core';
 import { Field } from '../../../interfaces/field';
 import { AvailableReservationsService } from '../../../services/availableReservations/available-reservations.service';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, EventInput } from '@fullcalendar/core';
+import { CalendarOptions, DatesSetArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -13,7 +13,7 @@ import { Reservation } from '../../../interfaces/reservation';
 import { AvailableReservation } from '../../../interfaces/available-reservation';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProgramComponent } from './modalProgram/modal.component';
-
+import moment from 'moment';
 
 
 @Component({
@@ -29,14 +29,7 @@ export class ProgramComponent {
 
   @Input() public field!: Field;
 
-  public reservationsSignal = this.reservationService.reservations;
-  public reservations: Reservation[] = [];
-
-  public availableReservationsSignal = this.availableReservationService.availableReservations;
-  public availableReservations: AvailableReservation[] = [];
-
   public events = signal<EventInput[]>([]);
-
 
   constructor(
     private fieldService: FieldService,
@@ -48,18 +41,7 @@ export class ProgramComponent {
       this.calendarOptions.slotMinTime = this.field.opening_time;
       this.calendarOptions.slotMaxTime = this.field.closing_time;
 
-      this.reservationService.getReservationsByFieldId(this.field.id!);
-      this.availableReservationService.getAvailableReservationsByFieldId(this.field.id!);
-
-      effect(() => {
-        this.reservations = this.reservationsSignal();
-        this.reservationsToEvents(this.reservations, false);
-      }, { allowSignalWrites: true });
-
-      effect(() => {
-        this.availableReservations = this.availableReservationsSignal();
-        this.reservationsToEvents(this.availableReservations, true);
-      }, { allowSignalWrites: true });
+      this.initialCalendarViewSize();
   }
 
   calendarOptions: CalendarOptions = {
@@ -82,14 +64,21 @@ export class ProgramComponent {
     },
     eventClick: (info) => {
       this.deleteEvent(info);
-    }
+    },
+    datesSet: (dates) => {
+      this.getDataFromDateRange(dates);
+    },
   };
 
-  reservationsToEvents(reservations: Reservation[] | AvailableReservation[], isAvailable: boolean) {
+  reservationsToEvents(reservations:(Reservation | AvailableReservation)[]) {
+
+    const now = moment(new Date()).format();
 
     let formattedEvents: EventInput[] = [];
 
     reservations.forEach(reservation => {
+
+      const isAvailable = reservation.type === 'available';
 
       const formattedEvent: EventInput = {
         id: (!isAvailable ? 'res' : 'avRes') + reservation.id,
@@ -98,8 +87,12 @@ export class ProgramComponent {
         color: !isAvailable ? 'red' : 'green',
       };
 
-      if ('price' in reservation) {
-        formattedEvent.title = reservation.price.toString() + '€';
+      if (isAvailable) {
+        const availableReservation = reservation as AvailableReservation;
+        formattedEvent.title = availableReservation.price.toString() + '€';
+        if (now > moment(availableReservation.date_time_end).format()) {
+          formattedEvent.title += ' - [EXPIRED]';
+        }
       }
 
       formattedEvents.push(formattedEvent);
@@ -127,7 +120,7 @@ export class ProgramComponent {
 
         this.availableReservationService.createAvailableReservation(availableReservation).subscribe({
           next: (result) => {
-            this.reservationsToEvents([result], true);
+            this.reservationsToEvents([result]);
           }
         })
       }
@@ -165,6 +158,20 @@ export class ProgramComponent {
             next: () => event.remove()
           })
         }
+      }
+    })
+  }
+
+  initialCalendarViewSize() {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (width < 768) this.calendarOptions.initialView = 'timeGridDay';
+  }
+
+  getDataFromDateRange(dates: DatesSetArg) {
+    this.events.set([]);
+    this.availableReservationService.getAllTypeByFieldAndTimeRange(this.field?.id!, dates.startStr.split('T')[0], dates.endStr.split('T')[0]).subscribe({
+      next: (res) => {
+        this.reservationsToEvents(res);
       }
     })
   }
