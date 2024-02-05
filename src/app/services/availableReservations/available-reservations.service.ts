@@ -32,11 +32,14 @@ export class AvailableReservationsService {
   }
 
   createBulkAvailableReservation(bulkReservations: AvailableReservation[]) {
-    console.log(bulkReservations);
     this.http.post<AvailableReservation[]>(`${API_URL}/availableReservations/bulk`, bulkReservations).subscribe({
       next: (res) => {
         this.availableReservations.update(items => [...items, ...res]);
       }
     })
+  }
+
+  deleteAvailableReservation(id: number) {
+    return this.http.delete<AvailableReservation>(`${API_URL}/availableReservations/${id}`);
   }
 }

@@ -102,7 +102,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
           start: reservation.date_time_start,
           end: reservation.date_time_end,
           color: !isAvailable ? 'red' : 'green',
-          display: !isAvailable ? 'background' : undefined
         };
 
         if ('price' in reservation) {

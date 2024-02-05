@@ -79,6 +79,9 @@ export class ProgramComponent {
     height: 'auto',
     select: (info) => {
       this.createAvailableReservation(info);
+    },
+    eventClick: (info) => {
+      this.deleteEvent(info);
     }
   };
 
@@ -89,10 +92,10 @@ export class ProgramComponent {
     reservations.forEach(reservation => {
 
       const formattedEvent: EventInput = {
+        id: !isAvailable ? 'res' : 'avRes' + reservation.id,
         start: reservation.date_time_start,
         end: reservation.date_time_end,
         color: !isAvailable ? 'red' : 'green',
-        display: !isAvailable ? 'background' : undefined
       };
 
       if ('price' in reservation) {
@@ -109,6 +112,7 @@ export class ProgramComponent {
 
     const modalRef = this.modalService.open(ModalProgramComponent);
     modalRef.componentInstance.title = 'Create available reservation?';
+    modalRef.componentInstance.delete = false;
     modalRef.componentInstance.start = info.start;
     modalRef.componentInstance.end = info.end;
     modalRef.closed.subscribe((res) => {
@@ -126,6 +130,31 @@ export class ProgramComponent {
             this.reservationsToEvents([result], true);
           }
         })
+      }
+    })
+  }
+
+  deleteEvent(info: any) {
+    const event = info.event;
+
+    const isAvailable = event._def.publicId.includes('avRes');
+
+    let text = '';
+    text += isAvailable ? 'Delete available' : 'Cancel'
+    text += ' reservation?';
+
+    const modalRef = this.modalService.open(ModalProgramComponent);
+    modalRef.componentInstance.title = text;
+    modalRef.componentInstance.delete = true;
+    modalRef.componentInstance.start = event.start;
+    modalRef.componentInstance.end = event.end;
+
+    modalRef.closed.subscribe((res) => {
+      if (res.reason === 'deleted') {
+        const id = info.event._def.publicId.split('avRes')[1];
+        this.availableReservationService.deleteAvailableReservation(id).subscribe({
+          next: () => event.remove()
+        });
       }
     })
   }

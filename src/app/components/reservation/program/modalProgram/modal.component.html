@@ -3,7 +3,7 @@
     <h4 class="modal-title">{{ title }}</h4>
   </div>
   <div class="modal-body">
-    <form (submit)="confirm()">
+
       <div class="row row-gap-3 justify-content-center">
 
         <div class="col-6 bg-white rounded-3 text-dark py-3 text-center">
@@ -11,22 +11,23 @@
             <hr>
             From <strong>{{ date.startTime }}</strong> to <strong>{{ date.endTime }}</strong>
         </div>
-
-        <div class="col-12">
-          <label class="form-label" for="priceInput">Price (€)</label>
-          <input type="number" min="0" max="1000" class="form-control" [formControl]="price" id="priceInput" required
-          [ngClass]="{'is-invalid': price.invalid}">
-          @if (price.invalid && !price.touched) {
-            <span class="invalid-feedback">Price is required. Minimum (0€)</span>
-          }
-        </div>
-
+        @if (!delete) {
+          <form [formGroup]="reservationForm" (submit)="confirm()">
+            <div class="col-12">
+              <label class="form-label" for="priceInput">Price (€)</label>
+              <input type="number" min="0" max="1000" class="form-control" formControlName="price" id="priceInput" required
+              [ngClass]="{'is-invalid': controls.price.invalid && controls.price.touched}">
+              @if (controls.price && controls.price.touched) {
+                <span class="invalid-feedback">Price is required. Minimum (0€)</span>
+              }
+            </div>
+          </form>
+        }
       </div>
-    </form>
   </div>
   <div class="modal-footer d-flex justify-content-center gap-5">
     <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
-    <button type="submit" class="btn btn-secondary" (click)="confirm()">Confirm</button>
+    <button type="submit" class="btn btn-danger" (click)="confirm()">Confirm</button>
   </div>
 </div>
 
