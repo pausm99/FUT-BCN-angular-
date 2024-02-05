@@ -34,8 +34,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   public field?: Field;
 
-  private routeSubscription!: Subscription;
-
   private interval: any;
 
   calendarOptions: CalendarOptions = {
@@ -89,7 +87,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.interval);
-    this.routeSubscription.unsubscribe();
   }
 
   reservationsToEvents(reservations: Reservation[] | AvailableReservation[], isAvailable: boolean) {
