@@ -92,7 +92,7 @@ export class ProgramComponent {
     reservations.forEach(reservation => {
 
       const formattedEvent: EventInput = {
-        id: !isAvailable ? 'res' : 'avRes' + reservation.id,
+        id: (!isAvailable ? 'res' : 'avRes') + reservation.id,
         start: reservation.date_time_start,
         end: reservation.date_time_end,
         color: !isAvailable ? 'red' : 'green',
@@ -137,7 +137,8 @@ export class ProgramComponent {
   deleteEvent(info: any) {
     const event = info.event;
 
-    const isAvailable = event._def.publicId.includes('avRes');
+    const id = event._def.publicId
+    const isAvailable = id.includes('avRes');
 
     let text = '';
     text += isAvailable ? 'Delete available' : 'Cancel'
@@ -151,10 +152,19 @@ export class ProgramComponent {
 
     modalRef.closed.subscribe((res) => {
       if (res.reason === 'deleted') {
-        const id = info.event._def.publicId.split('avRes')[1];
-        this.availableReservationService.deleteAvailableReservation(id).subscribe({
-          next: () => event.remove()
-        });
+
+        if (isAvailable) {
+          const avResId = id.split('avRes')[1];
+          this.availableReservationService.deleteAvailableReservation(avResId).subscribe({
+            next: () => event.remove()
+          });
+        }
+        else {
+          const resId = id.split('res')[1];
+          this.reservationService.deleteReservation(resId).subscribe({
+            next: () => event.remove()
+          })
+        }
       }
     })
   }

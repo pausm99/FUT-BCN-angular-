@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Reservation } from '../../interfaces/reservation';
+import { Observable } from 'rxjs';
 
 const API_URL = environment.api_url;
 
@@ -20,6 +21,10 @@ export class ReservationService {
         this.reservations.set(res);
       }
     })
+  }
+
+  deleteReservation(id: number): Observable<any> {
+    return this.http.delete<Reservation>(`${API_URL}/reservations/${id}`);
   }
 
 }
