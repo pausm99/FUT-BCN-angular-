@@ -41,7 +41,7 @@
             </div>
 
             <div class="mb-3">
-              <button type="button" class="btn btn-primary w-100" (click)="firstStepCompleted()">Next</button>
+              <button type="button" class="btn btn-secondary w-100" (click)="firstStepCompleted()">Next</button>
             </div>
 
           } @else if (!steps[1]) {
@@ -83,8 +83,8 @@
               </div>
             </div>
             <div class="mb-3 d-flex justify-content-between flex-column flex-md-row gap-3">
-              <button type="button" class="btn btn-secondary px-5" (click)="stepBack(0)">Back</button>
-              <button type="button" class="btn btn-primary px-5" (click)="secondStepCompleted()">Next</button>
+              <button type="button" class="btn btn-primary px-5" (click)="stepBack(0)">Back</button>
+              <button type="button" class="btn btn-secondary px-5" (click)="secondStepCompleted()">Next</button>
             </div>
           } @else if (!company) {
             <div class="input-group">
@@ -140,13 +140,13 @@
           }
           @if (steps[1]) {
             <div class="mb-3 d-flex justify-content-between">
-              <button type="button" class="btn btn-secondary px-5" (click)="stepBack(1)">Back</button>
-              <button type="submit" class="btn btn-primary px-5">Register</button>
+              <button type="button" class="btn btn-primary px-5" (click)="stepBack(1)">Back</button>
+              <button type="submit" class="btn btn-secondary px-5">Register</button>
             </div>
           }
 
           <div class="mb-3 text-end">
-            <a (click)="openLogIn()" type="text" class="text-green-400">Already a {{ title }} user? Log in</a>
+            <a (click)="openLogIn()" type="text" class="text-secondary">Already a {{ title }} user? Log in</a>
           </div>
         </div>
       </div>
