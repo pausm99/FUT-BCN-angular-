@@ -115,7 +115,9 @@ export class ProgramComponent {
           date_time_start: info.start,
           date_time_end: info.end,
           field_id: this.field.id!,
-          price: Number(parseFloat(res.price).toFixed(2))
+          price: Number(parseFloat(res.price).toFixed(2)),
+          blocked: false,
+          type: 'available'
         }
 
         this.availableReservationService.createAvailableReservation(availableReservation).subscribe({

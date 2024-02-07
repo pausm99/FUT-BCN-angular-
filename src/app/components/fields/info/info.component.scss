@@ -80,10 +80,10 @@ h2 {
       }
 
       .phone-number {
-        text-decoration: underline;
         cursor: pointer;
 
         &:hover {
+          text-decoration: underline;
           color: var(--primary-color);
         }
       }

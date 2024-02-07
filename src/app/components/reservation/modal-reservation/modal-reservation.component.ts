@@ -45,12 +45,11 @@ export class ModalReservationComponent {
   }
 
   confirm() {
-    alert('Reservation confirmed!');
-    this.activeModal.close();
+    this.activeModal.close({reason: 'confirmed'});
   }
 
   cancel() {
-    this.activeModal.close({reason: 'cancelled'})
+    this.activeModal.close({reason: 'cancelled'});
   }
 
 }

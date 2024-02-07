@@ -23,8 +23,12 @@ export class ReservationService {
     })
   }
 
+  createReservation(reservation: Reservation) {
+    return this.http.post<Reservation>(`${API_URL}/reservations`, reservation);
+  }
+
   deleteReservation(id: number): Observable<any> {
-    return this.http.delete<Reservation>(`${API_URL}/reservations/${id}`);
+    return this.http.delete<any>(`${API_URL}/reservations/${id}`);
   }
 
 }

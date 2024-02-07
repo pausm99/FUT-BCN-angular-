@@ -26,6 +26,7 @@
     "@fullcalendar/interaction": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "@paypal/paypal-js": "^8.0.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",

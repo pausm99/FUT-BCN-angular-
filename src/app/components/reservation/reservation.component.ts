@@ -13,6 +13,7 @@ import { AvailableReservation } from '../../interfaces/available-reservation';
 import moment from 'moment-timezone';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalReservationComponent } from './modal-reservation/modal-reservation.component';
+import { PaymentComponent } from '../payment/payment.component';
 
 
 @Component({
@@ -88,8 +89,13 @@ export class ReservationComponent implements OnInit, OnDestroy {
     reservations.forEach(reservation => {
 
       const isAvailable = reservation.type === 'available';
+      let isBlocked = false;
 
-      if (moment(reservation.date_time_start).format() > now) {
+      if (isAvailable && 'blocked' in reservation) {
+        isBlocked = reservation.blocked!;
+      }
+
+      if (moment(reservation.date_time_start).format() > now && !isBlocked) {
 
         const formattedEvent: EventInput = {
           id: (!isAvailable ? 'res' : 'avRes') + reservation.id,
@@ -141,6 +147,8 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     if (isAvailable) {
 
+      const avResId = Number(id?.split('avRes')[1]);
+
       const start = info.event.start;
       const end = info.event.end;
 
@@ -148,7 +156,46 @@ export class ReservationComponent implements OnInit, OnDestroy {
       modalRef.componentInstance.field = this.field;
       modalRef.componentInstance.start = start;
       modalRef.componentInstance.end = end;
+
+      modalRef.closed.subscribe((res) => {
+        if (res.reason === 'confirmed') {
+
+          this.changeAvailableResBlockState(avResId, true);
+
+          this.modalService.dismissAll();
+
+
+          let found = this.events().find(item => item.id === id)
+          if (found) {
+
+            const avRes: AvailableReservation = {
+              id: avResId,
+              date_time_start: new Date(found.start!.toLocaleString()),
+              date_time_end: new Date(found.end!.toLocaleString()),
+              field_id: this.field?.id!,
+              price: Number(found.title?.split('€')[0]),
+              blocked: true
+            }
+
+            const paymentModalRef = this.modalService.open(PaymentComponent);
+            paymentModalRef.componentInstance.avResInfo = avRes;
+
+            paymentModalRef.closed.subscribe((res) => {
+              if (res.reason === 'cancelled') {
+                this.changeAvailableResBlockState(avResId, false)
+              }
+            })
+          }
+        }
+        else if (res.reason === 'cancelled') {
+          this.changeAvailableResBlockState(avResId, false)
+        }
+      })
     }
+  }
+
+  changeAvailableResBlockState(id: number, state: boolean) {
+    this.availableReservationsService.changeAvailableReservationState(id, state).subscribe((res) => console.log(res))
   }
 
 }

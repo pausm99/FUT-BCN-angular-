@@ -43,4 +43,8 @@ export class AvailableReservationsService {
   deleteAvailableReservation(id: number) {
     return this.http.delete<AvailableReservation>(`${API_URL}/availableReservations/${id}`);
   }
+
+  changeAvailableReservationState(id: number, state: boolean) {
+    return this.http.patch<any>(`${API_URL}/availableReservations/state/${id}`, {state: state});
+  }
 }
