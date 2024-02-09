@@ -51,8 +51,4 @@ export class ManageFieldComponent {
     this.router.navigate([`manage/field/${this.field?.id}/schedule`])
   }
 
-  information() {
-    this.router.navigate([`manage/field/${this.field?.id}`])
-  }
-
 }
