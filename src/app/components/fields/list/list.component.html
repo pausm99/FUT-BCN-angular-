@@ -1,4 +1,4 @@
-<div class="d-flex flex-column gap-4">
+<div class="d-flex align-items-center flex-column gap-4">
   <h1>
     @if (!company) {
       Field list
@@ -13,41 +13,43 @@
       ADD FIELD
     </button>
   } @else {
-    <app-filter></app-filter>
+    <app-filter (sendFilters)="applyFilters($event)"></app-filter>
   }
-  <div class="gap-4 fields-grid">
+  <div class="gap-4 fields-grid w-100">
     @for (field of fields(); track $index) {
-      <div class="field-card-wrapper">
-        <div class="field-card d-flex flex-column justify-content-between rounded-3">
-          <div class="field-card-header">
-            <div class="image"></div>
-            <div class="field">
-              <a [routerLink]="'/fields/' + field.id"><h3 class="field-name">{{ field.name }}</h3></a>
-            </div>
-          </div>
-          <div class="field-card-body">
-            <span><Address>{{ field.address }}</Address></span>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex gap-2 justify-content-between">
-                <span class="rounded-pill px-3 bg-secondary field-type">{{ field.type }}</span>
-                @if (field.public) { <span class="rounded-pill px-3 bg-danger-subtle public-pill">Public</span> }
+      @if (fieldMatchesCriteria(field)) {
+        <div class="field-card-wrapper">
+          <div class="field-card d-flex flex-column justify-content-between rounded-3">
+            <div class="field-card-header">
+              <div class="image"></div>
+              <div class="field">
+                <a [routerLink]="'/fields/' + field.id"><h3 class="field-name">{{ field.name }}</h3></a>
               </div>
-              @if (company) {
-                <button class="btn btn-primary d-flex gap-3" (click)="manageField(field.id!)">
-                  <i class="bi bi-gear"></i>
-                  Manage
-                </button>
-              }
-              @else if (!field.public) {
-                <button class="btn btn-primary" (click)="bookField(field.id!)">Book</button>
-              }
-              @else {
-                <button class="btn btn-danger" (click)="goToField(field.id!)">Book</button>
-              }
+            </div>
+            <div class="field-card-body">
+              <span><Address>{{ field.address }}</Address></span>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-2 justify-content-between">
+                  <span class="rounded-pill px-3 bg-secondary field-type">{{ field.type }}</span>
+                  @if (field.public) { <span class="rounded-pill px-3 bg-danger-subtle public-pill">Public</span> }
+                </div>
+                @if (company) {
+                  <button class="btn btn-primary d-flex gap-3" (click)="manageField(field.id!)">
+                    <i class="bi bi-gear"></i>
+                    Manage
+                  </button>
+                }
+                @else if (!field.public) {
+                  <button class="btn btn-primary" (click)="bookField(field.id!)">Book</button>
+                }
+                @else {
+                  <button class="btn btn-danger" (click)="goToField(field.id!)">Book</button>
+                }
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
     }
   </div>
 </div>

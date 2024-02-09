@@ -5,8 +5,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FilterComponent } from '../filter/filter.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddFieldComponent } from '../add-field/add-field.component';
-
-const maxStars: number = 5;
+import { Filter } from '../../../interfaces/filter';
+import { Field } from '../../../interfaces/field';
 
 
 @Component({
@@ -19,9 +19,12 @@ const maxStars: number = 5;
 export class ListComponent {
 
   public fields = this.fieldService.fields;
-  public stars: any[] = new Array(maxStars);
+
+  public private: boolean = false;
 
   public company: string | null = this.route.snapshot.queryParamMap.get('company');
+
+  public filter?: Filter;
 
   constructor(
     private fieldService: FieldService,
@@ -54,5 +57,56 @@ export class ListComponent {
   addNewField() {
     this.modal.open(AddFieldComponent);
   }
+
+  applyFilters(filters: Filter) {
+    console.log(filters);
+    this.filter = filters;
+  }
+
+
+  fieldMatchesCriteria(field: Field): boolean {
+    if (this.filter === undefined) return true;
+    else {
+
+
+      if (this.filter.name) {
+        if (field.name.toLowerCase().includes(this.filter.name.toLowerCase())) return true;
+        else return false;
+      }
+
+
+      if (
+        !(this.filter.FutSala && field.type === 'FutSala') &&
+        !(this.filter.Fut5 && field.type === 'Fut5') &&
+        !(this.filter.Fut7 && field.type === 'Fut7') &&
+        !(this.filter.Fut11 && field.type === 'Fut11')
+      ) {
+        return false;
+      }
+
+
+      if (
+        (this.filter.property.public && !field.public) ||
+        (this.filter.property.private && field.public)
+      ) return false;
+
+
+      if (
+        this.filter.opening_time &&
+        field.opening_time &&
+        this.filter.opening_time > field.opening_time
+      ) return false
+
+
+      if (
+        this.filter.closing_time &&
+        field.closing_time &&
+        this.filter.closing_time < field.closing_time
+      ) return false
+
+      
+      return true;
+    }
+}
 
 }

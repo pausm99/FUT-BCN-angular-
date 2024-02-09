@@ -1,12 +1,77 @@
-<div class="filter-menu d-flex justify-content-between align-content-center rounded-3 my-4">
-  <ul class="list-unstyled d-flex mb-0 gap-3">
-    <li class="me-2">Sort by</li>
-    <li>Name</li>
-    <li>Type</li>
-    <li>Availability</li>
-  </ul>
-  <ul class="list-unstyled d-flex mb-0 gap-3">
-    <li><a [routerLink]="['/fields']" routerLinkActive="router-link-active"><i class="bi bi-list-ul"></i></a></li>
-    <li><a [routerLink]="['/fields/map']" routerLinkActive="router-link-active"><i class="bi bi-pin-map"></i></a></li>
-  </ul>
+<div class="d-flex gap-4 py-2 px-4 justify-content-evenly align-items-center rounded-3 bg-white mb-3" id="top-menu">
+  <a [routerLink]="['/fields']" routerLinkActive="router-link-active"><i class="bi bi-list-ul me-2"></i></a>
+  <a [routerLink]="['/fields/map']" routerLinkActive="router-link-active"><i class="bi bi-pin-map me-2"></i></a>
+  <a href=""><i class="bi bi-calendar4-range me-2"></i></a>
+  <a href="" data-bs-toggle="offcanvas" data-bs-target="#filter-menu" aria-controls="filter-menu"><i class="bi bi-funnel me-2"></i></a>
+</div>
+
+<div class="offcanvas offcanvas-end bg-white" tabindex="-1" id="filter-menu">
+  <form [formGroup]="filterForm" class="h-100" (submit)="applyFilters()">
+    <div class="d-flex flex-column h-100 justify-content-between align-items-center filter-menu-content">
+      <div class="form-group search p-3 w-100">
+        <i class="bi bi-search search-icon"></i>
+        <input type="text" class="form-control" formControlName="name" placeholder="Search by name...">
+      </div>
+      <ul class="list-unstyled justify-content-start w-100 d-flex py-4 px-3 flex-column mb-0 criteria">
+        <li class="criteria-item">
+          <span>Type</span>
+          <button class="criteria-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#criteria-item-1" aria-controls="filter-toggler-1" aria-expanded="false" aria-label="Toggle filter">
+            <span class="criteria-toggler-icon"></span>
+          </button>
+        </li>
+        <div class="collapse flex-wrap" id="criteria-item-1">
+          <div formGroupName="type" class="btn-group btn-group-sm w-100" role="group" aria-label="Field type filter check">
+            <input type="checkbox" class="btn-check" id="filterCheckFSala" formControlName="FutSala" autocomplete="off">
+            <label class="btn btn-outline-dark" for="filterCheckFSala">FutSala</label>
+
+            <input type="checkbox" class="btn-check" id="filterCheckF5" formControlName="Fut5" autocomplete="off">
+            <label class="btn btn-outline-dark" for="filterCheckF5">Fut5</label>
+
+            <input type="checkbox" class="btn-check" id="filterCheckF7" formControlName="Fut7" autocomplete="off">
+            <label class="btn btn-outline-dark" for="filterCheckF7">Fut7</label>
+
+            <input type="checkbox" class="btn-check" id="filterCheckF11" formControlName="Fut11" autocomplete="off">
+            <label class="btn btn-outline-dark" for="filterCheckF11">Fut11</label>
+          </div>
+        </div>
+        <li class="criteria-item">
+          <span>Property</span>
+          <button class="criteria-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#criteria-item-2" aria-controls="filter-toggler-1" aria-expanded="false" aria-label="Toggle filter">
+            <span class="criteria-toggler-icon"></span>
+          </button>
+        </li>
+        <div class="collapse" id="criteria-item-2">
+          <div formGroupName="property" class="btn-group btn-group-sm w-100" role="group" aria-label="Field propery filter check">
+            <input type="checkbox" class="btn-check" id="filterCheckPrivate" formControlName="private" autocomplete="off">
+            <label class="btn btn-outline-dark" for="filterCheckPrivate">Private</label>
+
+            <input type="checkbox" class="btn-check" id="filterCheckPublic" formControlName="public" autocomplete="off">
+            <label class="btn btn-outline-dark" for="filterCheckPublic">Public</label>
+          </div>
+        </div>
+        <li class="criteria-item">
+          <span>Schedule</span>
+          <button class="criteria-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#criteria-item-3" aria-controls="filter-toggler-1" aria-expanded="false" aria-label="Toggle filter">
+            <span class="criteria-toggler-icon"></span>
+          </button>
+        </li>
+        <div class="collapse" id="criteria-item-3">
+          <div class="row">
+            <div class="col-6">
+              <label class="form-label w-100 text-center">Opening Time</label>
+              <ngb-timepicker id="filterOpeningTime" formControlName="opening_time"/>
+            </div>
+            <div class="col-6">
+              <label class="form-label w-100 text-center">Closing Time</label>
+              <ngb-timepicker id="filterClosingTime" formControlName="closing_time"/>
+            </div>
+          </div>
+        </div>
+      </ul>
+      <ul class="list-unstyled w-100 justify-content-between align-items-center d-flex mb-0 bottom-menu">
+        <div (click)="resetFilter()" data-bs-dismiss="offcanvas" class="bg-secondary-subtle rounded-1 text-primary refresh"><i class="bi bi-arrow-clockwise"></i></div>
+        <button type="submit" data-bs-dismiss="offcanvas" [disabled]="activeFilters() === 0" class="btn rounded-pill px-5 bg-secondary">APPLY ({{activeFilters()}})</button>
+      </ul>
+    </div>
+  </form>
 </div>
