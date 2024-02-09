@@ -1,0 +1,16 @@
+<div class="container d-flex flex-column align-items-center gap-3">
+  <h1 class="mb-5">{{ field?.name }} reservations</h1>
+    <div class="bg-white p-3 rounded-3 myCalendar">
+      <full-calendar [options]="calendarOptions" [events]="events()"></full-calendar>
+    </div>
+    <div class="legend rounded-3 gap-3 d-flex justify-content-center align-content-center">
+      <div class="legend-item">
+        <div class="legend-item-color"></div>
+        <span>Available</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-item-color"></div>
+        <span>Occupied</span>
+      </div>
+    </div>
+</div>

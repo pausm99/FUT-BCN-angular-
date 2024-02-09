@@ -43,7 +43,7 @@ export class ListComponent {
   }
 
   bookField(id: number) {
-    this.router.navigate([`/reservation/${id}`]);
+    this.router.navigate([`/reservations/${id}`]);
   }
 
   goToField(id: number) {
@@ -104,7 +104,7 @@ export class ListComponent {
         this.filter.closing_time < field.closing_time
       ) return false
 
-      
+
       return true;
     }
 }
