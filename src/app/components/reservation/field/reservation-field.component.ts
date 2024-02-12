@@ -1,5 +1,5 @@
 import { Reservation } from '../../../interfaces/reservation';
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, DatesSetArg, EventClickArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -14,6 +14,7 @@ import moment from 'moment-timezone';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalReservationComponent } from '../modal-reservation/modal-reservation.component';
 import { PaymentComponent } from '../../payment/payment.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -58,7 +59,8 @@ export class ReservationFieldComponent implements OnInit, OnDestroy {
   constructor(
     private fieldService: FieldService,
     private availableReservationsService: AvailableReservationsService,
-    ) {
+    private router: Router,
+    private ngZone: NgZone) {
 
       this.field = this.fieldService.activeField();
 
@@ -183,6 +185,10 @@ export class ReservationFieldComponent implements OnInit, OnDestroy {
             paymentModalRef.closed.subscribe((res) => {
               if (res.reason === 'cancelled') {
                 this.changeAvailableResBlockState(avResId, false)
+              } else if (res.reason === 'approved') {
+                this.ngZone.run(() => {
+                  this.router.navigate(['/profile']);
+                });
               }
             })
           }
