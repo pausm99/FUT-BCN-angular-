@@ -1,8 +1,68 @@
 <section class="section">
   <div class="container">
     <h1>Profile</h1>
-    <div class="profile-fields">
-      <div style="height: 200px; width: 200px;" class="profile-image rounded-3 bg-light"></div>
+    <div class="profile d-flex flex-column gap-4 gap-lg-5">
+      <div class="profile-header align-items-lg-center justify-content-lg-evenly d-flex">
+        <div class="d-flex">
+          <div class="image bg-light"></div>
+          <div class="person d-flex flex-column justify-content-center">
+            <p class="m-0 text-white fs-3">{{ user().name }}</p>
+            <small>{{ user().email }}</small>
+          </div>
+        </div>
+        <div class="main-actions d-none d-lg-inline-flex gap-3">
+          <div class="main-actions-item rounded-3">
+            <i class="bi bi-pencil-fill"></i>
+          </div>
+          <div (click)="logout()" class="main-actions-item rounded-3">
+            <i class="bi bi-box-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="profile-section user-type justify-content-center align-items-center d-flex gap-3">
+        @if (!isCompany()) {
+          <span class="rounded-pill bg-white px-3 py-1">{{ getPosition() }}</span>
+          <span class="rounded-pill bg-primary-subtle px-3 py-1">{{ user().age }} years</span>
+        } @else {
+          <span class="rounded-pill bg-white px-3 py-1">Company profile</span>
+          <span class="rounded-pill bg-primary-subtle px-3 py-1">{{ user().phone }}</span>
+        }
+      </div>
+      <div class="profile-section">
+        <div class="dashboard mt-2 d-flex justify-content-between justify-content-lg-evenly align-items-center pe-1">
+          <div class="dashboard-item gap-3">
+            <div class="dashboard-item-image">
+              @if (!isCompany()) {
+                <i class="bi bi-card-list"></i>
+              }
+              @else {
+                <i class="bi bi-gear"></i>
+              }
+            </div>
+            <h4 class="dashboard-item-title fs-3">
+              @if (isCompany()) {
+                Fields
+              }
+              @else {
+                Reservations
+              }
+            </h4>
+          </div>
+          <div class="dashboard-action rounded-pill d-flex gap-2 align-items-center">
+            @if (isCompany()) {
+              <a [routerLink]="['/manage']" [queryParams]="{company: true}" routerLinkActive="router-link-active" >Manage</a>
+            }
+            @else {
+              <a [routerLink]="">View</a>
+            }
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="d-lg-none profile-section d-flex align-items-center flex-column gap-2">
+        <button type="button" class="btn btn-secondary w-100">Edit</button>
+        <span (click)="logout()" class="logout-button">Log Out</span>
+      </div>
     </div>
   </div>
 </section>
