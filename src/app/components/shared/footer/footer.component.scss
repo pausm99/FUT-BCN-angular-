@@ -5,6 +5,11 @@
 	font-size: var(--h3-font-size);
 	font-weight: var(--font-weight-bold);
 	display: block;
+
+  img {
+    height: 38px;
+    width: auto;
+  }
 }
 
 .site-footer {

@@ -1,8 +1,8 @@
 <nav [ngClass]="{'navbarBackground': !isAtTop }" class="navbar navbar-expand-lg fixed-top">
   <div class="container">
-      <a class="navbar-brand" href="index.html">
-          <i class="bi-back"></i>
-          <span>{{ title }}</span>
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <img src="../../../../assets/images/logo.png" alt="Logo">
+        <span>{{ title }}</span>
       </a>
 
       <button class="navbar-toggler" #closeButton type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
