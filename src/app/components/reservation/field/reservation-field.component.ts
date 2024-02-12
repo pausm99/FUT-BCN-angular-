@@ -187,9 +187,6 @@ export class ReservationFieldComponent implements OnInit, OnDestroy {
             })
           }
         }
-        else if (res.reason === 'cancelled') {
-          this.changeAvailableResBlockState(avResId, false)
-        }
       })
     }
   }
