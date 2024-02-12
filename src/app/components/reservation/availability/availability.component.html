@@ -1,3 +1,37 @@
-<div class="container">
+<div class="container text-center d-flex flex-column gap-4">
   <h1>Available reservations</h1>
+  <div class="d-flex justify-content-between justify-content-lg-center gap-5 align-items-center mb-3 mb-lg-5">
+    <button (click)="previousDay()" [ngClass]="{'back-menu-disabled': isToday()}" type="button" class="btn btn-secondary"><i class="bi bi-arrow-left"></i></button>
+    <div class="bg-white rounded-3 px-4 py-2">{{ today }}</div>
+    <button (click)="nextDay()" type="button" class="btn btn-secondary"><i class="bi bi-arrow-right"></i></button>
+  </div>
+    @if (itHasAnyRecords()) {
+      <ul class="list-unstyled d-flex flex-column gap-4 text-lg-start">
+        @for (field of reservationsPerField | keyvalue; track $index) {
+          <li class="d-flex flex-column field gap-4">
+            <div class="field-head d-flex flex-lg-column-reverse justify-content-center justify-content-lg-evenly gap-2 align-items-center align-items-lg-start">
+              <small class="rounded-pill field-type">{{getFieldTypeByKey(field.key)}}</small>
+              <a [routerLink]="'/fields/' + field.key" routerLinkActive="router-link-active" ><h3 class="field-name">{{ getNameByKey(field.key) }}</h3></a>
+            </div>
+            <ul class="d-flex list-unstyled gap-2 gap-list">
+              @for (res of field.value; track $index) {
+                <li class="bg-white rounded-3 p-3 gap-item text-center" (click)="bookField(field.key, res)">
+                  <div class="gap-item-wrapper">
+                    <div>
+                      {{ res.date_time_start | date: 'HH:mm' }}
+                      <hr>
+                      {{ res.date_time_end | date: 'HH:mm' }}
+                    </div>
+                    <small class="price bg-primary-subtle rounded-1">{{ res.price }}€</small>
+                  </div>
+                </li>
+              }
+            </ul>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="no-data-message">No available reservations for selected day...</p>
+    }
+
 </div>

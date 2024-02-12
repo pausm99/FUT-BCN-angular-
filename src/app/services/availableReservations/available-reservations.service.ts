@@ -47,4 +47,8 @@ export class AvailableReservationsService {
   changeAvailableReservationState(id: number, state: boolean) {
     return this.http.patch<any>(`${API_URL}/availableReservations/state/${id}`, {state: state});
   }
+
+  getAvailableReservationByTimeRange(start: string, end: string) {
+    return this.http.get<any>(`${API_URL}/availableReservations/occupied?start=${start}&end=${end}`);
+  }
 }

@@ -6,4 +6,6 @@ export interface AvailableReservation {
   date_time_start: Date;
   date_time_end: Date;
   price: number;
+  field_name?: string;
+  field_type?: string;
 }
