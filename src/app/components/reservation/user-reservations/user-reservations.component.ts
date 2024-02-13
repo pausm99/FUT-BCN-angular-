@@ -1,13 +1,14 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { ReservationService } from '../../../services/reservation/reservation.service';
 import { Reservation } from '../../../interfaces/reservation';
 import { CommonModule, DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-reservations',
   standalone: true,
-  imports: [DatePipe, CommonModule],
+  imports: [DatePipe, CommonModule, RouterLink],
   templateUrl: './user-reservations.component.html',
   styleUrl: './user-reservations.component.scss'
 })

@@ -1,3 +1,7 @@
+:host {
+  position: relative;
+}
+
 table {
 	border :1px solid #ccc;
 	border-collapse: collapse;
@@ -24,6 +28,18 @@ table th {
   font-size: .85em;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+.back-link {
+  position: absolute;
+  color: var(--white-color);
+  font-size: 2rem;
+  top: 0;
+  left: 0;
+
+  @media (min-width: 992px) {
+    font-size: 2.5rem;
+  }
 }
 
 /* Media Queries*/

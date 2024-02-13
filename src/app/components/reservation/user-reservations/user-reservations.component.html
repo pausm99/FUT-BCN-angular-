@@ -1,25 +1,31 @@
-<div class="d-flex flex-column gap-3">
+<div class="d-flex flex-column align-items-center gap-3">
   <h1>My reservations</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Day</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (res of reservations; track $index) {
+  <a class="back-link" [routerLink]="['/profile']" routerLinkActive="router-link-active"><i class="bi bi-arrow-left-square"></i></a>
+  @if (reservations.length !== 0) {
+    <table>
+      <thead>
         <tr>
-          <th>{{$index + 1}}</th>
-          <td data-label="date">{{ res.date_time_start | date:'mediumDate' }}</td>
-          <td data-label="start">{{ res.date_time_start | date:'HH:mm' }}</td>
-          <td data-label="end">{{ res.date_time_end | date:'HH:mm' }}</td>
-          <td data-label="amount">{{ res.amount }}€</td>
+          <th>#</th>
+          <th>Day</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Amount</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @for (res of reservations; track $index) {
+          <tr>
+            <th>{{$index + 1}}</th>
+            <td data-label="date">{{ res.date_time_start | date:'mediumDate' }}</td>
+            <td data-label="start">{{ res.date_time_start | date:'HH:mm' }}</td>
+            <td data-label="end">{{ res.date_time_end | date:'HH:mm' }}</td>
+            <td data-label="amount">{{ res.amount }}€</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <h2 class="mt-5 text-center">You don't have any reservations yet...</h2>
+    <a [routerLink]="['/reservations']" routerLinkActive="router-link-active" class="rounded-pill bg-secondary py-3 px-5 fs-5 mt-3"><i class="bi bi-journal-check me-2"></i>Book here</a>
+  }
 </div>
