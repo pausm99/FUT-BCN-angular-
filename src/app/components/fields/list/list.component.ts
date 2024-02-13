@@ -74,39 +74,49 @@ export class ListComponent {
         else return false;
       }
 
-
       if (
-        !(this.filter.FutSala && field.type === 'FutSala') &&
-        !(this.filter.Fut5 && field.type === 'Fut5') &&
-        !(this.filter.Fut7 && field.type === 'Fut7') &&
-        !(this.filter.Fut11 && field.type === 'Fut11')
+        (this.filter.FutSala && field.type === 'FutSala') ||
+        (this.filter.Fut5 && field.type === 'Fut5') ||
+        (this.filter.Fut7 && field.type === 'Fut7') ||
+        (this.filter.Fut11 && field.type === 'Fut11')
       ) {
+      } else {
+        if (this.filter.FutSala || this.filter.Fut5 || this.filter.Fut7 || this.filter.Fut11)
         return false;
       }
-
 
       if (
         (this.filter.property.public && !field.public) ||
         (this.filter.property.private && field.public)
       ) return false;
 
-
       if (
         this.filter.opening_time &&
         field.opening_time &&
-        this.filter.opening_time > field.opening_time
-      ) return false
+        this.filterDateIsAfter(this.filter.opening_time, field.opening_time)
+      ) {
+        return false
+      }
 
 
       if (
         this.filter.closing_time &&
         field.closing_time &&
-        this.filter.closing_time < field.closing_time
+        !this.filterDateIsAfter(this.filter.closing_time, field.closing_time)
       ) return false
 
 
       return true;
     }
-}
+  }
+
+  filterDateIsAfter(dateFilterString: string, dateFieldString: string): boolean {
+    const actualDate = new Date().toISOString().split('T')[0];
+
+    const dateFilter = new Date(`${actualDate}T${dateFilterString}`);
+    const dateField = new Date(`${actualDate}T${dateFieldString}`);
+
+    return dateFilter > dateField;
+  }
 
 }
