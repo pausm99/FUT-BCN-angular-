@@ -14,7 +14,19 @@ export const routes: Routes = [
     path: 'profile',
     title: 'Profile',
     loadComponent: () => import('./components/profile/profile.component').then(c => c.ProfileComponent),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        title: 'Profile',
+        loadComponent: () => import('./components/profile/info/profile-info.component').then(c => c.ProfileInfoComponent)
+      },
+      {
+        path: 'my-reservations',
+        title: 'My reservations',
+        loadComponent: () => import('./components/reservation/user-reservations/user-reservations.component').then(c => c.UserReservationsComponent)
+      }
+    ]
   },
   {
     path: 'fields',

@@ -1,0 +1,25 @@
+<div class="d-flex flex-column gap-3">
+  <h1>My reservations</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Day</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (res of reservations; track $index) {
+        <tr>
+          <th>{{$index + 1}}</th>
+          <td data-label="date">{{ res.date_time_start | date:'mediumDate' }}</td>
+          <td data-label="start">{{ res.date_time_start | date:'HH:mm' }}</td>
+          <td data-label="end">{{ res.date_time_end | date:'HH:mm' }}</td>
+          <td data-label="amount">{{ res.amount }}€</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
