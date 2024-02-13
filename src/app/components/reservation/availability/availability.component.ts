@@ -186,7 +186,7 @@ export class AvailabilityComponent implements OnInit {
             this.changeAvailableResBlockState(res.id!, false)
           } else if (result.reason === 'approved') {
             this.ngZone.run(() => {
-              this.router.navigate(['/profile']);
+              this.router.navigate(['/profile/my-reservations']);
             });
           }
         });

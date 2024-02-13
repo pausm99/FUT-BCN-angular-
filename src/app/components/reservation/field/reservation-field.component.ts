@@ -187,7 +187,7 @@ export class ReservationFieldComponent implements OnInit, OnDestroy {
                 this.changeAvailableResBlockState(avResId, false)
               } else if (res.reason === 'approved') {
                 this.ngZone.run(() => {
-                  this.router.navigate(['/profile']);
+                  this.router.navigate(['/profile/my-reservations']);
                 });
               }
             })
