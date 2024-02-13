@@ -105,14 +105,14 @@ export class MapListComponent implements AfterViewInit {
     actionButton.innerHTML = `<button class="btn ${field.public ? 'btn-danger' : 'btn-primary' } w-100 mt-2">Book</button>`;
 
     actionButton.addEventListener('click', () => {
-      this.router.navigate([`/reservation/${field.id}`]);
+      this.router.navigate([`/reservations/${field.id}`]);
     });
 
     const actionButton2 = document.createElement('div');
     actionButton2.innerHTML = `<button class="btn btn-secondary w-100 mt-1">View</button>`;
 
     actionButton2.addEventListener('click', () => {
-      this.router.navigate([`/field/${field.id}`]);
+      this.router.navigate([`/fields/${field.id}`]);
     });
 
     const div = document.createElement('div');
@@ -131,12 +131,10 @@ export class MapListComponent implements AfterViewInit {
         publicField +
       `</div>`;
 
-    content.appendChild(actionButton);
+    if (!field.public) content.appendChild(actionButton);
     content.appendChild(actionButton2);
 
     div.appendChild(content);
-
-
 
     return div;
   }
