@@ -42,4 +42,8 @@ export class UserService {
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${API_URL}/user/${id}`);
   }
+
+  logout() {
+    return this.http.post<any>(`${API_URL}/user/logout`, null);
+  }
 }
