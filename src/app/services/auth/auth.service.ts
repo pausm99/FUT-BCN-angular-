@@ -13,24 +13,32 @@ export class AuthService {
 
   constructor(private userService: UserService) {
     this.logged.set(this.isLoggedIn());
-    const decodedTokenFromStorage = this.decodeToken(this.getToken() || '');
-    if (decodedTokenFromStorage) userService.userInfo.set(decodedTokenFromStorage);
+    const userInfo = this.getUserInfo();
+    if (userInfo) userService.userInfo.set(userInfo);
   }
 
-  setToken(token: string): void {
-    localStorage.setItem('apiToken', token);
+  setUserInfo(token: string): void {
     this.logged.set(true);
     const decodedToken = this.decodeToken(token);
+    if (decodedToken) localStorage.setItem('userInfo', JSON.stringify(decodedToken));
     this.userService.userInfo.set(decodedToken);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('apiToken')
+  getUserInfo(): any | null {
+    const storedData = localStorage.getItem('userInfo');
+
+    try {
+      return storedData ? JSON.parse(storedData) : null;
+    } catch (error) {
+      return null;
+    }
   }
 
+
   logOut(): void {
-    localStorage.removeItem('apiToken');
+    this.userService.logout().subscribe((res) => console.log(res));
     this.logged.set(false);
+    localStorage.removeItem('userInfo');
     this.userService.userInfo.set({
       id: 0,
       email: '',
@@ -40,7 +48,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.getToken() !== null;
+    return this.getUserInfo() !== null;
   }
 
   decodeToken(token: string): any | null {
