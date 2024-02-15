@@ -33,9 +33,10 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', [Validators.required, CustomValidators.passwordValidator]),
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
     userRole: new FormControl('player', [Validators.required]),
-    position: new FormControl('GK', CustomValidators.conditionalRequired('bank_account', this.company)),
-    age: new FormControl('', CustomValidators.conditionalRequired('bank_account', this.company)),
+    position: new FormControl('GK', CustomValidators.conditionalRequired('position', this.company)),
+    age: new FormControl('', [Validators.max(100), Validators.min(14), CustomValidators.conditionalRequired('age', this.company)]),
     bank_account: new FormControl('', CustomValidators.conditionalRequired('bank_account', this.company)),
+    phone: new FormControl(null, [Validators.minLength(9), Validators.maxLength(9), CustomValidators.conditionalRequired('phone', this.company)])
   });
 
   constructor(
@@ -48,8 +49,30 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm.get('userRole')?.valueChanges.subscribe(() => {
       this.company = !this.company;
+      const isCompany = this.registerForm.get('userRole')?.value === 'company';
+
+      const positionControl = this.registerForm.get('position');
+      const ageControl = this.registerForm.get('age');
+      const bankAccountControl = this.registerForm.get('bank_account');
+      const phoneControl = this.registerForm.get('phone');
+
+      if (isCompany) {
+        positionControl?.clearValidators();
+        ageControl?.clearValidators();
+        bankAccountControl?.setValidators([CustomValidators.conditionalRequired('bank_account', this.company), validateIBAN]);
+        phoneControl?.setValidators([Validators.minLength(9), Validators.maxLength(9), CustomValidators.conditionalRequired('phone', this.company)]);
+      } else {
+        bankAccountControl?.clearValidators();
+        phoneControl?.clearValidators();
+        positionControl?.setValidators([CustomValidators.conditionalRequired('position', this.company)]);
+        ageControl?.setValidators([Validators.max(100), Validators.min(14), CustomValidators.conditionalRequired('age', this.company)]);
+      }
+
+      positionControl?.updateValueAndValidity();
+      ageControl?.updateValueAndValidity();
+      bankAccountControl?.updateValueAndValidity();
+      phoneControl?.updateValueAndValidity();
     });
-    this.registerForm.get('bank_account')?.addValidators(validateIBAN)
   }
 
   registerUser(): void {
@@ -63,6 +86,7 @@ export class RegisterComponent implements OnInit {
         position: !this.company ? values.position.value! : undefined,
         age: !this.company ? values.age.value! : undefined,
         bank_account: this.company ? values.bank_account.value! : undefined,
+        phone: this.company ? values.phone.value! : undefined
       }
       this.userService.register(user).subscribe({
         next: () => {
@@ -104,7 +128,6 @@ export class RegisterComponent implements OnInit {
       this.duplicatedEmail = res.isDuplicated;
       return this.duplicatedEmail;
     } catch (error) {
-      console.error('Error al verificar el correo electrónico:', error);
       return false;
     }
   }

@@ -6,16 +6,20 @@ export class CustomValidators extends Validators {
     return regex.test(control.value) ? null : { invalidPassword: true };
   }
 
-  static conditionalRequired(name: string, company: boolean): ValidationErrors | null {
-    if ((name === 'age' || name === 'position') && !company) {
-      console.log(this.required)
-      return { required: true };
-    } else if (name === 'bank_account' && company) {
-      console.log(this.required)
-      return { required: true }
+  static conditionalRequired(name: string, company: boolean): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+
+      if (
+        (company && (name === 'bank_account' || name === 'phone')) ||
+        (!company && (name === 'position' || name === 'age'))
+      ) {
+        if (control.value === null || control.value === '' || control.value === undefined) return { conditionalRequired: true}
+      }
+
+      return null;
     }
-    return null;
   }
+
 
   static timeRangeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
       const openingTime = control.get('opening_time')?.value;

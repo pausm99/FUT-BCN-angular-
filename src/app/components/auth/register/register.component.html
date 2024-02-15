@@ -126,14 +126,25 @@
                 @if (registerForm.get('bank_account')?.invalid && registerForm.get('bank_account')?.touched) {
                   <span class="invalid-feedback">Required</span>
                 }
-                @if (registerForm.get('bank_account')?.errors?.['error']['patternInvalid']) {
+                @if (registerForm.get('bank_account')?.errors?.['error']?.['patternInvalid']) {
                   <span class="invalid-feedback">IBAN Code pattern is invalid</span>
                 }
-                @if (registerForm.get('bank_account')?.errors?.['error']['countryUnsupported']) {
+                @if (registerForm.get('bank_account')?.errors?.['error']?.['countryUnsupported']) {
                   <span class="invalid-feedback">Country not supported</span>
                 }
-                @if (registerForm.get('bank_account')?.errors?.['error']['codeLengthInvalid']) {
+                @if (registerForm.get('bank_account')?.errors?.['error']?.['codeLengthInvalid']) {
                   <span class="invalid-feedback">IBAN Code length is invalid</span>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="registerPhone" class="form-label">Phone</label>
+                <input type="tel" id="registerPhone" pattern="[0-9]+" minlength="9" maxlength="9" class="form-control" formControlName="phone" [required]="checkRequired('phone')"
+                [ngClass]="{'
+                  is-invalid': registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched
+                }">
+                @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched) {
+                  <span class="invalid-feedback">Required</span>
                 }
               </div>
             </div>
@@ -141,7 +152,7 @@
           @if (steps[1]) {
             <div class="mb-3 d-flex justify-content-between">
               <button type="button" class="btn btn-primary px-5" (click)="stepBack(1)">Back</button>
-              <button type="submit" class="btn btn-secondary px-5">Register</button>
+              <button type="submit" [disabled]="registerForm.invalid" class="btn btn-secondary px-5">Register</button>
             </div>
           }
 
