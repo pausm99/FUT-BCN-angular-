@@ -13,11 +13,14 @@
           <ul class="navbar-nav ms-lg-5 me-lg-auto">
             @for (route of routes; track $index) {
               <li class="nav-item">
-                @if (route.path !== 'login' && route.path !== 'register' && route.path !== 'manage') {
+                @if (route.path !== 'login' && route.path !== 'register' && route.path !== 'manage' && route.path !== 'reservations') {
                   <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
                 @if (route.path === 'manage' && userInfo().role === 'company') {
                   <a class="nav-link" [routerLink]="route.path" [queryParams]="{company: true}" routerLinkActive="router-link-active" >{{ route.title }}</a>
+                }
+                @if (route.path === 'reservations' && userInfo().role !== 'company') {
+                  <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
               </li>
             }

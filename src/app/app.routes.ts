@@ -3,6 +3,7 @@ import { AuthGuard } from './guards/auth/auth.guard';
 import { FieldGuard } from './guards/field/field.guard';
 import { ManageGuard } from './guards/manage/manage.guard';
 import { ManageFieldGuard } from './guards/manage/manage-field.guard';
+import { PlayerGuard } from './guards/player/player.guard';
 
 export const routes: Routes = [
   {
@@ -24,7 +25,8 @@ export const routes: Routes = [
       {
         path: 'my-reservations',
         title: 'My reservations',
-        loadComponent: () => import('./components/reservation/user-reservations/user-reservations.component').then(c => c.UserReservationsComponent)
+        loadComponent: () => import('./components/reservation/user-reservations/user-reservations.component').then(c => c.UserReservationsComponent),
+        canActivate: [PlayerGuard]
       }
     ]
   },
@@ -88,7 +90,7 @@ export const routes: Routes = [
     path: 'reservations',
     title: 'Book',
     loadComponent: () => import('./components/reservation/reservation.component').then(c => c.ReservationComponent),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, PlayerGuard],
     children: [
       {
         path: '',
