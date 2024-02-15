@@ -36,7 +36,7 @@ export class AuthService {
 
 
   logOut(): void {
-    this.userService.logout().subscribe((res) => console.log(res));
+    this.userService.logout().subscribe(() => {});
     this.logged.set(false);
     localStorage.removeItem('userInfo');
     this.userService.userInfo.set({
