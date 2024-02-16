@@ -65,13 +65,24 @@
   --font-weight-bold:             700;
 }
 
+html {
+  height: 100dvh
+}
+
 body {
   background-color: var(--white-color);
   font-family: var(--body-font-family);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
+
+footer {
+  margin-top: auto;
+}
+
+
 
 /*---------------------------------------
   TYPOGRAPHY
@@ -178,6 +189,10 @@ a {
 
   @media (min-width: 992px) {
     padding-bottom: 75px;
+  }
+
+  @media (min-width: 1200px) {
+    padding-bottom: 120px;
   }
 
   & * {

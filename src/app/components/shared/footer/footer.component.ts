@@ -16,4 +16,8 @@ export class FooterComponent {
     this.title = this.titleService.getPageTitle();
   }
 
+  getFullYear(): string {
+    return new Date().getFullYear().toString();
+  }
+
 }
