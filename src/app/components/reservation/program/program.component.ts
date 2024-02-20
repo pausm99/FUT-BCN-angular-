@@ -14,6 +14,7 @@ import { AvailableReservation } from '../../../interfaces/available-reservation'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProgramComponent } from './modalProgram/modal.component';
 import moment from 'moment';
+import { ToastService } from '../../../services/toast/toast.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class ProgramComponent {
   constructor(
     private fieldService: FieldService,
     private availableReservationService: AvailableReservationsService,
+    private toastService: ToastService,
     private reservationService: ReservationService
     ) {
       this.field = this.fieldService.activeField();
@@ -151,13 +153,21 @@ export class ProgramComponent {
         if (isAvailable) {
           const avResId = id.split('avRes')[1];
           this.availableReservationService.deleteAvailableReservation(avResId).subscribe({
-            next: () => event.remove()
+            next: () => {
+              event.remove()
+              this.toastService.showSuccess('Available reservation deleted successfully')
+            },
+            error: () => this.toastService.showDanger('Failed to delete available reservation')
           });
         }
         else {
           const resId = id.split('res')[1];
           this.reservationService.deleteReservation(resId).subscribe({
-            next: () => event.remove()
+            next: () => {
+              event.remove()
+              this.toastService.showSuccess('Reservation deleted successfully')
+            },
+            error: () => this.toastService.showDanger('Failed to delete reservation')
           })
         }
       }
@@ -174,7 +184,8 @@ export class ProgramComponent {
     this.availableReservationService.getAllTypeByFieldAndTimeRange(this.field?.id!, dates.startStr.split('T')[0], dates.endStr.split('T')[0]).subscribe({
       next: (res) => {
         this.reservationsToEvents(res);
-      }
+      },
+      error: () => this.toastService.showDanger('Failed to load field data')
     })
   }
 

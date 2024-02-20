@@ -15,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalReservationComponent } from '../modal-reservation/modal-reservation.component';
 import { PaymentComponent } from '../../payment/payment.component';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../services/toast/toast.service';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class ReservationFieldComponent implements OnInit, OnDestroy {
   constructor(
     private fieldService: FieldService,
     private availableReservationsService: AvailableReservationsService,
+    private toastService: ToastService,
     private router: Router,
     private ngZone: NgZone) {
 
@@ -139,6 +141,9 @@ export class ReservationFieldComponent implements OnInit, OnDestroy {
     this.availableReservationsService.getAllTypeByFieldAndTimeRange(this.field?.id!, dates.startStr.split('T')[0], dates.endStr.split('T')[0]).subscribe({
       next: (res) => {
         this.reservationsToEvents(res);
+      },
+      error: () => {
+        this.toastService.showDanger(`Failed to load field reservations`)
       }
     })
   }

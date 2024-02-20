@@ -9,6 +9,7 @@ import { ModalReservationComponent } from '../modal-reservation/modal-reservatio
 import { Field } from '../../../interfaces/field';
 import { PaymentComponent } from '../../payment/payment.component';
 import { FieldService } from '../../../services/field/field.service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 
 @Component({
@@ -27,13 +28,13 @@ export class AvailabilityComponent implements OnInit {
   public today!: string;
 
   private todaySubject = new Subject<string>();
-
   todayObservable$: Observable<string> = this.todaySubject.asObservable();
 
 
   constructor(
     private availableResService: AvailableReservationsService,
     private fieldService: FieldService,
+    private toastService: ToastService,
     private router: Router,
     private ngZone: NgZone) {
 
@@ -60,7 +61,8 @@ export class AvailabilityComponent implements OnInit {
       next: (res) => {
         this.classifyAvailableReservations(res);
         console.log(res);
-      }
+      },
+      error: () => this.toastService.showDanger(`Failed to load available reservations for selected date`)
     })
   }
 
@@ -183,8 +185,11 @@ export class AvailabilityComponent implements OnInit {
 
         paymentModalRef.closed.subscribe((result) => {
           if (result.reason === 'cancelled') {
+
             this.changeAvailableResBlockState(res.id!, false)
+
           } else if (result.reason === 'approved') {
+
             this.ngZone.run(() => {
               this.router.navigate(['/profile/my-reservations']);
             });

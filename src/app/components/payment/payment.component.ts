@@ -9,6 +9,7 @@ import { UserService } from '../../services/user/user.service';
 import { Field } from '../../interfaces/field';
 import { AvailableReservation } from '../../interfaces/available-reservation';
 import { Observable } from 'rxjs';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-payment',
@@ -33,6 +34,7 @@ export class PaymentComponent implements OnInit {
     private userService: UserService,
     private availableReservationService: AvailableReservationsService,
     private reservationService: ReservationService,
+    private toastService: ToastService
   ) {
     this.userId = this.userService.userInfo().id;
     this.field = this.fieldService.activeField();
@@ -67,13 +69,15 @@ export class PaymentComponent implements OnInit {
               },
               onError: (err: any) => {
                 this.cancelReservation();
+                this.toastService.showDanger('Error during payment process')
               },
               onCancel: (data: any) => {
                 this.cancelReservation();
+                this.toastService.showDanger('Payment cancelled')
               }
             }).render(this.paypalElement.nativeElement)
         } catch (error) {
-            console.error("failed to render the PayPal Buttons", error);
+            this.toastService.showDanger('Error during payment process')
         }
     }
   }
@@ -82,7 +86,8 @@ export class PaymentComponent implements OnInit {
     this.deleteAvailableReservation().subscribe({
       next: () => {
         this.payReservation();
-      }
+      },
+      error: () => this.toastService.showDanger('Error during reservation process')
     })
   }
 
@@ -102,8 +107,14 @@ export class PaymentComponent implements OnInit {
     }
 
     this.reservationService.createReservation(reservation).subscribe({
-      next: () => this.activeModal.close({ reason: 'approved' }),
-      error: () => this.activeModal.close({ reason: 'cancelled' })
+      next: () => {
+        this.activeModal.close({ reason: 'approved' })
+        this.toastService.showSuccess('Reservation created successfully')
+      },
+      error: () => {
+        this.activeModal.close({ reason: 'cancelled' })
+        this.toastService.showDanger('Error during reservation process')
+      }
     });
   }
 

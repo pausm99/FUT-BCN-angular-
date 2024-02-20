@@ -8,6 +8,7 @@ import { FieldService } from '../../../services/field/field.service';
 import { Field } from '../../../interfaces/field';
 import { UserService } from '../../../services/user/user.service';
 import { MapPointerComponent } from '../../map/map-pointer/map-pointer.component';
+import { ToastService } from '../../../services/toast/toast.service';
 
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
@@ -57,7 +58,11 @@ export class AddFieldComponent {
     closing_time: new FormControl(null, [Validators.required]),
   }, [CustomValidators.timeRangeValidator]);
 
-  constructor(private modal: NgbModal, private fieldService: FieldService, private userService: UserService) {}
+  constructor(
+    private modal: NgbModal,
+    private fieldService: FieldService,
+    private userService: UserService,
+    private toastService: ToastService) {}
 
   openMap() {
     const modal = this.modal.open(MapPointerComponent);
@@ -90,9 +95,11 @@ export class AddFieldComponent {
 
       this.fieldService.createNewField(field).subscribe({
         next: (result) => {
+          this.toastService.showSuccess('Field created successfully')
           this.fieldService.fields.update(items => [...items, result]);
           this.activeModal.close();
-        }
+        },
+        error: () => this.toastService.showDanger('Failed to create a new field')
       })
 
     }

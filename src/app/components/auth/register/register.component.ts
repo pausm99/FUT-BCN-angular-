@@ -9,6 +9,7 @@ import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../interfaces/user';
 import { firstValueFrom } from 'rxjs';
 import { validateIBAN } from 'ngx-iban-validator';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -42,6 +43,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private titleService: TitleService,
     private navbarService: NavbarService,
+    private toastService: ToastService,
     private userService: UserService) {
     this.title = this.titleService.getPageTitle();
   }
@@ -90,11 +92,13 @@ export class RegisterComponent implements OnInit {
       }
       this.userService.register(user).subscribe({
         next: () => {
+          this.toastService.showSuccess('User registered successfully')
           this.activeModal.close();
           this.registerForm.reset();
           const { email, password } = user;
           this.userService.login({ email, password }).subscribe();
-        }
+        },
+        error: () => this.toastService.showDanger('Failed to register user')
       })
     }
   }

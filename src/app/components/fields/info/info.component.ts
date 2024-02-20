@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../interfaces/user';
 import { FieldService } from '../../../services/field/field.service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 mapboxgl.accessToken = environment.mapbox_api_key;
 
@@ -34,8 +35,10 @@ export class InfoComponent implements AfterViewInit {
 
   constructor(
     private fieldService: FieldService,
-    private cdr: ChangeDetectorRef,
-    private userService: UserService)
+    private userService: UserService,
+    private toastService: ToastService,
+    private cdr: ChangeDetectorRef
+  )
     {
       this.field = this.fieldService.activeField()
   }
@@ -51,7 +54,10 @@ export class InfoComponent implements AfterViewInit {
         next: (res) => {
           this.company = res;
         },
-        error: () => this.company = undefined
+        error: () => {
+          this.company = undefined,
+          this.toastService.showDanger('Failed to load field info')
+        }
       })
     }
 

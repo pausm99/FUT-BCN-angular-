@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class LoginComponent {
     private navbarService: NavbarService,
     private usersService: UserService,
     private authService: AuthService,
+    private toastService: ToastService,
     private router: Router) {
     this.title = this.titleService.getPageTitle();
   }
@@ -60,7 +62,7 @@ export class LoginComponent {
         error: (err) => {
           if (err.status === 401) this.invalidCredentials = true;
           else {
-            console.log(err);
+            this.toastService.showDanger('Failed to log in')
             this.serverError = true;
           }
         }

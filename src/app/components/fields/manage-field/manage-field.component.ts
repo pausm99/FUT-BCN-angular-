@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FieldService } from '../../../services/field/field.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { Field } from '../../../interfaces/field';
-import { ProgramComponent } from '../../reservation/program/program.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../../services/toast/toast.service';
 
 
 @Component({
@@ -19,11 +18,10 @@ export class ManageFieldComponent {
 
   public program: boolean = false;
 
-  private modalService = inject(NgbModal);
-
   constructor(
     private fieldService: FieldService,
     private router: Router,
+    private toastService: ToastService
     ) {
 
     this.field = this.fieldService.activeField();
@@ -34,13 +32,16 @@ export class ManageFieldComponent {
       this.fieldService.deleteField(this.field?.id).subscribe({
         next: () => {
           this.router.navigate(['/manage'], { queryParams: { company: true } });
+          this.toastService.showSuccess(`Field deleted successfully`);
         },
         error: () => {
-          alert("Can't delete this football field"); //posar un alert de bootstrap
+          this.toastService.showDanger(`Can't delete this field`);
         }
       });
+
     }
-    else alert("Can't delete this football field"); //posar un alert de bootstrap
+    else this.toastService.showDanger(`Can't delete this field`);
+
   }
 
   editField() {
