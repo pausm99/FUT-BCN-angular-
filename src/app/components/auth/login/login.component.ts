@@ -54,7 +54,7 @@ export class LoginComponent {
           const companyParams = this.authService.queryParams;
 
           const redirectURL = this.authService.redirectURL || '/home'
-          const a = this.router.navigate(
+          this.router.navigate(
             [redirectURL],
             { queryParams: { company: companyParams } }
           );
