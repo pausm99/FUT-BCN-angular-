@@ -1,5 +1,16 @@
 <section class="section">
   <div class="container">
-    <img src="../../../assets/images/404.jpeg" alt="404 Not found">
+    <div class="d-flex text-center flex-column justify-content-center align-items-center">
+      <div id="icon404">
+        <span class="four">4</span>
+        <img src="../../../assets/images/logo.png" alt="Football ball">
+        <span class="four">4</span>
+      </div>
+      <div>
+        <h1>Something gone wrong!</h1>
+        <p>The page you were looking for doesn't exist</p>
+      </div>
+      <a [routerLink]="['/home']" routerLinkActive="router-link-active"  class="btn btn-secondary mt-3 mt-lg-4">Return homepage</a>
+    </div>
   </div>
 </section>
