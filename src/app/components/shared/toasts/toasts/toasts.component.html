@@ -1,12 +1,12 @@
 <div class="toast-container position-fixed top-0 end-0 p-3">
-  @for (toast of toastService.toasts; track toast) {
+  @if (toastService.toast) {
     <ngb-toast
-      [class]="toast.classname"
+      [class]="toastService.toast.classname"
       [autohide]="true"
-      [delay]="toast.delay || 5000"
-      (hidden)="toastService.remove(toast)"
+      [delay]="toastService.toast.delay || 5000"
+      (hidden)="toastService.remove(toastService.toast)"
     >
-    {{ toast.text }}
+    {{ toastService.toast.text }}
     </ngb-toast>
   }
 </div>

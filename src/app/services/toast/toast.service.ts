@@ -6,18 +6,18 @@ import { Injectable } from '@angular/core';
 })
 export class ToastService {
 
-  toasts: Toast[] = [];
+  toast?: Toast;
 
   private show(toast: Toast) {
-    this.toasts.push(toast);
+    this.toast = toast;
   }
 
   private clear() {
-    this.toasts.splice(0, this.toasts.length);
+    this.toast = undefined;
   }
 
   remove(toast: Toast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
+    this.toast = undefined;
   }
 
   showStandard(text: string) {
@@ -25,11 +25,11 @@ export class ToastService {
 	}
 
 	showSuccess(text: string) {
-		this.show({ text, classname: 'bg-success text-light', delay: 10000 });
+		this.show({ text, classname: 'bg-success text-light', delay: 5000 });
 	}
 
 	showDanger(text: string) {
-		this.show({ text, classname: 'bg-danger text-light', delay: 15000 });
+		this.show({ text, classname: 'bg-danger text-light', delay: 5000 });
 	}
 
   constructor() { }
