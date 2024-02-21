@@ -13,7 +13,7 @@
           <ul class="navbar-nav ms-lg-5 me-lg-auto">
             @for (route of routes; track $index) {
               <li class="nav-item">
-                @if (route.path !== 'login' && route.path !== 'register' && route.path !== 'manage' && route.path !== 'reservations') {
+                @if (route.path !== 'login' && route.path !== 'register' && route.path !== 'manage' && route.path !== 'reservations' && route.path !== 'not-found') {
                   <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
                 @if (route.path === 'manage' && userInfo().role === 'company') {
