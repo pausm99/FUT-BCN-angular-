@@ -16,7 +16,7 @@ export const ManageFieldGuard: CanActivateFn = (route, state) => {
   const userInfo = userService.userInfo();
 
   if (isNaN(Number(id))) {
-    router.navigate(['/home']);
+    router.navigate(['/not-found']);
     return false;
   }
 
@@ -32,7 +32,7 @@ export const ManageFieldGuard: CanActivateFn = (route, state) => {
       }
     }),
     catchError((error) => {
-      router.navigate(['/home']);
+      router.navigate(['/not-found']);
       return of(false);
     })
   );

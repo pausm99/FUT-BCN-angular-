@@ -9,7 +9,7 @@ export const FieldGuard: CanActivateFn = (route, state) => {
   const id: string = route.params['id'];
 
   if (isNaN(Number(id))) {
-    router.navigate(['/home']);
+    router.navigate(['/not-found']);
     return false;
   }
 
@@ -26,7 +26,7 @@ export const FieldGuard: CanActivateFn = (route, state) => {
         }
     }),
     catchError((error) => {
-      router.navigate(['/home']);
+      router.navigate(['/not-found']);
       return of(false);
     })
   );
