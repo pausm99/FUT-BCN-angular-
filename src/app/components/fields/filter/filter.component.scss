@@ -34,12 +34,27 @@
 
 #filter-menu {
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     & {
-      width: 60%;
+      width: 45% !important;
       margin: 0 auto;
     }
   }
+
+  @media (min-width: 992px) {
+    & {
+      width: 40% !important;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    & {
+      width: 30% !important;
+      margin: 0 auto;
+    }
+  }
+
 
   .filter-menu-content {
 
