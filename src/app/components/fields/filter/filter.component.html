@@ -68,7 +68,7 @@
           </div>
         </div>
       </ul>
-      <ul class="list-unstyled w-100 justify-content-between align-items-center d-flex mb-0 bottom-menu">
+      <ul class="list-unstyled p-3 w-100 justify-content-between align-items-center d-flex mb-0 bottom-menu">
         <div (click)="resetFilter()" data-bs-dismiss="offcanvas" class="bg-secondary-subtle rounded-1 text-primary refresh"><i class="bi bi-arrow-clockwise"></i></div>
         <button type="submit" data-bs-dismiss="offcanvas" [disabled]="activeFilters() === 0" class="btn rounded-pill px-5 bg-secondary">APPLY ({{activeFilters()}})</button>
       </ul>

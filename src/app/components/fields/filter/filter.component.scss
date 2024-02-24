@@ -44,7 +44,6 @@
   .filter-menu-content {
 
     .search {
-      flex: 1;
       position: relative;
       background-color: rgba(0, 0, 0, 0.05);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -94,9 +93,9 @@
             display: block;
             position: relative;
             &:before {
-              transition: top 300ms 350ms ease, -webkit-transform 300ms 50ms ease;
-              transition: top 300ms 350ms ease, transform 300ms 50ms ease;
-              transition: top 300ms 350ms ease, transform 300ms 50ms ease, -webkit-transform 300ms 50ms ease;
+              transition: top 200ms 300ms ease, -webkit-transform 200ms 50ms ease;
+              transition: top 200ms 300ms ease, transform 200ms 50ms ease;
+              transition: top 200ms 300ms ease, transform 200ms 50ms ease, -webkit-transform 200ms 50ms ease;
               position: absolute;
               right: 0;
               left: 0;
@@ -106,9 +105,9 @@
               content: '';
             }
             &:after {
-              transition: top 300ms 350ms ease, -webkit-transform 300ms 50ms ease;
-              transition: top 300ms 350ms ease, transform 300ms 50ms ease;
-              transition: top 300ms 350ms ease, transform 300ms 50ms ease, -webkit-transform 300ms 50ms ease;
+              transition: top 200ms 300ms ease, -webkit-transform 200ms 50ms ease;
+              transition: top 200ms 300ms ease, transform 200ms 50ms ease;
+              transition: top 200ms 300ms ease, transform 200ms 50ms ease, -webkit-transform 200ms 50ms ease;
               position: absolute;
               right: 0;
               left: 0;
@@ -122,9 +121,9 @@
         }
         .criteria-toggler[aria-expanded="true"] {
           .criteria-toggler-icon:after {
-            transition: top 300ms 50ms ease, -webkit-transform 300ms 350ms ease;
-            transition: top 300ms 50ms ease, transform 300ms 350ms ease;
-            transition: top 300ms 50ms ease, transform 300ms 350ms ease, -webkit-transform 300ms 350ms ease;
+            transition: top 200ms 50ms ease, -webkit-transform 200ms 300ms ease;
+            transition: top 200ms 50ms ease, transform 200ms 300ms ease;
+            transition: top 200ms 50ms ease, transform 200ms 300ms ease, -webkit-transform 200ms 300ms ease;
             top: 0;
             transform: rotate(0);
           }
@@ -133,8 +132,6 @@
     }
 
     .bottom-menu {
-      flex: 1;
-      padding: 0.5rem 1rem;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
 
       .refresh {
