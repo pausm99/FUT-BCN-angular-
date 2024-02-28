@@ -50,16 +50,16 @@
                       </div>
                     </li>
                     <hr>
-                    <li><a class="" [routerLink]="['/profile']">
+                    <li class="menu-item"><a class="" [routerLink]="['/profile']">
                       <div class="d-flex gap-3 align-items-center">
-                        <i class="bi bi-gear"></i>
-                        Settings
+                        <i class="bi bi-person"></i>
+                        <span>Profile</span>
                       </div>
                     </a></li>
-                    <li><a class="" href="#">
+                    <li class="menu-item"><a class="" href="#">
                       <div class="d-flex gap-3 align-items-center">
                         <i class="bi bi-translate"></i>
-                        Language
+                        <span>Language</span>
                       </div>
                     </a></li>
                     <hr>
@@ -67,7 +67,7 @@
                       <button class="logout-button" (click)="logout()">
                         <div class="d-flex gap-3 align-items-center">
                           <i class="bi bi-box-arrow-right"></i>
-                          Logout
+                          <span>Logout</span>
                         </div>
                       </button>
                     </li>
@@ -78,58 +78,26 @@
                 <ul class="list-unstyled m-0 d-flex flex-column gap-2">
                   <li><a class="text-white" [routerLink]="['/profile']">
                     <div class="d-flex gap-3 align-items-center">
-                      <i class="bi bi-gear"></i>
-                      Settings
+                      <i class="bi bi-person"></i>
+                      <span>Profile</span>
                     </div>
                   </a></li>
                   <li><a class="text-white" href="#">
                     <div class="d-flex gap-3 align-items-center">
                       <i class="bi bi-translate"></i>
-                      Language
+                      <span>Language</span>
                     </div>
                   </a></li>
                   <li>
                     <button class="text-white logout-button" (click)="logout()">
                       <div class="d-flex gap-3 align-items-center">
                         <i class="bi bi-box-arrow-right"></i>
-                        Logout
+                        <span>Logout</span>
                       </div>
                     </button>
                   </li>
                 </ul>
               </div>
-              <!-- <li>
-                <div class="btn-group">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                    <li><span class="" href="#"><strong class="text-secondary">{{ userInfo().name }}</strong></span></li>
-                    <hr>
-                    <li><a class="" [routerLink]="['/profile']">
-                      <div class="d-flex gap-3 align-items-center">
-                        <i class="bi bi-gear"></i>
-                        Settings
-                      </div>
-                    </a></li>
-                    <li><a class="" href="#">
-                      <div class="d-flex gap-3 align-items-center">
-                        <i class="bi bi-translate"></i>
-                        Language
-                      </div>
-                    </a></li>
-                    <hr>
-                    <li>
-                      <button class="" (click)="logout()">
-                        <div class="d-flex gap-3 align-items-center">
-                          <i class="bi bi-box-arrow-right"></i>
-                          Logout
-                        </div>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </li> -->
             }
         </div>
       </div>
