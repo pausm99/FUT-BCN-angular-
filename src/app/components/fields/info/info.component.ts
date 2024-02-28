@@ -33,6 +33,8 @@ export class InfoComponent implements AfterViewInit {
   public formattedLength?: number;
   public formattedWidth?: number;
 
+  public public24Hour: boolean = false;
+
   constructor(
     private fieldService: FieldService,
     private userService: UserService,
@@ -47,6 +49,7 @@ export class InfoComponent implements AfterViewInit {
     this.configureMap();
     this.changeDatesFormat();
     this.changeDimensionsFormat();
+    this.check24Hour();
 
 
     if (!this.manage && !this.field?.public) {
@@ -93,6 +96,12 @@ export class InfoComponent implements AfterViewInit {
       })
         .setLngLat([this.field?.location_lng!, this.field?.location_lat!])
         .addTo(map)
+  }
+
+  check24Hour() {
+    if (this.field?.opening_time === '00:00:00' && this.field?.closing_time === '23:59:59') {
+      this.public24Hour = true;
+    }
   }
 
 }

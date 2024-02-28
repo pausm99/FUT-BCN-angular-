@@ -32,7 +32,12 @@
         <span class="rounded-pill bg-danger-subtle public-tag px-3">Public</span>
       }
     </div>
-    <span>{{ formattedDateOpening | date:'h a' }} - {{ formattedDateClosing | date:'h a' }}</span>
+    @if (!public24Hour) {
+      <span>{{ formattedDateOpening | date:'h a' }} - {{ formattedDateClosing | date:'h a' }}</span>
+    }
+    @else {
+      <span>24 H</span>
+    }
   </div>
 
   @if (!manage && !field!.public) {
