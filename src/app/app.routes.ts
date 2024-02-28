@@ -105,6 +105,24 @@ export const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'events',
+    title: 'Events',
+    loadComponent: () => import('./components/events/events.component').then(c => c.EventsComponent),
+    canActivate: [AuthGuard, PlayerGuard],
+    children: [
+      {
+        path: '',
+        title: 'Event list',
+        loadComponent: () => import('./components/events/event-list/event-list.component').then(c => c.EventListComponent),
+      },
+      {
+        path: ':id',
+        title: 'Event info',
+        loadComponent: () => import('./components/events/event-info/event-info.component').then(c => c.EventInfoComponent),
+      }
+    ]
+  },
 
   {
     path: '',
