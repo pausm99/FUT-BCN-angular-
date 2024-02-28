@@ -24,10 +24,11 @@
       align-items: center;
       background-color: var(--dark-color);
       padding: 0.5rem 0.75rem;
+      border: none;
 
       i {
         font-size: x-large;
-        color: #d8d8d8;
+        color: var(--white-color);
       }
     }
   }
