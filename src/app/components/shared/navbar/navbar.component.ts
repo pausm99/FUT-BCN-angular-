@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('closeButton', { static: false }) closeButton!: ElementRef;
   @ViewChild('navbarNav', { static: false }) navBarNav!: ElementRef;
+  @ViewChild('profileMenu', { static: false }) profileMenu!: ElementRef;
 
   public routes = routes
         .filter(route => route && route.path)
@@ -102,5 +103,13 @@ export class NavbarComponent implements OnInit {
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     this.isAtTop = window.scrollY <= 30;
+  }
+
+  profileMenuToggle() {
+    const profileMenu = this.profileMenu.nativeElement;
+    if (profileMenu) {
+      if (profileMenu.classList.contains('active')) profileMenu.classList.remove('active');
+      else profileMenu.classList.add('active');
+    }
   }
 }

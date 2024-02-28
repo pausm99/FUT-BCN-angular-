@@ -25,40 +25,46 @@
               </li>
             }
           </ul>
-
+          <hr class="d-lg-none">
           <div class="navbar-nav justify-content-end flex-grow-1 ps-lg-0">
             @if (!user()) {
-              <li class="nav-item">
+              <li class="nav-item mt-4">
                 <div class="d-flex gap-2 ms-lg-4 flex-column flex-lg-row">
                   <button class="btn rounded-pill bg-primary text-white px-3" (click)="openLogin()">Log In</button>
-                  <button class="btn rounded-pill px-3" (click)="openRegister()">Register</button>
+                  <button class="btn text-decoration-underline" (click)="openRegister()">Register</button>
                 </div>
               </li>
             }
             @else {
-              <li>
-                <div class="btn-group">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                    <li><span class="dropdown-item" href="#"><strong class="text-secondary">{{ userInfo().name }}</strong></span></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" [routerLink]="['/profile']">
+              <div class="action d-none d-lg-block">
+                <div class="profile" (click)="profileMenuToggle()"></div>
+                <div class="menu" #profileMenu>
+                  <ul id="menu-list" class="list-unstyled m-0">
+                    <li>
+                      <div class="d-flex gap-3 align-items-center">
+                        <div class="profile"></div>
+                        <div class="d-flex flex-column">
+                          <span class="text-dark">{{ userInfo().name }}</span>
+                          <small>{{ userInfo().email }}</small>
+                        </div>
+                      </div>
+                    </li>
+                    <hr>
+                    <li><a class="" [routerLink]="['/profile']">
                       <div class="d-flex gap-3 align-items-center">
                         <i class="bi bi-gear"></i>
                         Settings
                       </div>
                     </a></li>
-                    <li><a class="dropdown-item" href="#">
+                    <li><a class="" href="#">
                       <div class="d-flex gap-3 align-items-center">
                         <i class="bi bi-translate"></i>
                         Language
                       </div>
                     </a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <hr>
                     <li>
-                      <button class="dropdown-item" (click)="logout()">
+                      <button class="logout-button" (click)="logout()">
                         <div class="d-flex gap-3 align-items-center">
                           <i class="bi bi-box-arrow-right"></i>
                           Logout
@@ -67,7 +73,63 @@
                     </li>
                   </ul>
                 </div>
-              </li>
+              </div>
+              <div class="mt-4 d-lg-none">
+                <ul class="list-unstyled m-0 d-flex flex-column gap-2">
+                  <li><a class="text-white" [routerLink]="['/profile']">
+                    <div class="d-flex gap-3 align-items-center">
+                      <i class="bi bi-gear"></i>
+                      Settings
+                    </div>
+                  </a></li>
+                  <li><a class="text-white" href="#">
+                    <div class="d-flex gap-3 align-items-center">
+                      <i class="bi bi-translate"></i>
+                      Language
+                    </div>
+                  </a></li>
+                  <li>
+                    <button class="text-white logout-button" (click)="logout()">
+                      <div class="d-flex gap-3 align-items-center">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+                      </div>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <!-- <li>
+                <div class="btn-group">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <li><span class="" href="#"><strong class="text-secondary">{{ userInfo().name }}</strong></span></li>
+                    <hr>
+                    <li><a class="" [routerLink]="['/profile']">
+                      <div class="d-flex gap-3 align-items-center">
+                        <i class="bi bi-gear"></i>
+                        Settings
+                      </div>
+                    </a></li>
+                    <li><a class="" href="#">
+                      <div class="d-flex gap-3 align-items-center">
+                        <i class="bi bi-translate"></i>
+                        Language
+                      </div>
+                    </a></li>
+                    <hr>
+                    <li>
+                      <button class="" (click)="logout()">
+                        <div class="d-flex gap-3 align-items-center">
+                          <i class="bi bi-box-arrow-right"></i>
+                          Logout
+                        </div>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </li> -->
             }
         </div>
       </div>
