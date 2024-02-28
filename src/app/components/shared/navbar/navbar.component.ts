@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, NgZone, OnInit, Renderer2, ViewChild, inject, signal } from '@angular/core';
 import { TitleService } from '../../../services/title/title.service';
 import { routes } from '../../../app.routes';
 import { Router, RouterModule } from '@angular/router';
@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
   public title?: string;
 
   private modalService = inject(NgbModal);
@@ -28,6 +28,9 @@ export class NavbarComponent implements OnInit {
 
   public user = this.authService.logged;
   public userInfo = this.usersService.userInfo;
+
+  private mutationObserver?: MutationObserver;
+
 
   @ViewChild('closeButton', { static: false }) closeButton!: ElementRef;
   @ViewChild('navbarNav', { static: false }) navBarNav!: ElementRef;
@@ -44,6 +47,8 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private usersService: UserService,
+    private renderer: Renderer2,
+    private ngZone: NgZone,
     config: NgbModalConfig
   ) {
     this.title = this.titleService.getPageTitle();
@@ -60,6 +65,10 @@ export class NavbarComponent implements OnInit {
         else if (modal === 'login') this.openLogin();
       }, 300);
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.observeClassChanges()
   }
 
   openLogin() {
@@ -111,5 +120,26 @@ export class NavbarComponent implements OnInit {
       if (profileMenu.classList.contains('active')) profileMenu.classList.remove('active');
       else profileMenu.classList.add('active');
     }
+  }
+
+  preventBodyScroll() {
+    this.renderer.setStyle(document.body, 'overflow', 'hidden');
+  }
+
+  allowBodyScroll() {
+    this.renderer.removeStyle(document.body, 'overflow');
+  }
+
+  private observeClassChanges() {
+    this.mutationObserver = new MutationObserver((mutations: MutationRecord[]) => {
+      this.ngZone.run(() => {
+        const isOpened = this.navBarNav.nativeElement.classList.contains('show');
+        if (isOpened) this.preventBodyScroll();
+        else this.allowBodyScroll();
+      });
+    });
+
+    const config: MutationObserverInit = { attributes: true, attributeFilter: ['class'] };
+    this.mutationObserver.observe(this.navBarNav.nativeElement, config);
   }
 }
