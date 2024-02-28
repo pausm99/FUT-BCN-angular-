@@ -44,13 +44,13 @@
   --body-font-family:             'SF Pro Text', sans-serif;
   --title-font-family:            'SF Pro Display', sans-serif;
 
-  --h1-font-size:                 3.625rem;
-  --h2-font-size:                 2.875rem;
-  --h3-font-size:                 2rem;
-  --h4-font-size:                 1.75rem;
-  --h5-font-size:                 1.5rem;
-  --h6-font-size:                 1.375rem;
-  --p-font-size:                  1.25rem;
+  --h1-font-size:                 1.5rem;
+  --h2-font-size:                 1.2rem;
+  --h3-font-size:                 1.1rem;
+  --h4-font-size:                 1rem;
+  --h5-font-size:                 0.9rem;
+  --h6-font-size:                 0.8rem;
+  --p-font-size:                  1rem;
   --menu-font-size:               1rem;
   --btn-font-size:                1.125rem;
   --copyright-font-size:          1rem;
@@ -131,6 +131,10 @@ p {
   color: var(--p-color);
   font-size: var(--p-font-size);
   font-weight: var(--font-weight-normal);
+}
+
+span {
+  font-size: var(--p-font-size);
 }
 
 ul li {
@@ -255,50 +259,92 @@ a {
 }
 
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 768px) {
+  p, span {
+    font-size: 1.1em;
+  }
+
   h1 {
-    font-size: 2.25rem;
+    font-size: 1.8em;
   }
 
   h2 {
-    font-size: 1.75rem;
+    font-size: 1.4em;
   }
 
   h3 {
-    font-size: 1.625rem;
+    font-size: 1.3em;
   }
 
   h4 {
-    font-size: 1.375rem;
+    font-size: 1.2em;
   }
 
   h5 {
-    font-size: 1.25rem;
-  }
-}
-
-@media screen and (min-width: 991px) {
-  h1 {
-    font-size: 3rem;
-  }
-
-  h2 {
-    font-size: 2.25rem;
-  }
-
-  h3 {
-    font-size: 2rem;
-  }
-
-  h4 {
-    font-size: 1.75rem;
-  }
-
-  h5 {
-    font-size: 1.25rem;
+    font-size: 1em;
   }
 
   h6 {
-    font-size: 1.125rem;
+    font-size: 0.9em;
+  }
+}
+
+@media (min-width: 992px) {
+  p, span {
+    font-size: 1.2em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  h4 {
+    font-size: 1.4em;
+  }
+
+  h5 {
+    font-size: 1.2em;
+  }
+
+  h6 {
+    font-size: 1.1em;
+  }
+}
+
+@media (min-width: 1200px) {
+  p, span {
+    font-size: 1.3em;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.8em;
+  }
+
+  h4 {
+    font-size: 1.6em;
+  }
+
+  h5 {
+    font-size: 1.4em;
+  }
+
+  h6 {
+    font-size: 1.2em;
   }
 }
