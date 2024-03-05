@@ -60,7 +60,6 @@ export class AvailabilityComponent implements OnInit {
     this.availableResService.getAvailableReservationByTimeRange(now, end).subscribe({
       next: (res) => {
         this.classifyAvailableReservations(res);
-        console.log(res);
       },
       error: () => this.toastService.showDanger(`Failed to load available reservations for selected date`)
     })
@@ -201,6 +200,6 @@ export class AvailabilityComponent implements OnInit {
   }
 
   changeAvailableResBlockState(id: number, state: boolean) {
-    this.availableResService.changeAvailableReservationState(id, state).subscribe((res) => console.log(res))
+    this.availableResService.changeAvailableReservationState(id, state).subscribe((res) => {})
   }
 }
