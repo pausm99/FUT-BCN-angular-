@@ -102,7 +102,7 @@ export class MapListComponent implements AfterViewInit {
   getPopupHtml(field: Field) {
 
     const actionButton = document.createElement('div');
-    actionButton.innerHTML = `<button class="btn ${field.public ? 'btn-danger' : 'btn-primary' } w-100 mt-2">Book</button>`;
+    actionButton.innerHTML = `<button class="btn btn-primary w-100 mt-2">Book</button>`;
 
     actionButton.addEventListener('click', () => {
       this.router.navigate([`/reservations/${field.id}`]);
