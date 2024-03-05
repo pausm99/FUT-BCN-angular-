@@ -22,15 +22,14 @@ export class CustomValidators extends Validators {
 
 
   static timeRangeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-      const openingTime = control.get('opening_time')?.value;
-      const closingTime = control.get('closing_time')?.value;
+      const openingTime = control.get('opening_time')?.value || control.get('start_time')?.value;
+      const closingTime = control.get('closing_time')?.value || control.get('end_time')?.value;
 
       if (openingTime && closingTime) {
         const openingDate = new Date(`1970-01-01T${openingTime}`);
         const closingDate = new Date(`1970-01-01T${closingTime}`);
 
         const timeDifference = (closingDate.getTime() - openingDate.getTime()) / (1000 * 60 * 60);
-
 
         if (timeDifference < 1 || openingDate >= closingDate) {
           return { timeRange: true };
