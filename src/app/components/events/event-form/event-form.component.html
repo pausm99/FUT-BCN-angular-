@@ -1,1 +1,65 @@
-<p>event-form works!</p>
+<form [formGroup]="eventForm" (ngSubmit)="createEvent()" novalidate>
+  <fieldset>
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-body">
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.close()"></button>
+
+        <h3 class="modal-title fs-4 text-center py-3" id="newEventModalLabel">Create new event</h3>
+
+        <div class="row row-gap-3">
+
+          <div class="col-12">
+            <label for="EventName" class="form-label">Event name</label>
+            <input type="text" maxlength="50" id="EventName" class="form-control" formControlName="name" required
+            [ngClass]="{'is-invalid': eventForm.get('name')?.invalid && eventForm.get('name')?.touched}">
+          </div>
+
+          <div class="col-12">
+            <div class="form-check">
+              <label class="form-check-label" for="incompleteChekc">
+                I need players
+              </label>
+              <input class="form-check-input" type="checkbox" value="true" formControlName="incomplete" id="incompleteChekc">
+              <i placement="top" ngbTooltip="Check to make the event public for other players to join">
+                <i class="bi bi-info-circle ms-1"></i>
+              </i>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dp"
+                formControlName="date"
+                ngbDatepicker
+                #d="ngbDatepicker"
+              />
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Opening Time</label>
+            <ngb-timepicker id="fieldOpeningTime" formControlName="start_time" required/>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Closing Time</label>
+            <ngb-timepicker id="fieldClosingTime" formControlName="end_time" required/>
+          </div>
+
+          <span [ngClass]="{'timeRangeError': eventForm.hasError('timeRange')}" class="d-none text-center">Time difference must be at least 1h</span>
+
+          <div class="text-end">
+            <button type="submit" class="btn btn-secondary" [disabled]="eventForm.invalid">Create</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </fieldset>
+</form>

@@ -4,6 +4,7 @@ import { FieldGuard } from './guards/field/field.guard';
 import { ManageGuard } from './guards/manage/manage.guard';
 import { ManageFieldGuard } from './guards/manage/manage-field.guard';
 import { PlayerGuard } from './guards/player/player.guard';
+import { EventGuard } from './guards/event/event.guard';
 
 export const routes: Routes = [
   {
@@ -120,6 +121,13 @@ export const routes: Routes = [
         path: ':id',
         title: 'Event info',
         loadComponent: () => import('./components/events/event-info/event-info.component').then(c => c.EventInfoComponent),
+        canActivate: [EventGuard]
+      },
+      {
+        path: 'create/:id',
+        title: 'Create event',
+        loadComponent: () => import('./components/events/event-list/event-list.component').then(c => c.EventListComponent),
+        canActivate: [EventGuard]
       }
     ]
   },
