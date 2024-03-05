@@ -8,6 +8,7 @@ import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../interfaces/user';
 import { FieldService } from '../../../services/field/field.service';
 import { ToastService } from '../../../services/toast/toast.service';
+import { Router } from '@angular/router';
 
 mapboxgl.accessToken = environment.mapbox_api_key;
 
@@ -39,6 +40,7 @@ export class InfoComponent implements AfterViewInit {
     private fieldService: FieldService,
     private userService: UserService,
     private toastService: ToastService,
+    private router: Router,
     private cdr: ChangeDetectorRef
   )
     {
@@ -102,6 +104,10 @@ export class InfoComponent implements AfterViewInit {
     if (this.field?.opening_time === '00:00:00' && this.field?.closing_time === '23:59:59') {
       this.public24Hour = true;
     }
+  }
+
+  createEvent() {
+    this.router.navigate([`/events/create/${this.field?.id}`])
   }
 
 }
