@@ -13,7 +13,7 @@ export const PlayerGuard: CanActivateFn = (route, state) => {
 
   if (role !== 'player') {
     router.navigate(['/home']);
-    toastService.showDanger(`Company profiles aren't allowed to book fields`)
+    toastService.showDanger(`Company profiles aren't allowed to book fields or participate in events`)
     return false;
   }
 
