@@ -1,1 +1,21 @@
 <h1 class="mb-5">Event list</h1>
+<ul id="event-list">
+  @for (event of events(); track $index) {
+    <div (click)="goToEvent(event.id)" class="event d-flex align-items-center gap-2 list-unstyled">
+      <div class="event-image">
+        <img src="../../../../assets/images/football-field.webp" alt="Football field">
+      </div>
+      <div class="event-text">
+        <h2 class="mb-1 mb-md-2">{{ event.name }}</h2>
+        <div class="d-flex align-items-center">
+          <i class="bi bi-clock me-2"></i>
+          <p>{{ event.date_time_start | date:'mediumDate' }} - {{ event.date_time_start | date:'HH:mm' }}</p>
+        </div>
+        <div class="d-flex align-items-center">
+          <i class="bi bi-geo-alt me-2"></i>
+          <p>{{ event.field_name }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</ul>

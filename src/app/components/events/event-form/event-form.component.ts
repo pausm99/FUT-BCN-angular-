@@ -36,9 +36,7 @@ export class EventFormComponent {
     private eventService: EventService,
     private fieldService: FieldService,
     private router: Router,
-  ) {
-    console.log(this.field_id)
-  }
+  ) {}
 
   eventForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -91,6 +89,7 @@ export class EventFormComponent {
 
   newEvent(reservation: Reservation) {
     const event: Event = {
+      name: this.eventForm.get('name')?.value!,
       reservation_id: reservation.id!,
       field_id: this.field_id,
       user_id: reservation.user_id,

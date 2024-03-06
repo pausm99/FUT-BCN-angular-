@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { FieldService } from '../../services/field/field.service';
 import { catchError, of, switchMap } from 'rxjs';
-import { EventService } from '../../services/event/event.service';
 
-export const EventGuard: CanActivateFn = (route, state) => {
+export const FieldPublicGuard: CanActivateFn = (route, state) => {
 
-  const eventService = inject(EventService);
+  const fieldService = inject(FieldService);
   const router = inject(Router);
   const id: string = route.params['id'];
 
@@ -14,11 +14,11 @@ export const EventGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  return eventService.getEventById(Number(id)).pipe(
-    switchMap((event) => {
+  return fieldService.getFieldById(Number(id)).pipe(
+    switchMap((field) => {
 
-        if (event) {
-          eventService.activeEvent.set(event);
+        if (field && field.public) {
+          fieldService.activeField.set(field);
           return of(true);
         }
         else {
