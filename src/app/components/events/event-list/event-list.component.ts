@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventFormComponent } from '../event-form/event-form.component';
 
@@ -12,15 +12,15 @@ import { EventFormComponent } from '../event-form/event-form.component';
 })
 export class EventListComponent {
 
-  modalService = inject(NgbModal)
+  constructor(private route: ActivatedRoute, private modalService: NgbModal) {
+    const url: UrlSegment[] = this.route.snapshot.url;
 
-  public create: boolean = this.route.snapshot.url[0].path === 'create';
+    if (url && url.length > 0) {
+      const create: boolean = url[0].path === 'create';
 
-  constructor(
-    private route: ActivatedRoute,
-    ) {
-    if (this.create) {
-      this.modalService.open(EventFormComponent);
+      if (create) {
+        this.modalService.open(EventFormComponent);
+      }
     }
   }
 

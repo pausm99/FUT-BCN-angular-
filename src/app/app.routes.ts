@@ -118,15 +118,15 @@ export const routes: Routes = [
         loadComponent: () => import('./components/events/event-list/event-list.component').then(c => c.EventListComponent),
       },
       {
-        path: ':id',
-        title: 'Event info',
-        loadComponent: () => import('./components/events/event-info/event-info.component').then(c => c.EventInfoComponent),
-        canActivate: [EventGuard]
-      },
-      {
         path: 'create/:id',
         title: 'Create event',
         loadComponent: () => import('./components/events/event-list/event-list.component').then(c => c.EventListComponent),
+        canActivate: [EventGuard]
+      },
+      {
+        path: ':id',
+        title: 'Event info',
+        loadComponent: () => import('./components/events/event-info/event-info.component').then(c => c.EventInfoComponent),
         canActivate: [EventGuard]
       }
     ]

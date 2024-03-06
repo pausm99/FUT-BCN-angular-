@@ -11,6 +11,7 @@ import { NgbTimeStringAdapter } from '../../../adapters/ngb-time-string.adapter'
 import { EventService } from '../../../services/event/event.service';
 import { Event } from '../../../interfaces/event';
 import { FieldService } from '../../../services/field/field.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-form',
@@ -33,7 +34,8 @@ export class EventFormComponent {
     private userService: UserService,
     private reservationService: ReservationService,
     private eventService: EventService,
-    private fieldService: FieldService
+    private fieldService: FieldService,
+    private router: Router,
   ) {
     console.log(this.field_id)
   }
@@ -60,8 +62,6 @@ export class EventFormComponent {
         amount: 0,
         paid: false
       }
-
-      console.log(reservation)
 
       this.reservationService.createReservation(reservation).subscribe({
         next: (createdReservation) => {
@@ -100,6 +100,12 @@ export class EventFormComponent {
     }
 
     this.eventService.createEvent(event);
+    this.router.navigate(['/events'])
+    this.activeModal.close();
+  }
+
+  closeModalAndRedirect() {
+    this.router.navigate(['/events'])
     this.activeModal.close();
   }
 
