@@ -8,4 +8,7 @@ export interface Event {
   date_time_end: Date;
   incomplete: boolean;
   field_name?: string;
+  address?: string;
+  user_name?: string;
+  field_type?: string;
 }
