@@ -16,16 +16,23 @@
           </div>
 
           <div class="col-12">
-            <div class="form-check">
+            <div class="form-check col-6">
               <label class="form-check-label" for="incompleteChekc">
                 I need players
               </label>
               <input class="form-check-input" type="checkbox" value="true" formControlName="incomplete" id="incompleteChekc">
               <i placement="top" ngbTooltip="If checked, other players could join the event">
-                <i class="bi bi-info-circle ms-1"></i>
+                <i class="bi bi-info-circle ms-2"></i>
               </i>
             </div>
           </div>
+
+          @if (eventForm.get('incomplete')?.value) {
+            <div class="col-12">
+              <label for="eventMaxPlayers" class="form-label">Max. players</label>
+              <input class="form-control" type="number" id="eventMaxPlayers" formControlName="max_players" min="1" max="200">
+            </div>
+          }
 
           <div class="col-12">
             <div class="input-group">

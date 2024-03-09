@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDatepickerModule, NgbTimeAdapter, NgbTimepicker, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomValidators } from '../../../validators/custom.validator';
@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
     { provide: NgbDateAdapter, useClass: NgbDateStringAdapter }
   ],
 })
-export class EventFormComponent {
+export class EventFormComponent  implements OnInit {
 
   activeModal = inject(NgbActiveModal);
 
@@ -44,7 +44,26 @@ export class EventFormComponent {
     date: new FormControl('', [Validators.required]),
     start_time: new FormControl('', [Validators.required]),
     end_time: new FormControl('', [Validators.required]),
+    max_players: new FormControl(null)
   }, [CustomValidators.timeRangeValidator]);
+
+  ngOnInit(): void {
+    const incomplete = this.eventForm.get('incomplete');
+    const max_players = this.eventForm.get('max_players');
+
+    if (incomplete && max_players) {
+
+      this.eventForm.get('incomplete')?.valueChanges.subscribe((value) => {
+        if (value) {
+          max_players.setValidators([Validators.required, Validators.min(1), Validators.max(200)]);
+        } else {
+          max_players.clearValidators();
+        }
+        max_players.updateValueAndValidity();
+      });
+    }
+  }
+
 
 
   createEvent() {
@@ -88,6 +107,8 @@ export class EventFormComponent {
   }
 
   newEvent(reservation: Reservation) {
+    const incomplete = this.eventForm.get('incomplete')?.value!;
+
     const event: Event = {
       name: this.eventForm.get('name')?.value!,
       reservation_id: reservation.id!,
@@ -95,7 +116,8 @@ export class EventFormComponent {
       user_id: reservation.user_id,
       date_time_start: reservation.date_time_start,
       date_time_end: reservation.date_time_end,
-      incomplete: this.eventForm.get('incomplete')?.value!
+      incomplete: incomplete,
+      max_players: incomplete ? this.eventForm.get('max_players')?.value! : undefined
     }
 
     this.eventService.createEvent(event);
