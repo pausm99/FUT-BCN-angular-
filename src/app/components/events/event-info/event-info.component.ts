@@ -3,11 +3,12 @@ import { EventService } from '../../../services/event/event.service';
 import { Event } from '../../../interfaces/event';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-event-info',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, NgbTooltip],
   templateUrl: './event-info.component.html',
   styleUrl: './event-info.component.scss'
 })

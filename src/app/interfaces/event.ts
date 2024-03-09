@@ -7,6 +7,7 @@ export interface Event {
   date_time_start: Date;
   date_time_end: Date;
   incomplete: boolean;
+  max_players?: number;
   field_name?: string;
   address?: string;
   user_name?: string;

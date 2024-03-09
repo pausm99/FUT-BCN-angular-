@@ -10,7 +10,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
     </p>
     <p>{{ event.address }}</p>
-    <p class="rounded-pill bg-secondary text-dark">{{ event.field_type }}</p>
+    <p class="rounded-pill bg-secondary text-dark mt-4">{{ event.field_type }}</p>
   </div>
   <div class="box2">
     <h2>
@@ -57,11 +57,20 @@
       <p class="created-by">Event created by:</p>
       <p class="text-decoration-underline">{{ event.user_name }}</p>
     </div>
-    <button class="btn btn-outline-secondary rounded-pill">
-      <div class="d-flex align-items-center justify-content-between gap-2">
-        <span>Join event</span>
-        <img src="../../../../assets/images/logo.png" alt="Football ball">
-      </div>
-    </button>
+    @if (event.incomplete) {
+      <button class="btn btn-outline-secondary rounded-pill">
+        <div class="d-flex align-items-center justify-content-between gap-2">
+          <span>Join event</span>
+          <img src="../../../../assets/images/logo.png" alt="Football ball">
+        </div>
+      </button>
+    } @else {
+      <p class="d-flex align-items-center">
+        You can't join this event
+        <i placement="top" ngbTooltip="This event is no longer accepting additional players">
+          <i class="bi bi-info-circle ms-1"></i>
+        </i>
+      </p>
+    }
   </div>
 </div>

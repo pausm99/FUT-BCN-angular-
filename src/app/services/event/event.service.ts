@@ -20,7 +20,8 @@ export class EventService {
     user_id: 0,
     date_time_start: new Date(),
     date_time_end: new Date(),
-    incomplete: false
+    incomplete: false,
+    max_players: 0
   });
 
   public events = signal<Event[]>([]);
@@ -46,5 +47,9 @@ export class EventService {
       },
       error: () => this.toastService.showDanger('Failed to load events')
     });
+  }
+
+  joinEvent(event_id: number, user_id: number) {
+    return this.http.patch<Event>(`${API_URL}/events/${event_id}`, user_id);
   }
 }
