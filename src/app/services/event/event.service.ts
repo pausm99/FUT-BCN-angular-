@@ -57,6 +57,11 @@ export class EventService {
 
     const body = { user_id: user_id };
 
-    return this.http.post<Event>(`${API_URL}/events/join/${event_id}`, body);
+    return this.http.post(`${API_URL}/events/join/${event_id}`, body);
+  }
+
+  unEnrollEvent(id: number, user_id: number) {
+
+    return this.http.delete(`${API_URL}/events/unenroll/${id}`, { params: { user_id: user_id } });
   }
 }

@@ -50,10 +50,21 @@ export class EventInfoComponent {
           next: () => {
             this.joined = true;
             this.players!++;
+            this.toastService.showSuccess('Joined event!')
           }
         })
       }
     }
+  }
+
+  unEnrollEvent() {
+    this.eventService.unEnrollEvent(this.event.id!, this.user_id).subscribe({
+      next: () => {
+        this.joined = false;
+        this.players!--;
+        this.toastService.showSuccess('Unenrolled from event!')
+      }
+    })
   }
 
 }
