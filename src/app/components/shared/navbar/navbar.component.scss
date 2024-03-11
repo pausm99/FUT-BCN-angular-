@@ -136,13 +136,19 @@
   .profile {
     cursor: pointer;
     font-size: 2rem;
-    background-color: var(--white-color);
     width: 45px;
     height: 45px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
   }
 
   .menu {
