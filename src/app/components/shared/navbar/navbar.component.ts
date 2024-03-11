@@ -87,6 +87,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   logout() {
     this.router.navigate(['/home']);
+    this.closeNavbar()
     this.authService.logOut();
     this.usersService.userInfo.set({
       id: 0,

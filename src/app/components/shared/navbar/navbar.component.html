@@ -14,13 +14,13 @@
             @for (route of routes; track $index) {
               <li class="nav-item">
                 @if (route.path !== 'login' && route.path !== 'register' && route.path !== 'manage' && route.path !== 'reservations' && route.path !== 'not-found') {
-                  <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
+                  <a class="nav-link" (click)="closeNavbar()" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
                 @if (route.path === 'manage' && userInfo().role === 'company') {
-                  <a class="nav-link" [routerLink]="route.path" [queryParams]="{company: true}" routerLinkActive="router-link-active" >{{ route.title }}</a>
+                  <a class="nav-link" (click)="closeNavbar()" [routerLink]="route.path" [queryParams]="{company: true}" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
                 @if (route.path === 'reservations' && userInfo().role !== 'company') {
-                  <a class="nav-link" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
+                  <a class="nav-link" (click)="closeNavbar()" [routerLink]="route.path" routerLinkActive="router-link-active" >{{ route.title }}</a>
                 }
               </li>
             }
@@ -53,13 +53,13 @@
                       </div>
                     </li>
                     <hr>
-                    <li class="menu-item"><a class="" [routerLink]="['/profile']">
+                    <li class="menu-item" (click)="closeNavbar()"><a [routerLink]="['/profile']">
                       <div class="d-flex gap-3 align-items-center">
                         <i class="bi bi-person"></i>
                         <span>Profile</span>
                       </div>
                     </a></li>
-                    <li class="menu-item"><a class="" href="#">
+                    <li class="menu-item" (click)="closeNavbar()"><a href="#">
                       <div class="d-flex gap-3 align-items-center">
                         <i class="bi bi-translate"></i>
                         <span>Language</span>
@@ -79,13 +79,13 @@
               </div>
               <div class="mt-4 d-lg-none">
                 <ul class="list-unstyled m-0 d-flex flex-column gap-2">
-                  <li><a class="text-white" [routerLink]="['/profile']">
+                  <li (click)="closeNavbar()"><a class="text-white" [routerLink]="['/profile']">
                     <div class="d-flex gap-3 align-items-center">
                       <i class="bi bi-person"></i>
                       <span>Profile</span>
                     </div>
                   </a></li>
-                  <li><a class="text-white" href="#">
+                  <li (click)="closeNavbar()"><a class="text-white" [routerLink]="['/home']">
                     <div class="d-flex gap-3 align-items-center">
                       <i class="bi bi-translate"></i>
                       <span>Language</span>
