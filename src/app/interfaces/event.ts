@@ -12,4 +12,5 @@ export interface Event {
   address?: string;
   user_name?: string;
   field_type?: string;
+  players?: number;
 }

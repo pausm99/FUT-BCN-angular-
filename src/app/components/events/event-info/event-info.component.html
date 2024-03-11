@@ -58,12 +58,18 @@
       <p class="text-decoration-underline">{{ event.user_name }}</p>
     </div>
     @if (event.incomplete) {
-      <button class="btn btn-outline-secondary rounded-pill">
-        <div class="d-flex align-items-center justify-content-between gap-2">
-          <span>Join event</span>
-          <img src="../../../../assets/images/logo.png" alt="Football ball">
-        </div>
-      </button>
+      <p>{{ players }}/{{ event.max_players }} players</p>
+      @if (!joined && players! < event.max_players!) {
+        <button (click)="joinEvent()" class="btn btn-outline-secondary rounded-pill">
+          <div class="d-flex align-items-center justify-content-between gap-2">
+            <span>Join event</span>
+            <img src="../../../../assets/images/logo.png" alt="Football ball">
+          </div>
+        </button>
+      }
+      @else {
+        <p>Joined <i class="bi bi-check-circle ms-1 text-secondary"></i></p>
+      }
     } @else {
       <p class="d-flex align-items-center">
         You can't join this event

@@ -49,7 +49,14 @@ export class EventService {
     });
   }
 
+  getPlayersEnrolled(id: number, user_id: number) {
+    return this.http.get(`${API_URL}/events/players`, { params: {event_id: id, user_id: user_id} })
+  }
+
   joinEvent(event_id: number, user_id: number) {
-    return this.http.patch<Event>(`${API_URL}/events/${event_id}`, user_id);
+
+    const body = { user_id: user_id };
+
+    return this.http.post<Event>(`${API_URL}/events/join/${event_id}`, body);
   }
 }
