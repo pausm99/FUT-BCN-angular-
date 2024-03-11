@@ -69,8 +69,8 @@
 		background: var(--white-color);
 		transition: background 10ms 300ms ease;
 		display: block;
-		width: 30px;
-		height: 2px;
+		width: 25px;
+		height: 1px;
 		position: relative;
 		&:before {
 			transition: top 300ms 350ms ease, -webkit-transform 300ms 50ms ease;
@@ -80,8 +80,8 @@
 			right: 0;
 			left: 0;
 			background: var(--white-color);
-			width: 30px;
-			height: 2px;
+			width: 25px;
+			height: 1px;
 			content: '';
 		}
 		&:after {
@@ -92,8 +92,8 @@
 			right: 0;
 			left: 0;
 			background: var(--white-color);
-			width: 30px;
-			height: 2px;
+			width: 25px;
+			height: 1px;
 			content: '';
 		}
 		&::before {
@@ -144,12 +144,17 @@
     align-items: center;
     overflow: hidden;
 
+    &.under {
+      cursor: auto;
+    }
+
     img {
       height: 100%;
       width: 100%;
       object-fit: cover;
     }
   }
+
 
   .menu {
     position: absolute;
