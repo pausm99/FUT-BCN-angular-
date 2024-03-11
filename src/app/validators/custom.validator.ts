@@ -38,4 +38,23 @@ export class CustomValidators extends Validators {
 
       return null;
     };
+
+  static eventTimeInRange(start: string, end: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const startTime = control.get('start_time')?.value;
+      const endTime = control.get('end_time')?.value;
+
+      const startTimeDate = new Date(`1970T${startTime}`);
+      const endTimeDate = new Date(`1970T${endTime}`);
+
+      const openingTimeDate = new Date(`1970T${start}`);
+      const closingTimeDate = new Date(`1970T${end}`);
+
+      if (startTimeDate < openingTimeDate || endTimeDate > closingTimeDate) {
+        return { wrongRange: true }
+      }
+
+      return null;
+    }
+  };
 }

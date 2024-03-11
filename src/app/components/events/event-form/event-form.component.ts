@@ -12,6 +12,7 @@ import { EventService } from '../../../services/event/event.service';
 import { Event } from '../../../interfaces/event';
 import { FieldService } from '../../../services/field/field.service';
 import { Router } from '@angular/router';
+import { Field } from '../../../interfaces/field';
 
 @Component({
   selector: 'app-event-form',
@@ -28,7 +29,7 @@ export class EventFormComponent  implements OnInit {
 
   activeModal = inject(NgbActiveModal);
 
-  public field_id: number = this.fieldService.activeField().id!;
+  public field: Field = this.fieldService.activeField();
 
   constructor(
     private userService: UserService,
@@ -45,7 +46,10 @@ export class EventFormComponent  implements OnInit {
     start_time: new FormControl('', [Validators.required]),
     end_time: new FormControl('', [Validators.required]),
     max_players: new FormControl(null)
-  }, [CustomValidators.timeRangeValidator]);
+  }, [CustomValidators.timeRangeValidator, CustomValidators.eventTimeInRange(this.field.opening_time, this.field.closing_time)]);
+
+  exposedFieldOpeningTime: Date = this.getExposedTime(this.field.opening_time);
+  exposedFieldClosingTime: Date = this.getExposedTime(this.field.closing_time);
 
   ngOnInit(): void {
     const incomplete = this.eventForm.get('incomplete');
@@ -73,7 +77,7 @@ export class EventFormComponent  implements OnInit {
 
       const reservation: Reservation = {
         user_id: this.userService.userInfo().id,
-        field_id: this.field_id,
+        field_id: this.field.id!,
         date_time_start: this.getFormattedTime(date, this.eventForm.get('start_time')?.value!),
         date_time_end: this.getFormattedTime(date, this.eventForm.get('end_time')?.value!),
         amount: 0,
@@ -112,7 +116,7 @@ export class EventFormComponent  implements OnInit {
     const event: Event = {
       name: this.eventForm.get('name')?.value!,
       reservation_id: reservation.id!,
-      field_id: this.field_id,
+      field_id: this.field.id!,
       user_id: reservation.user_id,
       date_time_start: reservation.date_time_start,
       date_time_end: reservation.date_time_end,
@@ -128,6 +132,11 @@ export class EventFormComponent  implements OnInit {
   closeModalAndRedirect() {
     this.router.navigate(['/events'])
     this.activeModal.close();
+  }
+
+  getExposedTime(time: string) {
+    const date = new Date(`1970T${time}`);
+    return date;
   }
 
 }

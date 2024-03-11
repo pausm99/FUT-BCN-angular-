@@ -5,7 +5,8 @@
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModalAndRedirect()"></button>
 
-        <h3 class="modal-title fs-4 text-center py-3" id="newEventModalLabel">Create new event</h3>
+        <h3 class="modal-title text-center py-3" id="newEventModalLabel">Create new event</h3>
+        <h4>{{ field.name }}</h4>
 
         <div class="row row-gap-3">
 
@@ -54,8 +55,12 @@
           </div>
 
           <div class="col-6">
-            <label class="form-label">Closing Time</label>
-            <ngb-timepicker id="fieldClosingTime" formControlName="end_time" required/>
+            <label class="form-label">End Time</label>
+            <ngb-timepicker id="fieldEndTime" formControlName="end_time" required/>
+          </div>
+
+          <div class="col-12">
+            <p class="text-center">Field schedule is {{ exposedFieldOpeningTime | date:'HH:mm' }} to {{ exposedFieldClosingTime | date:'HH:mm' }}h</p>
           </div>
 
           <span [ngClass]="{'timeRangeError': eventForm.hasError('timeRange')}" class="d-none text-center">Time difference must be at least 1h</span>
